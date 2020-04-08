@@ -20,7 +20,7 @@ class BaseController(cement.Controller):
     class Meta:
         label = 'base'
         description = "BioSimulations-compliant command-line interface to the tellurium simulation program"
-        help = "tellurium"
+        help = "Biosimulations-tellurium"
         arguments = [
             (['-i', '--sim-file'], dict(type=str,
                                         required=True,
@@ -61,7 +61,7 @@ class BaseController(cement.Controller):
 class App(cement.App):
     """ Command line application """
     class Meta:
-        label = 'tellurium'
+        label = 'Biosimulations-tellurium'
         base_controller = 'base'
         handlers = [
             BaseController,

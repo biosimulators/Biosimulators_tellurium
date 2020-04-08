@@ -3,7 +3,7 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 
 ## Contents
 * [Installation](#installation)
-* [Documentation](#documentation)
+* [Usage](#usage)
 * [License](#license)
 * [Development team](#development-team)
 * [Questions and comments](#questions-and-comments)
@@ -14,11 +14,22 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 pip install git+https://github.com/reproducible-biomedical-modeling/Biosimulations_tellurium
 ```
 
-## Documentation
-Inline documentation is available inline by running the following command
-
+## Usage
 ```
-Biosimulations_tellurium --help
+usage: Biosimulations-tellurium [-h] [-d] [-q] -i SIM_FILE [-o OUT_DIR] [-v]
+
+BioSimulations-compliant command-line interface to the tellurium simulation program
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           full application debug mode
+  -q, --quiet           suppress all console output
+  -i SIM_FILE, --sim-file SIM_FILE
+                        Path to SED-ML file which describes a simulation
+                        experiment
+  -o OUT_DIR, --out-dir OUT_DIR
+                        Directory to save outputs
+  -v, --version         show program's version number and exit
 ```
 
 ## License
