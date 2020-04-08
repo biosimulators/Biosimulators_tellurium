@@ -3,7 +3,6 @@
 #
 # Run image:
 #   docker run \
-#     --interactive \
 #     --tty \
 #     --rm \
 #     --mount type=bind,source="$(pwd)"/tests/fixtures,target=/root/in,readonly \
