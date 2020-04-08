@@ -3,7 +3,7 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 
 ## Contents
 * [Installation](#installation)
-* [Documentation](https://reproducible-biomedical-modeling.github.io/Biosimulations_format_utils/)
+* [Documentation](#documentation)
 * [License](#license)
 * [Development team](#development-team)
 * [Questions and comments](#questions-and-comments)
@@ -11,7 +11,7 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 ## Installation
 
 ```
-pip install Biosimulations_tellurium
+pip install git+https://github.com/reproducible-biomedical-modeling/Biosimulations_tellurium
 ```
 
 ## Documentation
