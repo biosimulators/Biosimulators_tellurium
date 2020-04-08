@@ -16,17 +16,397 @@
   ],
   "algorithms": [
     {
-      "id": "algorithm-1",
-      "name": "name of algorithm-1",
+      "name": "CVODE",
+      "variants": [
+        {
+          "kisaoId": "KISAO:0000019",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000433",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000407",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000099",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000035",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000071",
+          "name": "CVODE"
+        },
+        {
+          "kisaoId": "KISAO:0000288",
+          "name": "CVODE (BDF / stiff)"
+        },
+        {
+          "kisaoId": "KISAO:0000280",
+          "name": "CVODE (Adams-Moulton / non-stiff)"
+        }
+      ],
       "parameters": [
         {
-          "id": "parameter-1",
-          "name": "name of parameter-1",
-          "type": "integer|float|string",
-          "value": "bool|number|string",
-          "kisaoId": "XXXXXXX"
+          "kisaoId": "KISAO:0000209",
+          "default": 1e-6
+        },
+        {
+          "kisaoId": "KISAO:0000211",
+          "default": 1e-12
+        },
+        {
+          "kisaoId": "KISAO:0000220",
+          "default": 5
+        },
+        {
+          "kisaoId": "KISAO:0000219",
+          "default": 12
+        },
+        {
+          "kisaoId": "KISAO:0000415",
+          "default": 20000
+        },
+        {
+          "kisaoId": "KISAO:0000467",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000485",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000332",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000107",
+          "default": false
         }
       ]
+    },
+    {
+      "name": "Runge-Kutta 4th order",
+      "variants": [
+        {
+          "kisaoId": "KISAO:0000032",
+          "name": "Explicit fourth-order Runge-Kutta"
+        },
+        {
+          "kisaoId": "KISAO:0000064",
+          "name": "Runge-Kutta method"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "name": "Gillespie direct SSA",
+      "variants": [
+        {
+          "kisaoId": "KISAO:0000241",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000029",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000319",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000274",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000333",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000329",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000323",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000331",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000027",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000082",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000324",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000350",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000330",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000028",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000038",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000039",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000048",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000074",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000081",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000045",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000351",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000084",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000040",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000046",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000003",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000051",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000335",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000336",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000095",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000022",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000076",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000015",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000075",
+          "name": "Gillespie"
+        },
+        {
+          "kisaoId": "KISAO:0000278",
+          "name": "Gillespie"
+        }
+      ],
+      "parameters": [
+        {
+          "kisaoId": "KISAO:0000488",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000107",
+          "default": true
+        },
+        {
+          "kisaoId": "KISAO:0000332",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000485",
+          "default": 0
+        },
+        {
+          "kisaoId": "KISAO:0000467",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "name": "NLEQ",
+      "variants": [
+        {
+          "kisaoId": "KISAO:0000099",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000274",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000282",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000283",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000355",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000356",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000407",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000408",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000409",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000410",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000411",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000412",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000413",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000432",
+          "name": "NLEQ"
+        },
+        {
+          "kisaoId": "KISAO:0000437",
+          "name": "NLEQ"
+        }
+      ],
+      "parameters": [
+        {
+          "kisaoId": "KISAO:0000209",
+          "default": 1e-12
+        },
+        {
+          "kisaoId": "KISAO:0000486",
+          "default": 100
+        },
+        {
+          "kisaoId": "KISAO:0000487",
+          "default": 1e-29
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "kisaoId": "KISAO:0000209",
+      "name": "Relative tolerance",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000211",
+      "name": "Absolute tolerance",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000220",
+      "name": "Maximum BDF order",
+      "type": "int"
+    },
+    {
+      "kisaoId": "KISAO:0000219",
+      "name": "Maximum Adams order",
+      "type": "int"
+    },
+    {
+      "kisaoId": "KISAO:0000415",
+      "name": "Maximum number of steps",
+      "type": "int"
+    },
+    {
+      "kisaoId": "KISAO:0000467",
+      "name": "Maximum time step",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000485",
+      "name": "Minimum time step",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000332",
+      "name": "Initial time step",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000107",
+      "name": "Use an adaptive time step?",
+      "type": "bool"
+    },
+    {
+      "kisaoId": "KISAO:0000486",
+      "name": "Maximum number of iterations?",
+      "type": "int"
+    },
+    {
+      "kisaoId": "KISAO:0000487",
+      "name": "Minimum damping factor",
+      "type": "float"
+    },
+    {
+      "kisaoId": "KISAO:0000488",
+      "name": "RNG seed",
+      "type": "int"
     }
   ],
   "modelFormats": [
