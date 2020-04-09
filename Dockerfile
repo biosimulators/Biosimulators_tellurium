@@ -1,5 +1,5 @@
 # Build image:
-#   docker build --tag crbm/biosimulations_tellurium:0.0.1 --tag crbm/biosimulations_tellurium:latest .
+#   docker build --tag crbm/biosimulations_tellurium:2.4.1 --tag crbm/biosimulations_tellurium:latest .
 #
 # Run image:
 #   docker run \
