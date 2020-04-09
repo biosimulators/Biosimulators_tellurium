@@ -4,7 +4,7 @@
   "version": "2.4.1",
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
-  "dockerHubImageId": "crbm/Biosimulations_tellurium",
+  "dockerHubImageId": "crbm/Biosimulations_tellurium:2.4.1",
   "algorithms": [
     {
       "id": "cvode",
