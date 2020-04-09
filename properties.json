@@ -19,7 +19,7 @@
         "KISAO:0000288",
         "KISAO:0000280"
       ],
-      "frameworks": [
+      "modelingFrameworks": [
         {
           "ontology": "SBO",
           "id": "0000293",
@@ -100,7 +100,7 @@
       "synonymousKisaoIds": [
         "KISAO:0000064"
       ],
-      "frameworks": [
+      "modelingFrameworks": [
         {
           "ontology": "SBO",
           "id": "0000293",
@@ -158,7 +158,7 @@
         "KISAO:0000075",
         "KISAO:0000278"
       ],
-      "frameworks": [
+      "modelingFrameworks": [
         {
           "ontology": "SBO",
           "id": "0000293",
@@ -228,7 +228,7 @@
         "KISAO:0000432",
         "KISAO:0000437"
       ],
-      "frameworks": [
+      "modelingFrameworks": [
         {
           "ontology": "SBO",
           "id": "0000293",
