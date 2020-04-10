@@ -26,7 +26,8 @@ class BaseController(cement.Controller):
 
     class Meta:
         label = 'base'
-        description = "BioSimulations-compliant command-line interface to the tellurium simulation program"
+        description = ("BioSimulations-compliant command-line interface to the "
+                       "tellurium simulation program <http://tellurium.analogmachine.org>.")
         help = "tellurium"
         arguments = [
             (['-i', '--in-archive'], dict(type=str,
@@ -36,7 +37,7 @@ class BaseController(cement.Controller):
                                        default='.',
                                        help='Directory to save outputs')),
             (['-v', '--version'], dict(action='version',
-                                       version='{} (tellurium {})'.format(Biosimulations_tellurium.__version__, tellurium.__version__))),
+                                       version=Biosimulations_tellurium.__version__)),
         ]
         PLOTTING_ENGINE = 'matplotlib'
 
