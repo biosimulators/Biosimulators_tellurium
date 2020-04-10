@@ -5,19 +5,123 @@
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
   "dockerHubImageId": "crbm/Biosimulations_tellurium:2.4.1",
+  "format": {
+    "name": "Docker Image",
+    "version": "1.2",
+    "url": "https://github.com/moby/moby/blob/master/image/spec/v1.2.md"
+  },
+  "authors": [
+    {
+      "firstName": "Jayit",
+      "lastName": "Biswas"
+    },
+    {
+      "firstName": "Kiri",
+      "lastName": "Choi"
+    },
+    {
+      "firstName": "Wilbert",
+      "lastName": "Copeland"
+    },
+    {
+      "firstName": "Caroline",
+      "lastName": "Cannistra"
+    },
+    {
+      "firstName": "Alex",
+      "lastName": "Darling"
+    },
+    {
+      "firstName": "Nasir",
+      "lastName": "Elmi"
+    },
+    {
+      "firstName": "Michal",
+      "lastName": "Galdzicki"
+    },
+    {
+      "firstName": "Stanley",
+      "lastName": "Gu"
+    },
+    {
+      "firstName": "Totte",
+      "lastName": "Karlsson"
+    },
+    {
+      "firstName": "Matthias",
+      "lastName": "König"
+    },
+    {
+      "firstName": "J",
+      "middleName": "Kyle",
+      "lastName": "Medley"
+    },
+    {
+      "firstName": "Herbert",
+      "lastName": "Sauro"
+    },
+    {
+      "firstName": "Andy",
+      "lastName": "Somogyi"
+    },
+    {
+      "firstName": "Lucian",
+      "lastName": "Smith"
+    },
+    {
+      "firstName": "Kaylene",
+      "lastName": "Stocking"
+    }
+  ],
+  "references": [
+    {
+      "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
+      "authors": "Choi, Kiri and Medley, J Kyle and König, Matthias and Stocking, Kaylene and Smith, Lucian and Gu, Stanley and Sauro, Herbert M",
+      "journal": "Biosystems",
+      "volume": 171,
+      "pages": "74-79",
+      "year": 2018,
+      "doi": "10.1016/j.biosystems.2018.07.006"
+    }
+  ],
+  "license": "Apache 2.0",
   "algorithms": [
     {
       "id": "cvode",
       "name": "CVODE",
-      "kisaoId": "KISAO:0000019",
-      "synonymousKisaoIds": [
-        "KISAO:0000433",
-        "KISAO:0000407",
-        "KISAO:0000099",
-        "KISAO:0000035",
-        "KISAO:0000071",
-        "KISAO:0000288",
-        "KISAO:0000280"
+      "kisaoTerm": {
+        "ontology": "KISAO",
+        "id": "0000019"
+      },
+      "ontologyTerms": [
+        {
+          "ontology": "KISAO",
+          "id": "0000433"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000407"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000099"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000035"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000071"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000288"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000280"
+        }
       ],
       "modelingFrameworks": [
         {
@@ -38,55 +142,82 @@
       ],
       "parameters": [
         {
-          "kisaoId": "KISAO:0000209",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000209"
+          },
           "name": "Relative tolerance",
           "type": "float",
           "default": 0.000001
         },
         {
-          "kisaoId": "KISAO:0000211",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000211"
+          },
           "name": "Absolute tolerance",
           "type": "float",
           "default": 1e-12
         },
         {
-          "kisaoId": "KISAO:0000220",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000220"
+          },
           "name": "Maximum Backward Differentiation Formula (BDF) order",
           "type": "integer",
           "default": 5
         },
         {
-          "kisaoId": "KISAO:0000219",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000219"
+          },
           "name": "Maximum Adams order",
           "type": "integer",
           "default": 12
         },
         {
-          "kisaoId": "KISAO:0000415",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000415"
+          },
           "name": "Maximum number of steps",
           "type": "integer",
           "default": 20000
         },
         {
-          "kisaoId": "KISAO:0000467",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000467"
+          },
           "name": "Maximum time step",
           "type": "float",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000485",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000485"
+          },
           "name": "Minimum time step",
           "type": "float",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000332",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000332"
+          },
           "name": "Initial time step",
           "type": "float",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000107",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000107"
+          },
           "name": "Adaptive time steps",
           "type": "boolean",
           "default": false
@@ -96,9 +227,15 @@
     {
       "id": "runge_kutta_4",
       "name": "Runge-Kutta 4th order",
-      "kisaoId": "KISAO:0000032",
-      "synonymousKisaoIds": [
-        "KISAO:0000064"
+      "kisaoTerm": {
+        "ontology": "KISAO",
+        "id": "0000032"
+      },
+      "ontologyTerms": [
+        {
+          "ontology": "KISAO",
+          "id": "0000064"
+        }
       ],
       "modelingFrameworks": [
         {
@@ -122,41 +259,143 @@
     {
       "id": "gillespie_direct_ssa",
       "name": "Gillespie direct SSA",
-      "kisaoId": "KISAO:0000029",
-      "synonymousKisaoIds": [
-        "KISAO:0000241",
-        "KISAO:0000319",
-        "KISAO:0000274",
-        "KISAO:0000333",
-        "KISAO:0000329",
-        "KISAO:0000323",
-        "KISAO:0000331",
-        "KISAO:0000027",
-        "KISAO:0000082",
-        "KISAO:0000324",
-        "KISAO:0000350",
-        "KISAO:0000330",
-        "KISAO:0000028",
-        "KISAO:0000038",
-        "KISAO:0000039",
-        "KISAO:0000048",
-        "KISAO:0000074",
-        "KISAO:0000081",
-        "KISAO:0000045",
-        "KISAO:0000351",
-        "KISAO:0000084",
-        "KISAO:0000040",
-        "KISAO:0000046",
-        "KISAO:0000003",
-        "KISAO:0000051",
-        "KISAO:0000335",
-        "KISAO:0000336",
-        "KISAO:0000095",
-        "KISAO:0000022",
-        "KISAO:0000076",
-        "KISAO:0000015",
-        "KISAO:0000075",
-        "KISAO:0000278"
+      "kisaoTerm": {
+        "ontology": "KISAO",
+        "id": "0000029"
+      },
+      "ontologyTerms": [
+        {
+          "ontology": "KISAO",
+          "id": "0000241"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000319"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000274"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000333"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000329"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000323"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000331"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000027"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000082"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000324"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000350"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000330"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000028"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000038"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000039"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000048"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000074"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000081"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000045"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000351"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000084"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000040"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000046"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000003"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000051"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000335"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000336"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000095"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000022"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000076"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000015"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000075"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000278"
+        }
       ],
       "modelingFrameworks": [
         {
@@ -177,31 +416,46 @@
       ],
       "parameters": [
         {
-          "kisaoId": "KISAO:0000488",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000488"
+          },
           "name": "Random number generator seed",
           "type": "integer",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000107",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000107"
+          },
           "name": "Adaptive time steps",
           "type": "boolean",
           "default": true
         },
         {
-          "kisaoId": "KISAO:0000332",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000332"
+          },
           "name": "Initial time step",
           "type": "float",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000485",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000485"
+          },
           "name": "Minimum time step",
           "type": "float",
           "default": 0
         },
         {
-          "kisaoId": "KISAO:0000467",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000467"
+          },
           "name": "Maximum time step",
           "type": "float",
           "default": 0
@@ -211,22 +465,67 @@
     {
       "id": "nleq",
       "name": "NLEQ",
-      "kisaoId": "KISAO:0000408",
-      "synonymousKisaoIds": [
-        "KISAO:0000099",
-        "KISAO:0000274",
-        "KISAO:0000282",
-        "KISAO:0000283",
-        "KISAO:0000355",
-        "KISAO:0000356",
-        "KISAO:0000407",
-        "KISAO:0000409",
-        "KISAO:0000410",
-        "KISAO:0000411",
-        "KISAO:0000412",
-        "KISAO:0000413",
-        "KISAO:0000432",
-        "KISAO:0000437"
+      "kisaoTerm": {
+        "ontology": "KISAO",
+        "id": "0000408"
+      },
+      "ontologyTerms": [
+        {
+          "ontology": "KISAO",
+          "id": "0000099"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000274"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000282"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000283"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000355"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000356"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000407"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000409"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000410"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000411"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000412"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000413"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000432"
+        },
+        {
+          "ontology": "KISAO",
+          "id": "0000437"
+        }
       ],
       "modelingFrameworks": [
         {
@@ -247,19 +546,28 @@
       ],
       "parameters": [
         {
-          "kisaoId": "KISAO:0000209",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000209"
+          },
           "name": "Relative tolerance",
           "type": "float",
           "default": 1e-12
         },
         {
-          "kisaoId": "KISAO:0000486",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000486"
+          },
           "name": "Maximum number of iterations",
           "type": "integer",
           "default": 100
         },
         {
-          "kisaoId": "KISAO:0000487",
+          "kisaoTerm": {
+            "ontology": "KISAO",
+            "id": "0000487"
+          },
           "name": "Minimum damping factor",
           "type": "float",
           "default": 1e-29
