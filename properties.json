@@ -8,7 +8,7 @@
   "format": {
     "name": "Docker Image",
     "version": "1.2",
-    "url": "https://github.com/moby/moby/blob/master/image/spec/v1.2.md"
+    "spec_url": "https://github.com/moby/moby/blob/master/image/spec/v1.2.md"
   },
   "authors": [
     {
@@ -134,10 +134,15 @@
       ],
       "modelFormats": [
         {
-          "name": "SBML",
+          "id": "SBML",
+          "name": "Systems Biology Markup Language",
           "version": "L3V2",
           "edamId": "format_2585",
-          "url": "http://sbml.org"
+          "url": "http://sbml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sbml",
+          "mimeType": "application/sbml+xml",
+          "extension": "xml",
+          "sedUrn": "urn:sedml:language:sbml"
         }
       ],
       "parameters": [
@@ -248,10 +253,15 @@
       ],
       "modelFormats": [
         {
-          "name": "SBML",
+          "id": "SBML",
+          "name": "Systems Biology Markup Language",
           "version": "L3V2",
           "edamId": "format_2585",
-          "url": "http://sbml.org"
+          "url": "http://sbml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sbml",
+          "mimeType": "application/sbml+xml",
+          "extension": "xml",
+          "sedUrn": "urn:sedml:language:sbml"
         }
       ],
       "parameters": []
@@ -408,10 +418,15 @@
       ],
       "modelFormats": [
         {
-          "name": "SBML",
+          "id": "SBML",
+          "name": "Systems Biology Markup Language",
           "version": "L3V2",
           "edamId": "format_2585",
-          "url": "http://sbml.org"
+          "url": "http://sbml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sbml",
+          "mimeType": "application/sbml+xml",
+          "extension": "xml",
+          "sedUrn": "urn:sedml:language:sbml"
         }
       ],
       "parameters": [
@@ -538,10 +553,15 @@
       ],
       "modelFormats": [
         {
-          "name": "SBML",
+          "id": "SBML",
+          "name": "Systems Biology Markup Language",
           "version": "L3V2",
           "edamId": "format_2585",
-          "url": "http://sbml.org"
+          "url": "http://sbml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sbml",
+          "mimeType": "application/sbml+xml",
+          "extension": "xml",
+          "sedUrn": "urn:sedml:language:sbml"
         }
       ],
       "parameters": [
