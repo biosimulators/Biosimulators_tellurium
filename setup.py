@@ -40,7 +40,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'Biosimulations-tellurium = Biosimulations_tellurium.__main__:main',
+            'tellurium = Biosimulations_tellurium.__main__:main',
         ],
     },
 )

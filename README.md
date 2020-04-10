@@ -14,9 +14,9 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 pip install git+https://github.com/reproducible-biomedical-modeling/Biosimulations_tellurium
 ```
 
-## Usage
+## Local usage
 ```
-usage: Biosimulations-tellurium [-h] [-d] [-q] -i SIM_FILE [-o OUT_DIR] [-v]
+usage: tellurium [-h] [-d] [-q] -i IN_ARCHIVE [-o OUT_DIR] [-v]
 
 BioSimulations-compliant command-line interface to the tellurium simulation program
 
@@ -24,12 +24,24 @@ optional arguments:
   -h, --help            show this help message and exit
   -d, --debug           full application debug mode
   -q, --quiet           suppress all console output
-  -i SIM_FILE, --sim-file SIM_FILE
-                        Path to SED-ML file which describes a simulation
-                        experiment
+  -i IN_ARCHIVE, --in-archive IN_ARCHIVE
+                        Path to OMEX file which contains one or more SED-ML-
+                        encoded simulation experiments
   -o OUT_DIR, --out-dir OUT_DIR
                         Directory to save outputs
   -v, --version         show program's version number and exit
+```
+
+## Usage through Docker container
+```
+docker run \
+  --tty \
+  --rm \
+  --mount type=bind,source="$(pwd)"/tests/fixtures,target=/root/in,readonly \
+  --mount type=bind,source="$(pwd)"/tests/results,target=/root/out \
+  crbm/biosimulations_tellurium:latest \
+    -i /root/in/BIOMD0000000297.omex \
+    -o /root/out
 ```
 
 ## License
