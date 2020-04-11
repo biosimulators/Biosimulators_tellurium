@@ -6,7 +6,7 @@
 :License: MIT
 """
 
-from .core import exec_archive
+from .core import exec_combine_archive
 import Biosimulations_tellurium
 import cement
 
@@ -33,7 +33,7 @@ class BaseController(cement.Controller):
     @cement.ex(hide=True)
     def _default(self):
         args = self.app.pargs
-        exec_archive(args.archive, args.out_dir)
+        exec_combine_archive(args.archive, args.out_dir)
 
 
 class App(cement.App):

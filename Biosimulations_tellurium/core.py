@@ -19,7 +19,10 @@ import zipfile
 importlib.reload(libcombine)
 
 
-def exec_archive(archive_file, out_dir, plotting_engine='matplotlib'):
+__all__ = ['exec_combine_archive']
+
+
+def exec_combine_archive(archive_file, out_dir, plotting_engine='matplotlib'):
     """ Execute the SED tasks defined in a COMBINE archive and save the outputs
 
     Args:
