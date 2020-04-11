@@ -16,7 +16,7 @@ pip install git+https://github.com/reproducible-biomedical-modeling/Biosimulatio
 
 ## Local usage
 ```
-usage: tellurium [-h] [-d] [-q] -i IN_ARCHIVE [-o OUT_DIR] [-v]
+usage: tellurium [-h] [-d] [-q] -i ARCHIVE [-o OUT_DIR] [-v]
 
 BioSimulations-compliant command-line interface to the tellurium simulation program
 
@@ -24,7 +24,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -d, --debug           full application debug mode
   -q, --quiet           suppress all console output
-  -i IN_ARCHIVE, --in-archive IN_ARCHIVE
+  -i ARCHIVE, --archive ARCHIVE
                         Path to OMEX file which contains one or more SED-ML-
                         encoded simulation experiments
   -o OUT_DIR, --out-dir OUT_DIR

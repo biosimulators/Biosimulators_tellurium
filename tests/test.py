@@ -52,7 +52,7 @@ class CliTestCase(unittest.TestCase):
 
     def test_sim_long_arg_names(self):
         archive_filename = 'tests/fixtures/BIOMD0000000297.omex'
-        with __main__.App(argv=['--in-archive', archive_filename, '--out-dir', self.dirname]) as app:
+        with __main__.App(argv=['--archive', archive_filename, '--out-dir', self.dirname]) as app:
             app.run()
         self.assert_outputs_created(self.dirname)
 
