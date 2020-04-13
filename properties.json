@@ -88,7 +88,7 @@
   "algorithms": [
     {
       "id": "cvode",
-      "name": "CVODE",
+      "name": "C-language Variable-coefficient Ordinary Differential Equation solver",
       "kisaoTerm": {
         "ontology": "KISAO",
         "id": "0000019"
@@ -143,6 +143,42 @@
           "mimeType": "application/sbml+xml",
           "extension": "xml",
           "sedUrn": "urn:sedml:language:sbml"
+        }
+      ],
+      "simulationFormats": [
+        {
+          "id": "SED-ML",
+          "name": "Simulation Experiment Description Markup Language",
+          "version": "L1V3",
+          "edamId": "format_3685",
+          "url": "https://sed-ml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
+          "mimeType": "application/xml",
+          "extension": "sedml"
+        }
+      ],
+      "archiveFormats": [
+        {
+          "id": "COMBINE",
+          "name": "COMBINE",
+          "version": "V1",
+          "edamId": "format_3686",
+          "url": "https://combinearchive.org/",
+          "specUrl": "http://identifiers.org/combine.specifications/omex",
+          "mimeType": "application/zip",
+          "extension": "omex"
+        }
+      ],
+      "references": [
+        {
+          "title": "CVODE, a stiff/nonstiff ODE solver in C",
+          "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
+          "journal": "Computers in Physics",
+          "volume": 10,
+          "issue": 2,
+          "pages": "138-143",
+          "year": 1996,
+          "doi": "10.1063/1.4822377"
         }
       ],
       "parameters": [
@@ -231,7 +267,7 @@
     },
     {
       "id": "runge_kutta_4",
-      "name": "Runge-Kutta 4th order",
+      "name": "Runge-Kutta fourth order method",
       "kisaoTerm": {
         "ontology": "KISAO",
         "id": "0000032"
@@ -264,11 +300,35 @@
           "sedUrn": "urn:sedml:language:sbml"
         }
       ],
+      "simulationFormats": [
+        {
+          "id": "SED-ML",
+          "name": "Simulation Experiment Description Markup Language",
+          "version": "L1V3",
+          "edamId": "format_3685",
+          "url": "https://sed-ml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
+          "mimeType": "application/xml",
+          "extension": "sedml"
+        }
+      ],
+      "archiveFormats": [
+        {
+          "id": "COMBINE",
+          "name": "COMBINE",
+          "version": "V1",
+          "edamId": "format_3686",
+          "url": "https://combinearchive.org/",
+          "specUrl": "http://identifiers.org/combine.specifications/omex",
+          "mimeType": "application/zip",
+          "extension": "omex"
+        }
+      ],
       "parameters": []
     },
     {
       "id": "gillespie_direct_ssa",
-      "name": "Gillespie direct SSA",
+      "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
       "kisaoTerm": {
         "ontology": "KISAO",
         "id": "0000029"
@@ -429,6 +489,42 @@
           "sedUrn": "urn:sedml:language:sbml"
         }
       ],
+      "simulationFormats": [
+        {
+          "id": "SED-ML",
+          "name": "Simulation Experiment Description Markup Language",
+          "version": "L1V3",
+          "edamId": "format_3685",
+          "url": "https://sed-ml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
+          "mimeType": "application/xml",
+          "extension": "sedml"
+        }
+      ],
+      "archiveFormats": [
+        {
+          "id": "COMBINE",
+          "name": "COMBINE",
+          "version": "V1",
+          "edamId": "format_3686",
+          "url": "https://combinearchive.org/",
+          "specUrl": "http://identifiers.org/combine.specifications/omex",
+          "mimeType": "application/zip",
+          "extension": "omex"
+        }
+      ],
+      "references": [
+        {
+          "title": "Exact stochastic simulation of coupled chemical reactions",
+          "authors": "Daniel T Gillespie",
+          "journal": "Journal of Physical Chemistry",
+          "volume": 81,
+          "issue": 25,
+          "pages": "2340-2361",
+          "year": 1997,
+          "doi": "10.1021/j100540a008"
+        }
+      ],
       "parameters": [
         {
           "kisaoTerm": {
@@ -478,8 +574,8 @@
       ]
     },
     {
-      "id": "nleq",
-      "name": "NLEQ",
+      "id": "nleq2",
+      "name": "Newton-type method for solveing non-linear (NL) equations (EQ)",
       "kisaoTerm": {
         "ontology": "KISAO",
         "id": "0000408"
@@ -562,6 +658,40 @@
           "mimeType": "application/sbml+xml",
           "extension": "xml",
           "sedUrn": "urn:sedml:language:sbml"
+        }
+      ],
+      "simulationFormats": [
+        {
+          "id": "SED-ML",
+          "name": "Simulation Experiment Description Markup Language",
+          "version": "L1V3",
+          "edamId": "format_3685",
+          "url": "https://sed-ml.org",
+          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
+          "mimeType": "application/xml",
+          "extension": "sedml"
+        }
+      ],
+      "archiveFormats": [
+        {
+          "id": "COMBINE",
+          "name": "COMBINE",
+          "version": "V1",
+          "edamId": "format_3686",
+          "url": "https://combinearchive.org/",
+          "specUrl": "http://identifiers.org/combine.specifications/omex",
+          "mimeType": "application/zip",
+          "extension": "omex"
+        }
+      ],
+      "references": [
+        {
+          "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
+          "authors": "Ulrich Nowak & Lutz Weimann",
+          "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
+          "volume": "91-10",
+          "year": 1991,
+          "doi": "10.1.1.43.3751"
         }
       ],
       "parameters": [
