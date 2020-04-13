@@ -1,3 +1,2 @@
 capturer
-docker
 pypdf2
