@@ -6,7 +6,6 @@
 :License: MIT
 """
 
-import importlib
 import libcombine
 import os
 import shutil
@@ -16,6 +15,8 @@ import tellurium.utils.omex
 import tempfile
 import warnings
 import zipfile
+
+import importlib
 importlib.reload(libcombine)
 
 

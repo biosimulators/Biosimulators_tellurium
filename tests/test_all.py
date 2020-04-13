@@ -6,10 +6,20 @@
 :License: MIT
 """
 
+try:
+    from Biosimulations_utils.simulator.testing import SbmlSedmlCombineSimulatorValidator
+except ModuleNotFoundError:
+    pass
 from Biosimulations_tellurium import __main__
 import Biosimulations_tellurium
 import capturer
-import docker
+try:
+    import docker
+except ModuleNotFoundError:
+    pass
+import importlib
+import libsbml  # noqa: F401
+import libsedml  # noqa: F401
 import os
 import PyPDF2
 import shutil
@@ -19,7 +29,7 @@ import unittest
 
 class CliTestCase(unittest.TestCase):
     def setUp(self):
-        self.dirname = tempfile.mkdtemp()
+        self.dirname = tempfile.mkdtemp()        
 
     def tearDown(self):
         shutil.rmtree(self.dirname)
@@ -131,3 +141,11 @@ class CliTestCase(unittest.TestCase):
         for file in files:
             with open(file, 'rb') as file:
                 PyPDF2.PdfFileReader(file)
+
+    @unittest.skipIf(os.getenv('CI', '0') in ['1', 'true'], 'Docker not setup in CI')
+    def test_validator(self):
+        importlib.reload(libsbml)        
+        importlib.reload(libsedml)
+
+        validator = SbmlSedmlCombineSimulatorValidator()
+        validator.run('crbm/biosimulations_tellurium')
