@@ -10,15 +10,21 @@ Biosimulations-compliant command-line interface to the [tellurium](http://tellur
 
 ## Installation
 
+### Install Python package
 ```
 pip install git+https://github.com/reproducible-biomedical-modeling/Biosimulations_tellurium
+```
+
+### Install Docker image
+```
+docker pull crbm/biosimulations_tellurium
 ```
 
 ## Local usage
 ```
 usage: tellurium [-h] [-d] [-q] -i ARCHIVE [-o OUT_DIR] [-v]
 
-BioSimulations-compliant command-line interface to the tellurium simulation program
+BioSimulations-compliant command-line interface to the tellurium simulation program <http://tellurium.analogmachine.org>.
 
 optional arguments:
   -h, --help            show this help message and exit
