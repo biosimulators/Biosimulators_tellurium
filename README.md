@@ -1,5 +1,5 @@
 # Biosimulations_tellurium
-Biosimulations-compliant command-line interface to the [tellurium](http://tellurium.analogmachine.org/) simulation program.
+BioSimulations-compliant command-line interface to the [tellurium](http://tellurium.analogmachine.org/) simulation program.
 
 ## Contents
 * [Installation](#installation)
