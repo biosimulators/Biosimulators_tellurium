@@ -148,6 +148,6 @@ class CliTestCase(unittest.TestCase):
         importlib.reload(libsedml)
 
         validator = SimulatorValidator()
-        valid_cases, case_exceptions = validator.run('crbm/biosimulations_tellurium', 'properties.json')
+        valid_cases, case_exceptions, _ = validator.run('crbm/biosimulations_tellurium', 'properties.json')
         self.assertGreater(len(valid_cases), 0)
         self.assertEqual(case_exceptions, [])
