@@ -84,7 +84,7 @@
       "doi": "10.1016/j.biosystems.2018.07.006"
     }
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "algorithms": [
     {
       "id": "cvode",
