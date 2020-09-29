@@ -72,17 +72,20 @@
       "lastName": "Stocking"
     }
   ],
-  "references": [
-    {
-      "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
-      "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
-      "journal": "Biosystems",
-      "volume": 171,
-      "pages": "74-79",
-      "year": 2018,
-      "doi": "10.1016/j.biosystems.2018.07.006"
-    }
-  ],
+  "references": {
+    "identifiers": [],
+    "citations": [
+      {
+        "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
+        "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
+        "journal": "Biosystems",
+        "volume": 171,
+        "pages": "74-79",
+        "year": 2018,
+        "doi": "10.1016/j.biosystems.2018.07.006"
+      }
+    ]
+  },
   "license": { "namespace": "SPDX", "id": "Apache-2.0" },
   "algorithms": [
     {
@@ -130,39 +133,42 @@
       ],
       "modelFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3686"
         }
       ],
-      "references": [
-        {
-          "title": "CVODE, a stiff/nonstiff ODE solver in C",
-          "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
-          "journal": "Computers in Physics",
-          "volume": 10,
-          "issue": 2,
-          "pages": "138-143",
-          "year": 1996,
-          "doi": "10.1063/1.4822377"
-        }
-      ],
+      "references": {
+        "identifiers": [],
+        "citations:": [
+          {
+            "title": "CVODE, a stiff/nonstiff ODE solver in C",
+            "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
+            "journal": "Computers in Physics",
+            "volume": 10,
+            "issue": 2,
+            "pages": "138-143",
+            "year": 1996,
+            "doi": "10.1063/1.4822377"
+          }
+        ]
+      },
       "parameters": [
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000209"
+            "id": "KISAO_0000209"
           },
           "name": "Relative tolerance",
           "type": "float",
@@ -171,7 +177,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000211"
+            "id": "KISAO_0000211"
           },
           "name": "Absolute tolerance",
           "type": "float",
@@ -180,7 +186,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000220"
+            "id": "KISAO_0000220"
           },
           "name": "Maximum Backward Differentiation Formula (BDF) order",
           "type": "integer",
@@ -189,7 +195,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000219"
+            "id": "KISAO_0000219"
           },
           "name": "Maximum Adams order",
           "type": "integer",
@@ -198,7 +204,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000415"
+            "id": "KISAO_0000415"
           },
           "name": "Maximum number of steps",
           "type": "integer",
@@ -207,7 +213,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000467"
+            "id": "KISAO_0000467"
           },
           "name": "Maximum time step",
           "type": "float",
@@ -216,7 +222,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000485"
+            "id": "KISAO_0000485"
           },
           "name": "Minimum time step",
           "type": "float",
@@ -225,7 +231,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000332"
+            "id": "KISAO_0000332"
           },
           "name": "Initial time step",
           "type": "float",
@@ -234,7 +240,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000107"
+            "id": "KISAO_0000107"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
@@ -263,19 +269,19 @@
       ],
       "modelFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3686"
         }
       ],
@@ -430,39 +436,42 @@
       ],
       "modelFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3686"
         }
       ],
-      "references": [
-        {
-          "title": "Exact stochastic simulation of coupled chemical reactions",
-          "authors": "Daniel T Gillespie",
-          "journal": "Journal of Physical Chemistry",
-          "volume": 81,
-          "issue": 25,
-          "pages": "2340-2361",
-          "year": 1997,
-          "doi": "10.1021/j100540a008"
-        }
-      ],
+      "references": {
+        "identifiers": [],
+        "citations": [
+          {
+            "title": "Exact stochastic simulation of coupled chemical reactions",
+            "authors": "Daniel T Gillespie",
+            "journal": "Journal of Physical Chemistry",
+            "volume": 81,
+            "issue": 25,
+            "pages": "2340-2361",
+            "year": 1997,
+            "doi": "10.1021/j100540a008"
+          }
+        ]
+      },
       "parameters": [
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000488"
+            "id": "KISAO_0000488"
           },
           "name": "Random number generator seed",
           "type": "integer",
@@ -471,7 +480,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000107"
+            "id": "KISAO_0000107"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
@@ -480,7 +489,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000332"
+            "id": "KISAO_0000332"
           },
           "name": "Initial time step",
           "type": "float",
@@ -489,7 +498,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000485"
+            "id": "KISAO_0000485"
           },
           "name": "Minimum time step",
           "type": "float",
@@ -498,7 +507,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000467"
+            "id": "KISAO_0000467"
           },
           "name": "Maximum time step",
           "type": "float",
@@ -579,37 +588,40 @@
       ],
       "modelFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "namespace": "edam",
+          "namespace": "EDAM",
           "id": "format_3686"
         }
       ],
-      "references": [
-        {
-          "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
-          "authors": "Ulrich Nowak & Lutz Weimann",
-          "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
-          "volume": "91-10",
-          "year": 1991,
-          "doi": "10.1.1.43.3751"
-        }
-      ],
+      "references": {
+        "identifiers": [],
+        "citations": [
+          {
+            "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
+            "authors": "Ulrich Nowak & Lutz Weimann",
+            "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
+            "volume": "91-10",
+            "year": 1991,
+            "doi": "10.1.1.43.3751"
+          }
+        ]
+      },
       "parameters": [
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000209"
+            "id": "KISAO_0000209"
           },
           "name": "Relative tolerance",
           "type": "float",
@@ -618,7 +630,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000486"
+            "id": "KISAO_0000486"
           },
           "name": "Maximum number of iterations",
           "type": "integer",
@@ -627,7 +639,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "0000487"
+            "id": "KISAO_0000487"
           },
           "name": "Minimum damping factor",
           "type": "float",
