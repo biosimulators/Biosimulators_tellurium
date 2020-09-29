@@ -1,6 +1,6 @@
 {
   "id": "tellurium",
-  "name": "tellurium",
+  "name": "Tellurium",
   "version": "2.4.1",
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
@@ -149,21 +149,20 @@
           "id": "format_3686"
         }
       ],
-      "references": {
-        "identifiers": [],
-        "citations:": [
-          {
-            "title": "CVODE, a stiff/nonstiff ODE solver in C",
-            "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
-            "journal": "Computers in Physics",
-            "volume": 10,
-            "issue": 2,
-            "pages": "138-143",
-            "year": 1996,
-            "doi": "10.1063/1.4822377"
-          }
-        ]
-      },
+
+      "citations:": [
+        {
+          "title": "CVODE, a stiff/nonstiff ODE solver in C",
+          "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
+          "journal": "Computers in Physics",
+          "volume": 10,
+          "issue": 2,
+          "pages": "138-143",
+          "year": 1996,
+          "doi": "10.1063/1.4822377"
+        }
+      ],
+
       "parameters": [
         {
           "kisaoId": {
@@ -253,12 +252,12 @@
       "name": "Runge-Kutta fourth order method",
       "kisaoId": {
         "namespace": "KISAO",
-        "id": "0000032"
+        "id": "KISAO_0000032"
       },
       "kisaoSynonyms": [
         {
           "namespace": "KISAO",
-          "id": "0000064"
+          "id": "KISAO_0000064"
         }
       ],
       "modelingFrameworks": [
@@ -292,146 +291,146 @@
       "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
       "kisaoId": {
         "namespace": "KISAO",
-        "id": "0000029"
+        "id": "KISAO_0000029"
       },
       "kisaoSynonyms": [
         {
           "namespace": "KISAO",
-          "id": "0000241"
+          "id": "KISAO_0000241"
         },
         {
           "namespace": "KISAO",
-          "id": "0000319"
+          "id": "KISAO_0000319"
         },
         {
           "namespace": "KISAO",
-          "id": "0000274"
+          "id": "KISAO_0000274"
         },
         {
           "namespace": "KISAO",
-          "id": "0000333"
+          "id": "KISAO_0000333"
         },
         {
           "namespace": "KISAO",
-          "id": "0000329"
+          "id": "KISAO_0000329"
         },
         {
           "namespace": "KISAO",
-          "id": "0000323"
+          "id": "KISAO_0000323"
         },
         {
           "namespace": "KISAO",
-          "id": "0000331"
+          "id": "KISAO_0000331"
         },
         {
           "namespace": "KISAO",
-          "id": "0000027"
+          "id": "KISAO_0000027"
         },
         {
           "namespace": "KISAO",
-          "id": "0000082"
+          "id": "KISAO_0000082"
         },
         {
           "namespace": "KISAO",
-          "id": "0000324"
+          "id": "KISAO_0000324"
         },
         {
           "namespace": "KISAO",
-          "id": "0000350"
+          "id": "KISAO_0000350"
         },
         {
           "namespace": "KISAO",
-          "id": "0000330"
+          "id": "KISAO_0000330"
         },
         {
           "namespace": "KISAO",
-          "id": "0000028"
+          "id": "KISAO_0000028"
         },
         {
           "namespace": "KISAO",
-          "id": "0000038"
+          "id": "KISAO_0000038"
         },
         {
           "namespace": "KISAO",
-          "id": "0000039"
+          "id": "KISAO_0000039"
         },
         {
           "namespace": "KISAO",
-          "id": "0000048"
+          "id": "KISAO_0000048"
         },
         {
           "namespace": "KISAO",
-          "id": "0000074"
+          "id": "KISAO_0000074"
         },
         {
           "namespace": "KISAO",
-          "id": "0000081"
+          "id": "KISAO_0000081"
         },
         {
           "namespace": "KISAO",
-          "id": "0000045"
+          "id": "KISAO_0000045"
         },
         {
           "namespace": "KISAO",
-          "id": "0000351"
+          "id": "KISAO_0000351"
         },
         {
           "namespace": "KISAO",
-          "id": "0000084"
+          "id": "KISAO_0000084"
         },
         {
           "namespace": "KISAO",
-          "id": "0000040"
+          "id": "KISAO_0000040"
         },
         {
           "namespace": "KISAO",
-          "id": "0000046"
+          "id": "KISAO_0000046"
         },
         {
           "namespace": "KISAO",
-          "id": "0000003"
+          "id": "KISAO_0000003"
         },
         {
           "namespace": "KISAO",
-          "id": "0000051"
+          "id": "KISAO_0000051"
         },
         {
           "namespace": "KISAO",
-          "id": "0000335"
+          "id": "KISAO_0000335"
         },
         {
           "namespace": "KISAO",
-          "id": "0000336"
+          "id": "KISAO_0000336"
         },
         {
           "namespace": "KISAO",
-          "id": "0000095"
+          "id": "KISAO_0000095"
         },
         {
           "namespace": "KISAO",
-          "id": "0000022"
+          "id": "KISAO_0000022"
         },
         {
           "namespace": "KISAO",
-          "id": "0000076"
+          "id": "KISAO_0000076"
         },
         {
           "namespace": "KISAO",
-          "id": "0000015"
+          "id": "KISAO_0000015"
         },
         {
           "namespace": "KISAO",
-          "id": "0000075"
+          "id": "KISAO_0000075"
         },
         {
           "namespace": "KISAO",
-          "id": "0000278"
+          "id": "KISAO_0000278"
         }
       ],
       "modelingFrameworks": [
         {
           "namespace": "SBO",
-          "id": "0000295"
+          "id": "SBO_0000295"
         }
       ],
       "modelFormats": [
@@ -452,21 +451,19 @@
           "id": "format_3686"
         }
       ],
-      "references": {
-        "identifiers": [],
-        "citations": [
-          {
-            "title": "Exact stochastic simulation of coupled chemical reactions",
-            "authors": "Daniel T Gillespie",
-            "journal": "Journal of Physical Chemistry",
-            "volume": 81,
-            "issue": 25,
-            "pages": "2340-2361",
-            "year": 1997,
-            "doi": "10.1021/j100540a008"
-          }
-        ]
-      },
+
+      "citations": [
+        {
+          "title": "Exact stochastic simulation of coupled chemical reactions",
+          "authors": "Daniel T Gillespie",
+          "journal": "Journal of Physical Chemistry",
+          "volume": 81,
+          "issue": 25,
+          "pages": "2340-2361",
+          "year": 1997,
+          "doi": "10.1021/j100540a008"
+        }
+      ],
       "parameters": [
         {
           "kisaoId": {
@@ -520,70 +517,70 @@
       "name": "Newton-type method for solveing non-linear (NL) equations (EQ)",
       "kisaoId": {
         "namespace": "KISAO",
-        "id": "0000408"
+        "id": "KISAO_0000408"
       },
       "kisaoTerms": [
         {
           "namespace": "KISAO",
-          "id": "0000099"
+          "id": "KISAO_0000099"
         },
         {
           "namespace": "KISAO",
-          "id": "0000274"
+          "id": "KISAO_0000274"
         },
         {
           "namespace": "KISAO",
-          "id": "0000282"
+          "id": "KISAO_0000282"
         },
         {
           "namespace": "KISAO",
-          "id": "0000283"
+          "id": "KISAO_0000283"
         },
         {
           "namespace": "KISAO",
-          "id": "0000355"
+          "id": "KISAO_0000355"
         },
         {
           "namespace": "KISAO",
-          "id": "0000356"
+          "id": "KISAO_0000356"
         },
         {
           "namespace": "KISAO",
-          "id": "0000407"
+          "id": "KISAO_0000407"
         },
         {
           "namespace": "KISAO",
-          "id": "0000409"
+          "id": "KISAO_0000409"
         },
         {
           "namespace": "KISAO",
-          "id": "0000410"
+          "id": "KISAO_0000410"
         },
         {
           "namespace": "KISAO",
-          "id": "0000411"
+          "id": "KISAO_0000411"
         },
         {
           "namespace": "KISAO",
-          "id": "0000412"
+          "id": "KISAO_0000412"
         },
         {
           "namespace": "KISAO",
-          "id": "0000413"
+          "id": "KISAO_0000413"
         },
         {
           "namespace": "KISAO",
-          "id": "0000432"
+          "id": "KISAO_0000432"
         },
         {
           "namespace": "KISAO",
-          "id": "0000437"
+          "id": "KISAO_0000437"
         }
       ],
       "modelingFrameworks": [
         {
           "namespace": "SBO",
-          "id": "0000293"
+          "id": "SBO_0000293"
         }
       ],
       "modelFormats": [
@@ -604,19 +601,17 @@
           "id": "format_3686"
         }
       ],
-      "references": {
-        "identifiers": [],
-        "citations": [
-          {
-            "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
-            "authors": "Ulrich Nowak & Lutz Weimann",
-            "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
-            "volume": "91-10",
-            "year": 1991,
-            "doi": "10.1.1.43.3751"
-          }
-        ]
-      },
+
+      "citations": [
+        {
+          "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
+          "authors": "Ulrich Nowak & Lutz Weimann",
+          "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
+          "volume": "91-10",
+          "year": 1991,
+          "doi": "10.1.1.43.3751"
+        }
+      ],
       "parameters": [
         {
           "kisaoId": {
