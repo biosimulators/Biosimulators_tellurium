@@ -1,5 +1,5 @@
 # Build image:
-#   docker build --tag crbm/biosimulations_tellurium:2.4.1 --tag crbm/biosimulations_tellurium:latest .
+#   docker build --tag biosimulators/tellurium:2.4.1 --tag biosimulators/tellurium:latest .
 #
 # Run image:
 #   docker run \
@@ -7,7 +7,7 @@
 #     --rm \
 #     --mount type=bind,source="$(pwd)"/tests/fixtures,target=/root/in,readonly \
 #     --mount type=bind,source="$(pwd)"/tests/results,target=/root/out \
-#     crbm/biosimulations_tellurium:latest \
+#     biosimulators/tellurium:latest \
 #       -i /root/in/BIOMD0000000297.omex \
 #       -o /root/out
 
@@ -24,7 +24,7 @@ LABEL about.home="http://tellurium.analogmachine.org/"
 LABEL about.documentation="https://tellurium.readthedocs.io/"
 LABEL about.license_file="https://github.com/sys-bio/tellurium/blob/master/LICENSE.txt"
 LABEL about.license="SPDX:Apache-2.0"
-LABEL about.tags="kinetic modeling,dynamical simulation,systems biology,SBML,SED-ML,COMBINE,OMEX"
+LABEL about.tags="kinetic modeling,dynamical simulation,systems biology,biochemical networks,SBML,SED-ML,COMBINE,OMEX,BioSimulators"
 LABEL maintainer="Jonathan Karr <karr@mssm.edu>"
 
 # Install requirements
@@ -38,8 +38,8 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy code for command-line interface into image and install it
-COPY . /root/Biosimulations_tellurium
-RUN pip3 install /root/Biosimulations_tellurium
+COPY . /root/Biosimulators_tellurium
+RUN pip3 install /root/Biosimulators_tellurium
 
 # Configure matplotlib backend
 ENV MPLBACKEND="module://Agg" \

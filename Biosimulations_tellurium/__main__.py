@@ -1,4 +1,4 @@
-""" BioSimulations-compliant command-line interface to the `tellurium <http://tellurium.analogmachine.org/>`_ simulation program.
+""" BioSimulators-compliant command-line interface to the `tellurium <http://tellurium.analogmachine.org/>`_ simulation program.
 
 :Author: Jonathan Karr <karr@mssm.edu>
 :Date: 2020-04-10
@@ -7,7 +7,7 @@
 """
 
 from .core import exec_combine_archive
-import Biosimulations_tellurium
+import Biosimulators_tellurium
 import cement
 
 
@@ -16,7 +16,7 @@ class BaseController(cement.Controller):
 
     class Meta:
         label = 'base'
-        description = ("BioSimulations-compliant command-line interface to the "
+        description = ("BioSimulators-compliant command-line interface to the "
                        "tellurium simulation program <http://tellurium.analogmachine.org>.")
         help = "tellurium"
         arguments = [
@@ -27,7 +27,7 @@ class BaseController(cement.Controller):
                                        default='.',
                                        help='Directory to save outputs')),
             (['-v', '--version'], dict(action='version',
-                                       version=Biosimulations_tellurium.__version__)),
+                                       version=Biosimulators_tellurium.__version__)),
         ]
 
     @cement.ex(hide=True)

@@ -15,7 +15,7 @@ except (subprocess.CalledProcessError, AssertionError):
 import os
 import pkg_utils
 
-name = 'Biosimulations_tellurium'
+name = 'Biosimulators_tellurium'
 dirname = os.path.dirname(__file__)
 
 # get package metadata
@@ -25,13 +25,13 @@ md = pkg_utils.get_package_metadata(dirname, name)
 setuptools.setup(
     name=name,
     version=md.version,
-    description=("BioSimulations-compliant command-line interface to "
+    description=("BioSimulators-compliant command-line interface to "
                  "the tellurium simulation program <http://tellurium.analogmachine.org>."),
     long_description=md.long_description,
-    url="https://github.com/reproducible-biomedical-modeling/" + name,
-    download_url='https://github.com/reproducible-biomedical-modeling/' + name,
+    url="https://github.com/biosimulators/" + name,
+    download_url='https://github.com/biosimulators/' + name,
     author='Center for Reproducible Biomedical Modeling',
-    author_email="info@reproduciblebiomodels.org",
+    author_email="info@biosimulators.org",
     license="MIT",
     keywords='systems biology modeling simulation',
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
@@ -47,7 +47,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'tellurium = Biosimulations_tellurium.__main__:main',
+            'tellurium = Biosimulators_tellurium.__main__:main',
         ],
     },
 )
