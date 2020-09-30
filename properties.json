@@ -1,14 +1,13 @@
 {
   "id": "tellurium",
-  "name": "tellurium",
+  "name": "Tellurium",
   "version": "2.4.1",
-  "description": "tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
+  "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
-  "dockerHubImageId": "biosimulators/tellurium:2.4.1",
+  "image": "docker.io/biosimulators/Biosimulations_tellurium:2.4.1",
   "format": {
-    "name": "Docker Image",
-    "version": "1.2",
-    "spec_url": "https://github.com/moby/moby/blob/master/image/spec/v1.2.md"
+    "namespace": "EDAM",
+    "id": "format_3973"
   },
   "authors": [
     {
@@ -73,87 +72,55 @@
       "lastName": "Stocking"
     }
   ],
-  "references": [
-    {
-      "title": "tellurium: an extensible python-based modeling environment for systems and synthetic biology",
-      "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
-      "journal": "Biosystems",
-      "volume": 171,
-      "pages": "74-79",
-      "year": 2018,
-      "doi": "10.1016/j.biosystems.2018.07.006"
-    }
-  ],
-  "license": "Apache-2.0",
+  "references": {
+    "identifiers": [],
+    "citations": [
+      {
+        "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
+        "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
+        "journal": "Biosystems",
+        "volume": 171,
+        "pages": "74-79",
+        "year": 2018,
+        "doi": "10.1016/j.biosystems.2018.07.006"
+      }
+    ]
+  },
+  "license": { "namespace": "SPDX", "id": "Apache-2.0" },
   "algorithms": [
     {
       "id": "cvode",
       "name": "C-language Variable-coefficient Ordinary Differential Equation solver",
-      "kisaoTerm": {
-        "ontology": "KISAO",
-        "id": "0000019"
-      },
-      "characteristics": [        
-        {
-          "ontology": "KISAO",
-          "id": "0000035"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000288"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000280"
-        }
-      ],
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000019"
+      },      
       "modelingFrameworks": [
         {
-          "ontology": "SBO",
-          "id": "0000293",
-          "name": "non-spatial continuous framework",
-          "description": "Modelling approach where the quantities of participants are considered continuous, and represented by real values. The associated simulation methods make use of differential equations. The models do not take into account the distribution of the entities and describe only the temporal fluxes.",
-          "iri": "http://biomodels.net/SBO/SBO_0000293"
+          "namespace": "SBO",
+          "id": "SBO_0000293"
         }
       ],
       "modelFormats": [
         {
-          "id": "SBML",
-          "name": "Systems Biology Markup Language",
-          "version": "L3V2",
-          "edamId": "format_2585",
-          "url": "http://sbml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sbml",
-          "mimeType": "application/sbml+xml",
-          "extension": "xml",
-          "sedUrn": "urn:sedml:language:sbml"
+          "namespace": "EDAM",
+          "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "id": "SED-ML",
-          "name": "Simulation Experiment Description Markup Language",
-          "version": "L1V3",
-          "edamId": "format_3685",
-          "url": "https://sed-ml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
-          "mimeType": "application/xml",
-          "extension": "sedml"
+          "namespace": "EDAM",
+          "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "id": "COMBINE",
-          "name": "COMBINE",
-          "version": "V1",
-          "edamId": "format_3686",
-          "url": "https://combinearchive.org/",
-          "specUrl": "http://identifiers.org/combine.specifications/omex",
-          "mimeType": "application/zip",
-          "extension": "omex"
+          "namespace": "EDAM",
+          "id": "format_3686"
         }
       ],
-      "references": [
+
+      "citations:": [
         {
           "title": "CVODE, a stiff/nonstiff ODE solver in C",
           "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
@@ -165,147 +132,120 @@
           "doi": "10.1063/1.4822377"
         }
       ],
+
       "parameters": [
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000209"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
           },
           "name": "Relative tolerance",
           "type": "float",
-          "default": 0.000001
+          "value": 0.000001
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000211"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
           },
           "name": "Absolute tolerance",
           "type": "float",
-          "default": 1e-12
+          "value": 1e-12
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000220"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000220"
           },
           "name": "Maximum Backward Differentiation Formula (BDF) order",
           "type": "integer",
-          "default": 5
+          "value": 5
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000219"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000219"
           },
           "name": "Maximum Adams order",
           "type": "integer",
-          "default": 12
+          "value": 12
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000415"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
           },
           "name": "Maximum number of steps",
           "type": "integer",
-          "default": 20000
+          "value": 20000
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000467"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000467"
           },
           "name": "Maximum time step",
           "type": "float",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000485"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000485"
           },
           "name": "Minimum time step",
           "type": "float",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000332"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000332"
           },
           "name": "Initial time step",
           "type": "float",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000107"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000107"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
-          "default": false
+          "value": false
         }
       ]
     },
     {
       "id": "runge_kutta_4",
       "name": "Runge-Kutta fourth order method",
-      "kisaoTerm": {
-        "ontology": "KISAO",
-        "id": "0000032"
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000032"
       },
-      "characteristics": [
-        {
-          "ontology": "KISAO",
-          "id": "0000064"
-        }
-      ],
       "modelingFrameworks": [
         {
-          "ontology": "SBO",
-          "id": "0000293",
-          "name": "non-spatial continuous framework",
-          "description": "Modelling approach where the quantities of participants are considered continuous, and represented by real values. The associated simulation methods make use of differential equations. The models do not take into account the distribution of the entities and describe only the temporal fluxes.",
-          "iri": "http://biomodels.net/SBO/SBO_0000293"
+          "namespace": "SBO",
+          "id": "SBO_0000293"
         }
       ],
       "modelFormats": [
         {
-          "id": "SBML",
-          "name": "Systems Biology Markup Language",
-          "version": "L3V2",
-          "edamId": "format_2585",
-          "url": "http://sbml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sbml",
-          "mimeType": "application/sbml+xml",
-          "extension": "xml",
-          "sedUrn": "urn:sedml:language:sbml"
+          "namespace": "EDAM",
+          "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "id": "SED-ML",
-          "name": "Simulation Experiment Description Markup Language",
-          "version": "L1V3",
-          "edamId": "format_3685",
-          "url": "https://sed-ml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
-          "mimeType": "application/xml",
-          "extension": "sedml"
+          "namespace": "EDAM",
+          "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "id": "COMBINE",
-          "name": "COMBINE",
-          "version": "V1",
-          "edamId": "format_3686",
-          "url": "https://combinearchive.org/",
-          "specUrl": "http://identifiers.org/combine.specifications/omex",
-          "mimeType": "application/zip",
-          "extension": "omex"
+          "namespace": "EDAM",
+          "id": "format_3686"
         }
       ],
       "parameters": []
@@ -313,67 +253,36 @@
     {
       "id": "gillespie_direct_ssa",
       "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
-      "kisaoTerm": {
-        "ontology": "KISAO",
-        "id": "0000029"
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000029"
       },
-      "characteristics": [
-        {
-          "ontology": "KISAO",
-          "id": "0000319"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000278"
-        }
-      ],
       "modelingFrameworks": [
         {
-          "ontology": "SBO",
-          "id": "0000295",
-          "name": "non-spatial discrete framework",
-          "description": "Modelling approach where the quantities of participants are considered discrete, and represented by integer values. The associated simulation methods can be deterministic or stochastic.The models do not take into account the distribution of the entities and describe only the temporal fluxes.",
-          "iri": "http://biomodels.net/SBO/SBO_0000295"
+          "namespace": "SBO",
+          "id": "SBO_0000295"
         }
       ],
       "modelFormats": [
         {
-          "id": "SBML",
-          "name": "Systems Biology Markup Language",
-          "version": "L3V2",
-          "edamId": "format_2585",
-          "url": "http://sbml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sbml",
-          "mimeType": "application/sbml+xml",
-          "extension": "xml",
-          "sedUrn": "urn:sedml:language:sbml"
+          "namespace": "EDAM",
+          "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "id": "SED-ML",
-          "name": "Simulation Experiment Description Markup Language",
-          "version": "L1V3",
-          "edamId": "format_3685",
-          "url": "https://sed-ml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
-          "mimeType": "application/xml",
-          "extension": "sedml"
+          "namespace": "EDAM",
+          "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "id": "COMBINE",
-          "name": "COMBINE",
-          "version": "V1",
-          "edamId": "format_3686",
-          "url": "https://combinearchive.org/",
-          "specUrl": "http://identifiers.org/combine.specifications/omex",
-          "mimeType": "application/zip",
-          "extension": "omex"
+          "namespace": "EDAM",
+          "id": "format_3686"
         }
       ],
-      "references": [
+
+      "citations": [
         {
           "title": "Exact stochastic simulation of coupled chemical reactions",
           "authors": "Daniel T Gillespie",
@@ -387,158 +296,85 @@
       ],
       "parameters": [
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000488"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
           },
           "name": "Random number generator seed",
           "type": "integer",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000107"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000107"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
-          "default": true
+          "value": true
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000332"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000332"
           },
           "name": "Initial time step",
           "type": "float",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000485"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000485"
           },
           "name": "Minimum time step",
           "type": "float",
-          "default": 0
+          "value": 0
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000467"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000467"
           },
           "name": "Maximum time step",
           "type": "float",
-          "default": 0
+          "value": 0
         }
       ]
     },
     {
       "id": "nleq2",
       "name": "Newton-type method for solveing non-linear (NL) equations (EQ)",
-      "kisaoTerm": {
-        "ontology": "KISAO",
-        "id": "0000408"
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000408"
       },
-      "kisaoTermSynonyms": [
-        {
-          "ontology": "KISAO",
-          "id": "0000409"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000410"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000411"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000412"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000413"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000432"
-        }
-      ],
-      "characteristics": [
-        {
-          "ontology": "KISAO",
-          "id": "0000274"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000282"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000283"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000355"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000356"
-        },
-        {
-          "ontology": "KISAO",
-          "id": "0000407"
-        }        
-      ],
       "modelingFrameworks": [
         {
-          "ontology": "SBO",
-          "id": "0000293",
-          "name": "non-spatial continuous framework",
-          "description": "Modelling approach where the quantities of participants are considered continuous, and represented by real values. The associated simulation methods make use of differential equations. The models do not take into account the distribution of the entities and describe only the temporal fluxes.",
-          "iri": "http://biomodels.net/SBO/SBO_0000293"
+          "namespace": "SBO",
+          "id": "SBO_0000293"
         }
       ],
       "modelFormats": [
         {
-          "id": "SBML",
-          "name": "Systems Biology Markup Language",
-          "version": "L3V2",
-          "edamId": "format_2585",
-          "url": "http://sbml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sbml",
-          "mimeType": "application/sbml+xml",
-          "extension": "xml",
-          "sedUrn": "urn:sedml:language:sbml"
+          "namespace": "EDAM",
+          "id": "format_2585"
         }
       ],
       "simulationFormats": [
         {
-          "id": "SED-ML",
-          "name": "Simulation Experiment Description Markup Language",
-          "version": "L1V3",
-          "edamId": "format_3685",
-          "url": "https://sed-ml.org",
-          "specUrl": "http://identifiers.org/combine.specifications/sed-ml",
-          "mimeType": "application/xml",
-          "extension": "sedml"
+          "namespace": "EDAM",
+          "id": "format_3685"
         }
       ],
       "archiveFormats": [
         {
-          "id": "COMBINE",
-          "name": "COMBINE",
-          "version": "V1",
-          "edamId": "format_3686",
-          "url": "https://combinearchive.org/",
-          "specUrl": "http://identifiers.org/combine.specifications/omex",
-          "mimeType": "application/zip",
-          "extension": "omex"
+          "namespace": "EDAM",
+          "id": "format_3686"
         }
       ],
-      "references": [
+
+      "citations": [
         {
           "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
           "authors": "Ulrich Nowak & Lutz Weimann",
@@ -550,35 +386,33 @@
       ],
       "parameters": [
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000209"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
           },
           "name": "Relative tolerance",
           "type": "float",
-          "default": 1e-12
+          "value": 1e-12
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000486"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000486"
           },
           "name": "Maximum number of iterations",
           "type": "integer",
-          "default": 100
+          "value": 100
         },
         {
-          "kisaoTerm": {
-            "ontology": "KISAO",
-            "id": "0000487"
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000487"
           },
           "name": "Minimum damping factor",
           "type": "float",
-          "default": 1e-29
+          "value": 1e-29
         }
       ]
     }
-  ],
-  "created": "2020-04-13T12:00:00Z",
-  "updated": "2020-04-13T12:00:00Z"
+  ]
 }
