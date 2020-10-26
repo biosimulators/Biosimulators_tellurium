@@ -1,10 +1,6 @@
 {
   "id": "tellurium",
-  "name": "Tellurium",
-  "biosimulators": {
-    "schemaVersion": "1.0.0",
-    "imageVersion": "1.0.0"
-  },
+  "name": "Tellurium",  
   "version": "2.1.6",
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
@@ -86,7 +82,7 @@
         "volume": 171,
         "pages": "74-79",
         "year": 2018,
-        "identifiers": [{"namespace": "doi", "id": "10.1016/j.biosystems.2018.07.006"}]
+        "identifiers": [{"namespace": "doi", "id": "10.1016/j.biosystems.2018.07.006", "url": "https://doi.org/10.1016/j.biosystems.2018.07.006"}]
       }
     ]
   },
@@ -133,7 +129,7 @@
           "issue": 2,
           "pages": "138-143",
           "year": 1996,
-          "identifiers": [{"namespace": "doi", "id": "10.1063/1.4822377"}]
+          "identifiers": [{"namespace": "doi", "id": "10.1063/1.4822377", "url": "https://doi.org/10.1063/1.4822377"}]
         }
       ],
 
@@ -295,7 +291,7 @@
           "issue": 25,
           "pages": "2340-2361",
           "year": 1997,
-          "identifiers": [{"namespace": "doi", "id": "10.1021/j100540a008"}]
+          "identifiers": [{"namespace": "doi", "id": "10.1021/j100540a008", "url": "https://doi.org/10.1021/j100540a008"}]
         }
       ],
       "parameters": [
@@ -385,7 +381,7 @@
           "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
           "volume": "91-10",
           "year": 1991,
-          "identifiers": [{"namespace": "doi", "id": "10.1.1.43.3751"}]
+          "identifiers": [{"namespace": "doi", "id": "10.1.1.43.3751", "url": "https://doi.org/10.1.1.43.3751"}]
         }
       ],
       "parameters": [
@@ -418,5 +414,9 @@
         }
       ]
     }
-  ]
+  ],
+  "biosimulators": {
+    "schemaVersion": "1.0.0",
+    "imageVersion": "1.0.0"
+  }
 }
