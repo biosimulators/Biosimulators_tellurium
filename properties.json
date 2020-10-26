@@ -57,6 +57,7 @@
     },
     {
       "firstName": "Herbert",
+      "middleName": "M.",
       "lastName": "Sauro"
     },
     {
@@ -78,7 +79,7 @@
       {
         "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
         "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
-        "journal": "Biosystems",
+        "journal": "BioSystems",
         "volume": 171,
         "pages": "74-79",
         "year": 2018,
@@ -123,7 +124,7 @@
       "citations:": [
         {
           "title": "CVODE, a stiff/nonstiff ODE solver in C",
-          "authors": "Scott D Cohen, Alan C Hindmarsh & and Paul F Dubois",
+          "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
           "journal": "Computers in Physics",
           "volume": 10,
           "issue": 2,
@@ -285,7 +286,7 @@
       "citations": [
         {
           "title": "Exact stochastic simulation of coupled chemical reactions",
-          "authors": "Daniel T Gillespie",
+          "authors": "Daniel T. Gillespie",
           "journal": "Journal of Physical Chemistry",
           "volume": 81,
           "issue": 25,
