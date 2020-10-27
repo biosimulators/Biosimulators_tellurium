@@ -262,8 +262,35 @@
         "namespace": "EDAM",
         "id": "format_3686"
       }],
-      "parameters": []
-    },   
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000107"
+          },
+          "name": "Adaptive time steps",
+          "type": "boolean",
+          "value": true
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000485"
+          },
+          "name": "Minimum time step",
+          "type": "float",
+          "value": 1e-12
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000467"
+          },
+          "name": "Maximum time step",
+          "type": "float",
+          "value": 1.0
+        }
+      ]
+    },
     {
       "id": "gillespie_direct_ssa",
       "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
@@ -372,27 +399,29 @@
         "id": "format_3686"
       }],
       "citations": [{
-        "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
-        "authors": "Ulrich Nowak & Lutz Weimann",
-        "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
-        "volume": "91-10",
-        "year": 1991,
-        "identifiers": [{
-          "namespace": "doi",
-          "id": "10.1.1.43.3751",
-          "url": "https://doi.org/10.1.1.43.3751"
+          "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
+          "authors": "Ulrich Nowak & Lutz Weimann",
+          "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
+          "volume": "91-10",
+          "year": 1991,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1.1.43.3751",
+            "url": "https://doi.org/10.1.1.43.3751"
+          }]
         },
         {
-        "title": "Newton methods for nonlinear problems",
-        "authors": "Peter Deuflhard",
-        "journal": "Affine Invariance and Adaptive Algorithms",
-        "year": 2004,
-        "identifiers": [{
-          "namespace": "doi",
-          "id": "10.1007/978-3-642-23899-4",
-          "url": "https://doi.org/10.1007/978-3-642-23899-4"
-        }]
-      }],
+          "title": "Newton methods for nonlinear problems",
+          "authors": "Peter Deuflhard",
+          "journal": "Affine Invariance and Adaptive Algorithms",
+          "year": 2004,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1007/978-3-642-23899-4",
+            "url": "https://doi.org/10.1007/978-3-642-23899-4"
+          }]
+        }
+      ],
       "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
@@ -418,7 +447,7 @@
           },
           "name": "Minimum damping factor",
           "type": "float",
-          "value": 1e-29
+          "value": 1e-20
         }
       ]
     }
