@@ -371,7 +371,6 @@
         "namespace": "EDAM",
         "id": "format_3686"
       }],
-
       "citations": [{
         "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
         "authors": "Ulrich Nowak & Lutz Weimann",
