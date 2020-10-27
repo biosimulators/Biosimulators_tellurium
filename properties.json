@@ -240,6 +240,31 @@
       "parameters": []
     },
     {
+      "id": "runge_kutta_45",
+      "name": "Fehlberg method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000086"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585"
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685"
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686"
+      }],
+      "parameters": []
+    },   
+    {
       "id": "gillespie_direct_ssa",
       "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
       "kisaoId": {
@@ -357,6 +382,16 @@
           "namespace": "doi",
           "id": "10.1.1.43.3751",
           "url": "https://doi.org/10.1.1.43.3751"
+        },
+        {
+        "title": "Newton methods for nonlinear problems",
+        "authors": "Peter Deuflhard",
+        "journal": "Affine Invariance and Adaptive Algorithms",
+        "year": 2004,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1007/978-3-642-23899-4",
+          "url": "https://doi.org/10.1007/978-3-642-23899-4"
         }]
       }],
       "parameters": [{
