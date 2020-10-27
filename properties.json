@@ -1,6 +1,6 @@
 {
   "id": "tellurium",
-  "name": "Tellurium",  
+  "name": "tellurium",
   "version": "2.1.6",
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
   "url": "http://tellurium.analogmachine.org/",
@@ -9,8 +9,7 @@
     "namespace": "EDAM",
     "id": "format_3973"
   },
-  "authors": [
-    {
+  "authors": [{
       "firstName": "Jayit",
       "lastName": "Biswas"
     },
@@ -75,67 +74,64 @@
   ],
   "references": {
     "identifiers": [],
-    "citations": [
-      {
-        "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
-        "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
-        "journal": "BioSystems",
-        "volume": 171,
-        "pages": "74-79",
-        "year": 2018,
-        "identifiers": [{"namespace": "doi", "id": "10.1016/j.biosystems.2018.07.006", "url": "https://doi.org/10.1016/j.biosystems.2018.07.006"}]
-      }
-    ]
+    "citations": [{
+      "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
+      "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
+      "journal": "BioSystems",
+      "volume": 171,
+      "pages": "74-79",
+      "year": 2018,
+      "identifiers": [{
+        "namespace": "doi",
+        "id": "10.1016/j.biosystems.2018.07.006",
+        "url": "https://doi.org/10.1016/j.biosystems.2018.07.006"
+      }]
+    }]
   },
-  "license": { "namespace": "SPDX", "id": "Apache-2.0" },
-  "algorithms": [
-    {
+  "license": {
+    "namespace": "SPDX",
+    "id": "Apache-2.0"
+  },
+  "algorithms": [{
       "id": "cvode",
       "name": "C-language Variable-coefficient Ordinary Differential Equation solver",
       "kisaoId": {
         "namespace": "KISAO",
         "id": "KISAO_0000019"
-      },      
-      "modelingFrameworks": [
-        {
-          "namespace": "SBO",
-          "id": "SBO_0000293"
-        }
-      ],
-      "modelFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_2585"
-        }
-      ],
-      "simulationFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3685"
-        }
-      ],
-      "archiveFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3686"
-        }
-      ],
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585"
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685"
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686"
+      }],
 
-      "citations:": [
-        {
-          "title": "CVODE, a stiff/nonstiff ODE solver in C",
-          "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
-          "journal": "Computers in Physics",
-          "volume": 10,
-          "issue": 2,
-          "pages": "138-143",
-          "year": 1996,
-          "identifiers": [{"namespace": "doi", "id": "10.1063/1.4822377", "url": "https://doi.org/10.1063/1.4822377"}]
-        }
-      ],
+      "citations:": [{
+        "title": "CVODE, a stiff/nonstiff ODE solver in C",
+        "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
+        "journal": "Computers in Physics",
+        "volume": 10,
+        "issue": 2,
+        "pages": "138-143",
+        "year": 1996,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1063/1.4822377",
+          "url": "https://doi.org/10.1063/1.4822377"
+        }]
+      }],
 
-      "parameters": [
-        {
+      "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000209"
@@ -225,30 +221,22 @@
         "namespace": "KISAO",
         "id": "KISAO_0000032"
       },
-      "modelingFrameworks": [
-        {
-          "namespace": "SBO",
-          "id": "SBO_0000293"
-        }
-      ],
-      "modelFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_2585"
-        }
-      ],
-      "simulationFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3685"
-        }
-      ],
-      "archiveFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3686"
-        }
-      ],
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585"
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685"
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686"
+      }],
       "parameters": []
     },
     {
@@ -258,45 +246,37 @@
         "namespace": "KISAO",
         "id": "KISAO_0000029"
       },
-      "modelingFrameworks": [
-        {
-          "namespace": "SBO",
-          "id": "SBO_0000295"
-        }
-      ],
-      "modelFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_2585"
-        }
-      ],
-      "simulationFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3685"
-        }
-      ],
-      "archiveFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3686"
-        }
-      ],
-
-      "citations": [
-        {
-          "title": "Exact stochastic simulation of coupled chemical reactions",
-          "authors": "Daniel T. Gillespie",
-          "journal": "Journal of Physical Chemistry",
-          "volume": 81,
-          "issue": 25,
-          "pages": "2340-2361",
-          "year": 1997,
-          "identifiers": [{"namespace": "doi", "id": "10.1021/j100540a008", "url": "https://doi.org/10.1021/j100540a008"}]
-        }
-      ],
-      "parameters": [
-        {
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585"
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685"
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686"
+      }],
+      "citations": [{
+        "title": "Exact stochastic simulation of coupled chemical reactions",
+        "authors": "Daniel T. Gillespie",
+        "journal": "Journal of Physical Chemistry",
+        "volume": 81,
+        "issue": 25,
+        "pages": "2340-2361",
+        "year": 1977,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1021/j100540a008",
+          "url": "https://doi.org/10.1021/j100540a008"
+        }]
+      }],
+      "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000488"
@@ -350,43 +330,36 @@
         "namespace": "KISAO",
         "id": "KISAO_0000408"
       },
-      "modelingFrameworks": [
-        {
-          "namespace": "SBO",
-          "id": "SBO_0000293"
-        }
-      ],
-      "modelFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_2585"
-        }
-      ],
-      "simulationFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3685"
-        }
-      ],
-      "archiveFormats": [
-        {
-          "namespace": "EDAM",
-          "id": "format_3686"
-        }
-      ],
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585"
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685"
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686"
+      }],
 
-      "citations": [
-        {
-          "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
-          "authors": "Ulrich Nowak & Lutz Weimann",
-          "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
-          "volume": "91-10",
-          "year": 1991,
-          "identifiers": [{"namespace": "doi", "id": "10.1.1.43.3751", "url": "https://doi.org/10.1.1.43.3751"}]
-        }
-      ],
-      "parameters": [
-        {
+      "citations": [{
+        "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
+        "authors": "Ulrich Nowak & Lutz Weimann",
+        "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
+        "volume": "91-10",
+        "year": 1991,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1.1.43.3751",
+          "url": "https://doi.org/10.1.1.43.3751"
+        }]
+      }],
+      "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000209"
