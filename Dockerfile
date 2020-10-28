@@ -1,5 +1,5 @@
 # Build image:
-#   docker build --tag biosimulators/tellurium:2.4.1 --tag biosimulators/tellurium:latest .
+#   docker build --tag biosimulators/tellurium:2.1.6 --tag biosimulators/tellurium:latest .
 #
 # Run image:
 #   docker run \
@@ -16,9 +16,9 @@ FROM ubuntu:18.04
 
 # metadata
 LABEL base_image="ubuntu:18.04"
-LABEL version="2.4.1"
+LABEL version="2.1.6"
 LABEL software="tellurium"
-LABEL software.version="2.4.1"
+LABEL software.version="2.1.6"
 LABEL about.summary="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology"
 LABEL about.home="http://tellurium.analogmachine.org/"
 LABEL about.documentation="https://tellurium.readthedocs.io/"
