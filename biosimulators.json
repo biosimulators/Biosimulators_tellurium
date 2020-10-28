@@ -73,7 +73,16 @@
     }
   ],
   "references": {
-    "identifiers": [],
+    "identifiers": [{
+      "namespace": "pypi",
+      "id": "tellurium",
+      "url": "https://pypi.org/project/tellurium/"
+    },
+    {
+      "namespace": "nanohub.resource",
+      "id": "tellurium",
+      "url": "https://nanohub.org/resources/tellurium"
+    }],
     "citations": [{
       "title": "Tellurium: an extensible python-based modeling environment for systems and synthetic biology",
       "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
