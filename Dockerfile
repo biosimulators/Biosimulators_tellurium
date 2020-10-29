@@ -25,7 +25,7 @@ LABEL about.documentation="https://tellurium.readthedocs.io/"
 LABEL about.license_file="https://github.com/sys-bio/tellurium/blob/master/LICENSE.txt"
 LABEL about.license="SPDX:Apache-2.0"
 LABEL about.tags="kinetic modeling,dynamical simulation,systems biology,biochemical networks,SBML,SED-ML,COMBINE,OMEX,BioSimulators"
-LABEL maintainer="Jonathan Karr <karr@mssm.edu>"
+LABEL maintainer="BioSimulators Team <info@biosimulators.org>"
 
 # Install requirements
 RUN apt-get update -y \
