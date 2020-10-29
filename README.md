@@ -17,7 +17,7 @@ pip install git+https://github.com/biosimulators/Biosimulators_tellurium
 
 ### Install Docker image
 ```
-docker pull biosimulators/tellurium
+docker pull ghcr.io/biosimulators/tellurium
 ```
 
 ## Local usage
