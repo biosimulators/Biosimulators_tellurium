@@ -71,7 +71,7 @@ class CliTestCase(unittest.TestCase):
         docker_client = docker.from_env()
 
         # build image
-        image_repo = 'biosimulators/tellurium'
+        image_repo = 'ghcr.io/biosimulators/tellurium'
         image_tag = Biosimulators_tellurium.__version__
         image, _ = docker_client.images.build(
             path='.',
@@ -87,7 +87,7 @@ class CliTestCase(unittest.TestCase):
         docker_client = docker.from_env()
 
         # image config
-        image_repo = 'biosimulators/tellurium'
+        image_repo = 'ghcr.io/biosimulators/tellurium'
         image_tag = Biosimulators_tellurium.__version__
 
         # setup input and output directories
@@ -148,6 +148,6 @@ class CliTestCase(unittest.TestCase):
         importlib.reload(libsedml)
 
         validator = SimulatorValidator()
-        valid_cases, case_exceptions, _ = validator.run('biosimulators/tellurium', 'biosimulators.json')
+        valid_cases, case_exceptions, _ = validator.run('ghcr.io/biosimulators/tellurium', 'biosimulators.json')
         self.assertGreater(len(valid_cases), 0)
         self.assertEqual(case_exceptions, [])
