@@ -16,7 +16,7 @@ FROM ubuntu:18.04
 
 # metadata
 LABEL base_image="ubuntu:18.04"
-LABEL version="2.1.6"
+LABEL version="0.0.1"
 LABEL software="tellurium"
 LABEL software.version="2.1.6"
 LABEL about.summary="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology"

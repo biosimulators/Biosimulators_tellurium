@@ -15,7 +15,7 @@ except (subprocess.CalledProcessError, AssertionError):
 import os
 import pkg_utils
 
-name = 'Biosimulators_tellurium'
+name = 'biosimulators_tellurium'
 dirname = os.path.dirname(__file__)
 
 # get package metadata
@@ -47,7 +47,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'tellurium = Biosimulators_tellurium.__main__:main',
+            'tellurium = biosimulators_tellurium.__main__:main',
         ],
     },
 )

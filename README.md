@@ -12,7 +12,7 @@ BioSimulators-compliant command-line interface and Docker image for the [telluri
 
 ### Install Python package
 ```
-pip install git+https://github.com/biosimulators/Biosimulators_tellurium
+pip install git+https://github.com/biosimulators/biosimulators_tellurium
 ```
 
 ### Install Docker image
