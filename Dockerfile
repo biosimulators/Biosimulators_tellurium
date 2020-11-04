@@ -12,10 +12,10 @@
 #       -o /root/out
 
 # Base OS
-FROM ubuntu:18.04
+FROM python:3.7.9-slim-buster
 
 # metadata
-LABEL base_image="ubuntu:18.04"
+LABEL base_image="python:3.7.9-slim-buster"
 LABEL version="0.0.1"
 LABEL software="tellurium"
 LABEL software.version="2.1.6"
@@ -30,16 +30,13 @@ LABEL maintainer="BioSimulators Team <info@biosimulators.org>"
 # Install requirements
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
-        python3 \
-        python3-pip \
-    && pip3 install -U pip \
-    && pip3 install -U setuptools \
+        libxml2 \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy code for command-line interface into image and install it
 COPY . /root/Biosimulators_tellurium
-RUN pip3 install /root/Biosimulators_tellurium
+RUN pip install /root/Biosimulators_tellurium
 
 # Configure matplotlib backend
 ENV MPLBACKEND="module://Agg" \
