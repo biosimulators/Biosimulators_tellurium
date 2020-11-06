@@ -1,4 +1,11 @@
-# Biosimulators_tellurium
+![Latest version](https://img.shields.io/github/v/tag/biosimulators/Biosimulators_tellurium)
+[![PyPI](https://img.shields.io/pypi/v/biosimulators_tellurium)](https://pypi.org/project/biosimulators_tellurium/)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/biosimulators/Biosimulators_tellurium/workflow-id)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3Aworkflow-id)
+[![Documentation](https://img.shields.io/github/license/biosimulators/Biosimulators_tellurium?badges-awesome-green.svg)](https://biosimulators.github.io/Biosimulators_tellurium/)
+[![Issues](https://img.shields.io/github/issues/biosimulators/Biosimulators_tellurium)](https://github.com/biosimulators/Biosimulators_tellurium/issues)
+[![License](https://img.shields.io/github/license/biosimulators/Biosimulators_tellurium?badges-awesome-green.svg)](https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/LICENSE)
+
+# BioSimulators-tellurium
 BioSimulators-compliant command-line interface and Docker image for the [tellurium](http://tellurium.analogmachine.org/) simulation program.
 
 This command-line interface and Docker image enable users to use tellurium to execute [COMBINE/OMEX archives](https://combinearchive.org/) that describe one or more simulation experiments (in [SED-ML format](https://sed-ml.org)) of one or more models (in [SBML format](http://sbml.org])).
@@ -10,6 +17,7 @@ A simple web application and web service for using tellurium to execute COMBINE/
 ## Contents
 * [Installation](#installation)
 * [Usage](#usage)
+* [Documentation](#documentation)
 * [License](#license)
 * [Development team](#development-team)
 * [Questions and comments](#questions-and-comments)
@@ -26,7 +34,9 @@ pip install git+https://github.com/biosimulators/biosimulators_tellurium
 docker pull ghcr.io/biosimulators/tellurium
 ```
 
-## Local usage
+## Usage
+
+### Local usage
 ```
 usage: tellurium [-h] [-d] [-q] -i ARCHIVE [-o OUT_DIR] [-v]
 
@@ -44,7 +54,7 @@ optional arguments:
   -v, --version         show program's version number and exit
 ```
 
-## Usage through Docker container
+### Usage through Docker container
 ```
 docker run \
   --tty \
@@ -55,6 +65,9 @@ docker run \
     -i /root/in/BIOMD0000000297.omex \
     -o /root/out
 ```
+
+## Documentation
+Documentation is available at https://biosimulators.github.io/Biosimulators_tellurium/.
 
 ## License
 This package is released under the [MIT license](LICENSE).
