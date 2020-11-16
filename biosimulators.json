@@ -151,7 +151,7 @@
           "id": "relative_tolerance",
           "name": "Relative tolerance",
           "type": "float",
-          "value": 0.000001
+          "value": "0.000001"
         },
         {
           "kisaoId": {
@@ -161,7 +161,7 @@
           "id": "absolute_tolerance",
           "name": "Absolute tolerance",
           "type": "float",
-          "value": 1e-12
+          "value": "1e-12"
         },
         {
           "kisaoId": {
@@ -171,7 +171,7 @@
           "id": "maximum_bdf_order",
           "name": "Maximum Backward Differentiation Formula (BDF) order",
           "type": "integer",
-          "value": 5
+          "value": "5"
         },
         {
           "kisaoId": {
@@ -181,7 +181,7 @@
           "id": "maximum_adams_order",
           "name": "Maximum Adams order",
           "type": "integer",
-          "value": 12
+          "value": "12"
         },
         {
           "kisaoId": {
@@ -191,7 +191,7 @@
           "id": "maximum_num_steps",
           "name": "Maximum number of steps",
           "type": "integer",
-          "value": 20000
+          "value": "20000"
         },
         {
           "kisaoId": {
@@ -201,7 +201,7 @@
           "id": "maximum_time_step",
           "name": "Maximum time step",
           "type": "float",
-          "value": 0
+          "value": null
         },
         {
           "kisaoId": {
@@ -211,7 +211,7 @@
           "id": "minimum_time_step",
           "name": "Minimum time step",
           "type": "float",
-          "value": 0
+          "value": null
         },
         {
           "kisaoId": {
@@ -221,7 +221,7 @@
           "id": "initial_time_step",
           "name": "Initial time step",
           "type": "float",
-          "value": 0
+          "value": null
         },
         {
           "kisaoId": {
@@ -231,7 +231,7 @@
           "id": "variable_step_size",
           "name": "Adaptive time steps",
           "type": "boolean",
-          "value": false
+          "value": "false"
         }
       ]
     },
@@ -290,7 +290,7 @@
           },
           "name": "Adaptive time steps",
           "type": "boolean",
-          "value": true
+          "value": "true"
         },
         {
           "kisaoId": {
@@ -299,7 +299,7 @@
           },
           "name": "Minimum time step",
           "type": "float",
-          "value": 1e-12
+          "value": "1e-12"
         },
         {
           "kisaoId": {
@@ -308,7 +308,7 @@
           },
           "name": "Maximum time step",
           "type": "float",
-          "value": 1.0
+          "value": "1.0"
         }
       ]
     },
@@ -356,7 +356,7 @@
           },
           "name": "Random number generator seed",
           "type": "integer",
-          "value": 0
+          "value": "0"
         },
         {
           "kisaoId": {
@@ -365,7 +365,7 @@
           },
           "name": "Adaptive time steps",
           "type": "boolean",
-          "value": true
+          "value": "true"
         },
         {
           "kisaoId": {
@@ -374,7 +374,7 @@
           },
           "name": "Initial time step",
           "type": "float",
-          "value": 0
+          "value": null
         },
         {
           "kisaoId": {
@@ -383,7 +383,7 @@
           },
           "name": "Minimum time step",
           "type": "float",
-          "value": 0
+          "value": null
         },
         {
           "kisaoId": {
@@ -392,7 +392,7 @@
           },
           "name": "Maximum time step",
           "type": "float",
-          "value": 0
+          "value": null
         }
       ]
     },
@@ -450,7 +450,7 @@
           },
           "name": "Relative tolerance",
           "type": "float",
-          "value": 1e-12
+          "value": "1e-12"
         },
         {
           "kisaoId": {
@@ -459,7 +459,7 @@
           },
           "name": "Maximum number of iterations",
           "type": "integer",
-          "value": 100
+          "value": "100"
         },
         {
           "kisaoId": {
@@ -468,7 +468,7 @@
           },
           "name": "Minimum damping factor",
           "type": "float",
-          "value": 1e-20
+          "value": "1e-20"
         }
       ]
     }
