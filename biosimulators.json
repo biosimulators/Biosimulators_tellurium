@@ -19,7 +19,7 @@
     "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6",
     "format": {
       "namespace": "EDAM",
-      "id": "format_3973", "version": null
+      "id": "format_3973", "version": "1.2.0"
     }
   },
   "authors": [{
@@ -172,15 +172,15 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": null
+        "id": "format_2585", "version": "L3V2"
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": null
+        "id": "format_3685", "version": "L1V3"
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": null
+        "id": "format_3686", "version": "1"
       }],
       "citations": [{
         "title": "CVODE, a stiff/nonstiff ODE solver in C",
@@ -320,15 +320,15 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": null
+        "id": "format_2585", "version": "L3V2"
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": null
+        "id": "format_3685", "version": "L1V3"
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": null
+        "id": "format_3686", "version": "1"
       }],
       "parameters": [],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
@@ -347,15 +347,15 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": null
+        "id": "format_2585", "version": "L3V2"
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": null
+        "id": "format_3685", "version": "L1V3"
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": null
+        "id": "format_3686", "version": "1"
       }],
       "parameters": [{
           "kisaoId": {
@@ -407,15 +407,15 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": null
+        "id": "format_2585", "version": "L3V2"
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": null
+        "id": "format_3685", "version": "L1V3"
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": null
+        "id": "format_3686", "version": "1"
       }],
       "citations": [{
         "title": "Exact stochastic simulation of coupled chemical reactions",
@@ -502,15 +502,15 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": null
+        "id": "format_2585", "version": "L3V2"
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": null
+        "id": "format_3685", "version": "L1V3"
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": null
+        "id": "format_3686", "version": "1"
       }],
       "citations": [{
           "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
