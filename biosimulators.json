@@ -3,24 +3,56 @@
   "name": "tellurium",
   "version": "2.1.6",
   "description": "Tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
-  "urls": [
-    {"type": "Home page", "url": "http://tellurium.analogmachine.org/"},
-    {"type": "Discussion forum", "url": "https://groups.google.com/d/forum/tellurium-discuss"},
-    {"type": "Tutorial", "url": "https://tellurium.readthedocs.io/en/latest/quickstart.html"},
-    {"type": "Installation instructions", "url": "https://github.com/sys-bio/tellurium#installation-instructions"},
-    {"type": "Documentation", "url": "https://tellurium.readthedocs.io/"},
-    {"type": "Source repository", "url": "https://github.com/sys-bio/tellurium"},
-    {"type": "Guide to contributing", "url": "https://github.com/sys-bio/tellurium/blob/develop/CONTRIBUTING.rst"},
-    {"type": "Issue tracker", "url": "https://github.com/sys-bio/tellurium/issues"},
-    {"type": "License", "url": "https://github.com/sys-bio/tellurium/blob/develop/LICENSE.txt"},
-    {"type": "Release notes", "url": "http://tellurium.analogmachine.org/news/"}
+  "urls": [{
+      "type": "Home page",
+      "url": "http://tellurium.analogmachine.org/"
+    },
+    {
+      "type": "Discussion forum",
+      "url": "https://groups.google.com/d/forum/tellurium-discuss"
+    },
+    {
+      "type": "Tutorial",
+      "url": "https://tellurium.readthedocs.io/en/latest/quickstart.html"
+    },
+    {
+      "type": "Installation instructions",
+      "url": "https://github.com/sys-bio/tellurium#installation-instructions"
+    },
+    {
+      "type": "Documentation",
+      "url": "https://tellurium.readthedocs.io/"
+    },
+    {
+      "type": "Source repository",
+      "url": "https://github.com/sys-bio/tellurium"
+    },
+    {
+      "type": "Guide to contributing",
+      "url": "https://github.com/sys-bio/tellurium/blob/develop/CONTRIBUTING.rst"
+    },
+    {
+      "type": "Issue tracker",
+      "url": "https://github.com/sys-bio/tellurium/issues"
+    },
+    {
+      "type": "License",
+      "url": "https://github.com/sys-bio/tellurium/blob/develop/LICENSE.txt"
+    },
+    {
+      "type": "Release notes",
+      "url": "http://tellurium.analogmachine.org/news/"
+    }
   ],
   "image": {
     "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6",
     "format": {
       "namespace": "EDAM",
-      "id": "format_3973", "version": "1.2.0"
-    }
+      "id": "format_3973",
+      "version": "1.2.0",
+      "supportedFeatures": []
+    },
+    "operatingSystemType": "Linux"
   },
   "authors": [{
       "firstName": "Jayit",
@@ -172,15 +204,21 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": "L3V2"
+        "id": "format_2585",
+        "version": "L3V2",
+        "supportedFeatures": []
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": "L1V3"
+        "id": "format_3685",
+        "version": "L1V3",
+        "supportedFeatures": []
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": "1"
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
       }],
       "citations": [{
         "title": "CVODE, a stiff/nonstiff ODE solver in C",
@@ -305,7 +343,22 @@
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        },
+        {
+          "name": "SUNDIALS",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "https://computing.llnl.gov/projects/sundials"
+        }
+      ]
     },
     {
       "id": "runge_kutta_4",
@@ -320,18 +373,31 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": "L3V2"
+        "id": "format_2585",
+        "version": "L3V2",
+        "supportedFeatures": []
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": "L1V3"
+        "id": "format_3685",
+        "version": "L1V3",
+        "supportedFeatures": []
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": "1"
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
       }],
       "parameters": [],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+        "name": "libRoadRunner",
+        "version": null,
+        "required": true,
+        "freeNonCommercialLicense": true,
+        "url": "http://libroadrunner.org/"
+      }],
       "citations": []
     },
     {
@@ -347,15 +413,21 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": "L3V2"
+        "id": "format_2585",
+        "version": "L3V2",
+        "supportedFeatures": []
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": "L1V3"
+        "id": "format_3685",
+        "version": "L1V3",
+        "supportedFeatures": []
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": "1"
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
       }],
       "parameters": [{
           "kisaoId": {
@@ -392,6 +464,13 @@
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+        "name": "libRoadRunner",
+        "version": null,
+        "required": true,
+        "freeNonCommercialLicense": true,
+        "url": "http://libroadrunner.org/"
+      }],
       "citations": []
     },
     {
@@ -407,15 +486,21 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": "L3V2"
+        "id": "format_2585",
+        "version": "L3V2",
+        "supportedFeatures": []
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": "L1V3"
+        "id": "format_3685",
+        "version": "L1V3",
+        "supportedFeatures": []
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": "1"
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
       }],
       "citations": [{
         "title": "Exact stochastic simulation of coupled chemical reactions",
@@ -487,7 +572,14 @@
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+        "name": "libRoadRunner",
+        "version": null,
+        "required": true,
+        "freeNonCommercialLicense": true,
+        "url": "http://libroadrunner.org/"
+      }]
     },
     {
       "id": "nleq2",
@@ -502,15 +594,21 @@
       }],
       "modelFormats": [{
         "namespace": "EDAM",
-        "id": "format_2585", "version": "L3V2"
+        "id": "format_2585",
+        "version": "L3V2",
+        "supportedFeatures": []
       }],
       "simulationFormats": [{
         "namespace": "EDAM",
-        "id": "format_3685", "version": "L1V3"
+        "id": "format_3685",
+        "version": "L1V3",
+        "supportedFeatures": []
       }],
       "archiveFormats": [{
         "namespace": "EDAM",
-        "id": "format_3686", "version": "1"
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
       }],
       "citations": [{
           "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
@@ -570,11 +668,52 @@
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+        "name": "libRoadRunner",
+        "version": null,
+        "required": true,
+        "freeNonCommercialLicense": true,
+        "url": "http://libroadrunner.org/"
+      }]
     }
   ],
   "interfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-  "supportedProgrammingLanguages": ["Python", "C", "C++", "C#"],
+  "supportedOperatingSystemTypes": ["platform-independent"],
+  "supportedProgrammingLanguages": [{
+      "namespace": "Linguist",
+      "id": "Python"
+    },
+    {
+      "namespace": "Linguist",
+      "id": "C"
+    },
+    {
+      "namespace": "Linguist",
+      "id": "C++"
+    },
+    {
+      "namespace": "Linguist",
+      "id": "C#"
+    }
+  ],
+  "funding": [{
+      "funder": {
+        "namespace": "FunderRegistry",
+        "id": "100000057"
+      },
+      "grant": "R01-GM123032",
+      "url": "https://grantome.com/grant/NIH/R01-GM123032"
+    },
+    {
+      "funder": {
+        "namespace": "FunderRegistry",
+        "id": "100000057"
+      },
+      "grant": "R01-GM081070",
+      "url": "https://grantome.com/grant/NIH/R01-GM081070"
+    }
+  ],
   "biosimulators": {
     "specificationVersion": "1.0.0",
     "imageVersion": "1.0.0",
