@@ -1,9 +1,7 @@
-![Latest version](https://img.shields.io/github/v/tag/biosimulators/Biosimulators_tellurium)
+[![Latest release](https://img.shields.io/github/v/tag/biosimulators/Biosimulators_tellurium)](https://github.com/biosimulations/Biosimulators_tellurium/releases)
 [![PyPI](https://img.shields.io/pypi/v/biosimulators_tellurium)](https://pypi.org/project/biosimulators_tellurium/)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/biosimulators/Biosimulators_tellurium/workflow-id)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3Aworkflow-id)
-[![Documentation](https://img.shields.io/github/license/biosimulators/Biosimulators_tellurium?badges-awesome-green.svg)](https://biosimulators.github.io/Biosimulators_tellurium/)
-[![Issues](https://img.shields.io/github/issues/biosimulators/Biosimulators_tellurium)](https://github.com/biosimulators/Biosimulators_tellurium/issues)
-[![License](https://img.shields.io/github/license/biosimulators/Biosimulators_tellurium?badges-awesome-green.svg)](https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/LICENSE)
+[![CI status](https://img.shields.io/github/workflow/status/biosimulators/Biosimulators_tellurium/workflow-id)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3Aworkflow-id)
+[![Test coverage](https://codecov.io/gh/biosimulators/Biosimulators_tellurium/branch/dev/graph/badge.svg)](https://codecov.io/gh/biosimulators/Biosimulators_tellurium)
 
 # BioSimulators-tellurium
 BioSimulators-compliant command-line interface and Docker image for the [tellurium](http://tellurium.analogmachine.org/) simulation program.

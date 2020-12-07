@@ -51,15 +51,21 @@ coverage html
 
 ## Documentation convention
 
-BioSimulators-tellurium is documented using [reStructuredText](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html) and the [napoleon Sphinx plugin](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html).
+BioSimulators-tellurium is documented using [reStructuredText](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html) and the [napoleon Sphinx plugin](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html). The documentation can be compiled by running the following commands:
+
+```
+python -m pip install -r docs-src/requirements.txt
+sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+sphinx-build docs-src docs
+```
 
 ## Submitting changes   
 
 Please use GitHub pull requests to submit changes. Each request should include a brief description of the new and/or modified features.
 
-## Releasing and deploying new versions
+## Releasing new versions
 
-Contact the [BioSimulators Team](mailto:info@biosimulators.org) to request release and deployment of new changes. 
+Contact the [BioSimulators Team](mailto:info@biosimulators.org) to request release of new changes. 
 
 ## Reporting issues
 

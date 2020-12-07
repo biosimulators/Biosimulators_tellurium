@@ -33,7 +33,7 @@ LABEL \
     about.summary="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology" \
     about.home="http://tellurium.analogmachine.org/" \
     about.documentation="https://tellurium.readthedocs.io/" \
-    about.license_file="https://github.com/sys-bio/tellurium/blob/master/LICENSE.txt" \
+    about.license_file="https://github.com/sys-bio/tellurium/blob/develop/LICENSE.txt" \
     about.license="SPDX:Apache-2.0" \
     about.tags="kinetic modeling,dynamical simulation,systems biology,biochemical networks,SBML,SED-ML,COMBINE,OMEX,BioSimulators" \
     maintainer="BioSimulators Team <info@biosimulators.org>"

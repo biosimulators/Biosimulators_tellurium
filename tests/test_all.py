@@ -7,7 +7,7 @@
 """
 
 try:
-    from Biosimulations_utils.simulator.testing import SimulatorValidator
+    from biosimulations_utils.simulator.testing import SimulatorValidator
 except ModuleNotFoundError:
     pass
 from biosimulators_tellurium import __main__

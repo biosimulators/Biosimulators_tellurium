@@ -3,7 +3,7 @@ About BioSimulators-tellurium
 
 License
 -------
-This package is released under the `MIT License <https://github.com/biosimulators/BioSimulators_tellurium/blob/dev/LICENSE>`_. tellurium is released under the `Apache 2.0 License <https://github.com/sys-bio/tellurium/blob/develop/LICENSE.txt>`_.
+This package is released under the `MIT License <https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/LICENSE>`_. tellurium is released under the `Apache 2.0 License <https://github.com/sys-bio/tellurium/blob/develop/LICENSE.txt>`_.
 
 Development team
 ----------------
