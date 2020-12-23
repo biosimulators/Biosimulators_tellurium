@@ -14,10 +14,13 @@
 # Base OS
 FROM python:3.7.9-slim-buster
 
+ARG VERSION="0.0.1"
+ARG SIMULATOR_VERSION="2.1.6"
+
 # metadata
 LABEL \
     org.opencontainers.image.title="tellurium" \
-    org.opencontainers.image.version="2.1.5" \
+    org.opencontainers.image.version="${SIMULATOR_VERSION}" \
     org.opencontainers.image.description="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology" \
     org.opencontainers.image.url="http://tellurium.analogmachine.org/" \
     org.opencontainers.image.documentation="https://tellurium.readthedocs.io/" \
@@ -27,9 +30,9 @@ LABEL \
     org.opencontainers.image.licenses="Apache-2.0" \
     \
     base_image="python:3.7.9-slim-buster" \
-    version="0.0.1" \ 
+    version="${VERSION}" \ 
     software="tellurium" \
-    software.version="2.1.6" \
+    software.version="${SIMULATOR_VERSION}" \
     about.summary="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology" \
     about.home="http://tellurium.analogmachine.org/" \
     about.documentation="https://tellurium.readthedocs.io/" \
@@ -48,6 +51,7 @@ RUN apt-get update -y \
 # Copy code for command-line interface into image and install it
 COPY . /root/Biosimulators_tellurium
 RUN pip install /root/Biosimulators_tellurium
+RUN pip install tellurium==${SIMULATOR_VERSION}
 
 # Configure matplotlib backend
 ENV MPLBACKEND="module://Agg" \
