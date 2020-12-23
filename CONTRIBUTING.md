@@ -65,7 +65,25 @@ Please use GitHub pull requests to submit changes. Each request should include a
 
 ## Releasing new versions
 
-Contact the [BioSimulators Team](mailto:info@biosimulators.org) to request release of new changes. 
+To release changes, contact the [lead developers](mailto:info@biosimulators.org) to request their release.
+
+Below are instructions for releasing a new version:
+
+1. Make the required changes to the repository.
+  * To update the version of the underyling simulator, update its version numbers in the following files:
+    * `requirements.txt`
+    * `Dockerfile`
+    * `biosimulators.json`
+2. Commit the changes to this repository.
+3. Increment the `__version__` variable in `biosimulators_tellurium/_version.py`.
+4. Commit this change to `biosimulators_tellurium/_version.py`.
+5. Add a tag for the new version by running `git tag { version }`. `version` should be equal to the value of the
+   `__version__` variable in `biosimulators_tellurium/_version.py`.
+6. Push these commits and the new tag to GitHub by running `git push && git push --tags`.
+7. This push will trigger a GitHub action which will execute the following tasks:
+   * Create a GitHub release for the version.
+   * Push the release to PyPI.
+   * Compile the documentation and push the compiled documentation to the repository so that the new documentation is viewable at github.io.
 
 ## Reporting issues
 

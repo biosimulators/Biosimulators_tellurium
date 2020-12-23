@@ -1,6 +1,6 @@
 [![Latest release](https://img.shields.io/github/v/tag/biosimulators/Biosimulators_tellurium)](https://github.com/biosimulations/Biosimulators_tellurium/releases)
 [![PyPI](https://img.shields.io/pypi/v/biosimulators_tellurium)](https://pypi.org/project/biosimulators_tellurium/)
-[![CI status](https://img.shields.io/github/workflow/status/biosimulators/Biosimulators_tellurium/workflow-id)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3Aworkflow-id)
+[![CI status](https://github.com/biosimulators/Biosimulators_tellurium/workflows/Continuous%20integration/badge.svg)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3A%22Continuous+integration%22)
 [![Test coverage](https://codecov.io/gh/biosimulators/Biosimulators_tellurium/branch/dev/graph/badge.svg)](https://codecov.io/gh/biosimulators/Biosimulators_tellurium)
 
 # BioSimulators-tellurium
@@ -53,14 +53,18 @@ optional arguments:
 ```
 
 ### Usage through Docker container
+The entrypoint to the Docker image supports the same command-line interface described above. 
+
+For example, the following command could be used to use the Docker image to execute the COMBINE/OMEX archive `./modeling-study.omex` and save its outputs to `./`.
+
 ```
 docker run \
   --tty \
   --rm \
-  --mount type=bind,source="$(pwd)"/tests/fixtures,target=/root/in,readonly \
-  --mount type=bind,source="$(pwd)"/tests/results,target=/root/out \
+  --mount type=bind,source="$(pwd)",target=/root/in,readonly \
+  --mount type=bind,source="$(pwd)",target=/root/out \
   ghcr.io/biosimulators/tellurium:latest \
-    -i /root/in/BIOMD0000000297.omex \
+    -i /root/in/modeling-study.omex \
     -o /root/out
 ```
 
