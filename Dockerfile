@@ -50,11 +50,12 @@ RUN apt-get update -y \
 
 # Copy code for command-line interface into image and install it
 COPY . /root/Biosimulators_tellurium
-RUN pip install /root/Biosimulators_tellurium
+RUN pip install /root/Biosimulators_tellurium \
+    && rm -rf /root/Biosimulators_tellurium
 RUN pip install tellurium==${SIMULATOR_VERSION}
 
 # Configure matplotlib backend
-ENV MPLBACKEND="module://Agg" \
+ENV MPLBACKEND=PDF \
     PYTHONWARNINGS="ignore:The 'warn' parameter of use():UserWarning:tellurium.tellurium,ignore:Matplotlib is currently using agg:UserWarning:tellurium.plotting.engine_mpl"
 
 # Entrypoint

@@ -24,7 +24,7 @@ A simple web application and web service for using tellurium to execute COMBINE/
 
 ### Install Python package
 ```
-pip install git+https://github.com/biosimulators/biosimulators_tellurium
+pip install biosimulators-tellurium
 ```
 
 ### Install Docker image
