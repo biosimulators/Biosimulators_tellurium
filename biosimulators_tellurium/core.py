@@ -6,19 +6,19 @@
 :License: MIT
 """
 
-from .data_model import PlottingEngine
-from .utils import get_sedml_locations_in_combine_archive, exec_sed_doc
+from .config import Config
+from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
+from biosimulators_utils.exec_status.data_model import ExecutionStatus, SedDocumentExecutionStatus  # noqa: F401
+from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
+from biosimulators_utils.report.data_model import OutputResults, ReportFormat  # noqa: F401
+from biosimulators_utils.report.io import ReportWriter
+from tellurium.sedml.tesedml import SEDMLCodeFactory
+import glob
 import os
+import pandas
 import shutil
 import tellurium
-import tellurium.sedml.tesedml
-import tellurium.utils.omex
 import tempfile
-import zipfile
-
-import libsedml
-import importlib
-importlib.reload(libsedml)
 
 
 __all__ = ['exec_sedml_docs_in_combine_archive']
@@ -26,8 +26,7 @@ __all__ = ['exec_sedml_docs_in_combine_archive']
 
 def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
                                        report_formats=None, plot_formats=None,
-                                       bundle_outputs=None, keep_individual_outputs=None,
-                                       plotting_engine=PlottingEngine.matplotlib):
+                                       bundle_outputs=None, keep_individual_outputs=None):
     """ Execute the SED tasks defined in a COMBINE/OMEX archive and save the outputs
 
     Args:
@@ -43,30 +42,109 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
         plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): report format (e.g., pdf)
         bundle_outputs (:obj:`bool`, optional): if :obj:`True`, bundle outputs into archives for reports and plots
         keep_individual_outputs (:obj:`bool`, optional): if :obj:`True`, keep individual output files
-        plotting_engine (:obj:`PlottingEngine`, optional): engine for generating plots
     """
-    # Check that the COMBINE/OMEX archive exists, and that it is in zip format
-    if not os.path.isfile(archive_filename):
-        raise FileNotFoundError("The COMBINE/OMEX archive file `{}` does not exist".format(archive_filename))
+    exec_sedml_docs_in_archive(exec_sed_doc, archive_filename, out_dir,
+                               apply_xml_model_changes=True,
+                               report_formats=report_formats,
+                               plot_formats=plot_formats,
+                               bundle_outputs=bundle_outputs,
+                               keep_individual_outputs=keep_individual_outputs)
 
-    if not zipfile.is_zipfile(archive_filename):
-        raise IOError("COMBINE/OMEX archive `{}` is not in the zip format".format(archive_filename))
 
-    # Create a temporary directory for the contents of the COMBINE/OMEX archive
-    archive_dirname = tempfile.mkdtemp()
+def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
+                 apply_xml_model_changes=True, report_formats=None, plot_formats=None,
+                 exec_status=None, indent=0):
+    """
+    Args:
+        filename (:obj:`str`): a path to SED-ML file which defines a SED document
+        working_dir (:obj:`str`): working directory of the SED document (path relative to which models are located)
 
-    # Extract the contents of the COMBINE/OMEX archive
-    tellurium.utils.omex.extractCombineArchive(omexPath=archive_filename, directory=archive_dirname)
+        out_path (:obj:`str`): path to store the outputs
 
-    # Get the locations of the SED-ML files within the COMBINE/OMEX archive
-    sedml_locations = get_sedml_locations_in_combine_archive(archive_filename)
+            * CSV: directory in which to save outputs to files
+              ``{out_path}/{rel_out_path}/{report.id}.csv``
+            * HDF5: directory in which to save a single HDF5 file (``{out_path}/reports.h5``),
+              with reports at keys ``{rel_out_path}/{report.id}`` within the HDF5 file
 
-    # Execute each SED-ML file
-    for sedml_location in sedml_locations:
-        exec_sed_doc(archive_dirname, sedml_location, out_dir, plotting_engine)
+        rel_out_path (:obj:`str`, optional): path relative to :obj:`out_path` to store the outputs
+        apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
+            calling :obj:`task_executer`.
+        report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
+        plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): plot format (e.g., pdf)
+        exec_status (:obj:`SedDocumentExecutionStatus`, optional): execution status of document
+        indent (:obj:`int`, optional): degree to indent status messages
 
-    # bundle the outputs of the SED-ML files
-    # TODO
+    Returns:
+        :obj:`OutputResults`: results of each report
+    """
+    # update status
+    if exec_status:
+        exec_status.status = ExecutionStatus.RUNNING
+        exec_status.export()
 
-    # clean up the temporary directory for the contents of the COMBINE/OMEX archive
-    shutil.rmtree(archive_dirname)
+    # Set the engine that tellurium uses for plotting
+    tellurium.setDefaultPlottingEngine(Config().plotting_engine.value)
+
+    # Create a temporary for tellurium's outputs
+    # - Reports: CSV (Rows: time, Columns: data sets)
+    # - Plots: PDF
+    tmp_out_dir = tempfile.mkdtemp()
+
+    # Use tellurium to execute the SED document and generate the specified outputs
+    try:
+        factory = SEDMLCodeFactory(filename,
+                                   workingDir=working_dir,
+                                   createOutputs=True,
+                                   saveOutputs=True,
+                                   outputDir=tmp_out_dir,
+                                   )
+        for plot_format in plot_formats:
+            factory.reportFormat = 'csv'
+            factory.plotFormat = plot_format.value
+            factory.executePython()
+    except Exception:
+        shutil.rmtree(tmp_out_dir)
+        raise
+
+    # Convert tellurium's CSV reports to the desired BioSimulators format(s)
+    # - Transpose rows/columns
+    # - Encode into PyTables dialect of HDF5
+    report_results = OutputResults()
+    for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
+        report_id = os.path.splitext(os.path.basename(report_filename))[0]
+
+        # read report from CSV file produced by tellurium
+        report_df = pandas.read_csv(report_filename).transpose()
+
+        # append to data structure of report results
+        report_results[report_id] = report_df
+
+        # save file in desired BioSimulators format(s)
+        for report_format in report_formats:
+            ReportWriter().run(report_df,
+                               base_out_path,
+                               os.path.join(rel_out_path, report_id) if rel_out_path else report_id,
+                               format=report_format)
+
+    # Move the plot outputs to the permanent output directory
+    out_dir = base_out_path
+    if rel_out_path:
+        out_dir = os.path.join(out_dir, rel_out_path)
+
+    if not os.path.isdir(out_dir):
+        os.makedirs(out_dir)
+
+    for plot_format in plot_formats:
+        for plot_filename in glob.glob(os.path.join(tmp_out_dir, '*.' + plot_format.value)):
+            shutil.move(plot_filename, out_dir)
+
+    # Clean up the temporary directory for tellurium's outputs
+    shutil.rmtree(tmp_out_dir)
+
+    # update status
+    if exec_status:
+        exec_status.status = ExecutionStatus.SUCCEEDED
+        exec_status.export()
+
+    # Return a data structure with the results of the reports
+    return report_results
