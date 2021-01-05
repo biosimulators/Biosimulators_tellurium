@@ -59,7 +59,7 @@ sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --n
 sphinx-build docs-src docs
 ```
 
-## Submitting changes   
+## Submitting changes
 
 Please use GitHub pull requests to submit changes. Each request should include a brief description of the new and/or modified features.
 
@@ -88,7 +88,7 @@ Below are instructions for releasing a new version:
 ## Reporting issues
 
 Please use [GitHub issues](https://github.com/biosimulators/Biosimulators_tellurium/issues) to report any issues to the development community.
-    
+
 ## Getting help
 
 Please use [GitHub issues](https://github.com/biosimulators/Biosimulators_tellurium/issues) to post questions or contact the lead developers at [info@biosimulators.org](mailto:info@biosimulators.org).

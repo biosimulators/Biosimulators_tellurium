@@ -15,7 +15,7 @@
 FROM python:3.7.9-slim-buster
 
 ARG VERSION="0.0.1"
-ARG SIMULATOR_VERSION="2.1.6"
+ARG SIMULATOR_VERSION="2.2.0"
 
 # metadata
 LABEL \
@@ -30,7 +30,7 @@ LABEL \
     org.opencontainers.image.licenses="Apache-2.0" \
     \
     base_image="python:3.7.9-slim-buster" \
-    version="${VERSION}" \ 
+    version="${VERSION}" \
     software="tellurium" \
     software.version="${SIMULATOR_VERSION}" \
     about.summary="Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology" \
@@ -45,12 +45,17 @@ LABEL \
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
         libxml2 \
+        libncurses5 \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy code for command-line interface into image and install it
 COPY . /root/Biosimulators_tellurium
 RUN pip install /root/Biosimulators_tellurium \
+    && mkdir -p /.cache/matplotlib \
+    && mkdir -p /.config/matplotlib \
+    && chmod ugo+rw /.config/matplotlib \
+    && chmod ugo+rw /.cache/matplotlib \
     && rm -rf /root/Biosimulators_tellurium
 RUN pip install tellurium==${SIMULATOR_VERSION}
 

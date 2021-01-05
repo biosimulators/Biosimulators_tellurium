@@ -1,4 +1,7 @@
+biosimulators_utils >= 0.1.28
 matplotlib
+numpy
 python_libcombine
 tellurium
 tesedml
+
