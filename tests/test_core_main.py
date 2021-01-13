@@ -87,7 +87,7 @@ class CliTestCase(unittest.TestCase):
         }
 
     def _assert_combine_archive_outputs(self, dirname, reports=True, plots=True):
-        expected_files = set(['status.yml'])
+        expected_files = set()
 
         if reports:
             expected_files.add('reports.h5')

@@ -8,10 +8,11 @@
 
 from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
-from biosimulators_utils.exec_status.data_model import ExecutionStatus, SedDocumentExecutionStatus  # noqa: F401
+from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog  # noqa: F401
 from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
 from biosimulators_utils.report.data_model import OutputResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
+from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
 from tellurium.sedml.tesedml import SEDMLCodeFactory
 import glob
 import os
@@ -42,18 +43,25 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
         plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): report format (e.g., pdf)
         bundle_outputs (:obj:`bool`, optional): if :obj:`True`, bundle outputs into archives for reports and plots
         keep_individual_outputs (:obj:`bool`, optional): if :obj:`True`, keep individual output files
+
+    Returns:
+        :obj:`CombineArchiveLog`: log
     """
-    exec_sedml_docs_in_archive(exec_sed_doc, archive_filename, out_dir,
-                               apply_xml_model_changes=True,
-                               report_formats=report_formats,
-                               plot_formats=plot_formats,
-                               bundle_outputs=bundle_outputs,
-                               keep_individual_outputs=keep_individual_outputs)
+    return exec_sedml_docs_in_archive(
+        exec_sed_doc, archive_filename, out_dir,
+        apply_xml_model_changes=True,
+        sed_doc_executer_supported_features=(Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface),
+        report_formats=report_formats,
+        plot_formats=plot_formats,
+        bundle_outputs=bundle_outputs,
+        keep_individual_outputs=keep_individual_outputs,
+        sed_doc_executer_logged_features=(),
+    )
 
 
 def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
                  apply_xml_model_changes=True, report_formats=None, plot_formats=None,
-                 exec_status=None, indent=0):
+                 log=None, indent=0):
     """
     Args:
         filename (:obj:`str`): a path to SED-ML file which defines a SED document
@@ -71,17 +79,12 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
             calling :obj:`task_executer`.
         report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
         plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): plot format (e.g., pdf)
-        exec_status (:obj:`SedDocumentExecutionStatus`, optional): execution status of document
+        log (:obj:`SedDocumentLog`, optional): execution status of document
         indent (:obj:`int`, optional): degree to indent status messages
 
     Returns:
         :obj:`OutputResults`: results of each report
     """
-    # update status
-    if exec_status:
-        exec_status.status = ExecutionStatus.RUNNING
-        exec_status.export()
-
     # Set the engine that tellurium uses for plotting
     tellurium.setDefaultPlottingEngine(Config().plotting_engine.value)
 
@@ -140,11 +143,6 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
 
     # Clean up the temporary directory for tellurium's outputs
     shutil.rmtree(tmp_out_dir)
-
-    # update status
-    if exec_status:
-        exec_status.status = ExecutionStatus.SUCCEEDED
-        exec_status.export()
 
     # Return a data structure with the results of the reports
     return report_results

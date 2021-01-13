@@ -14,7 +14,7 @@
 # Base OS
 FROM python:3.7.9-slim-buster
 
-ARG VERSION="0.1.0"
+ARG VERSION="0.1.1"
 ARG SIMULATOR_VERSION="2.2.0"
 
 # metadata
@@ -62,7 +62,8 @@ RUN pip install tellurium==${SIMULATOR_VERSION}
 # Configure matplotlib backend
 ENV PLOTTING_ENGINE=matplotlib \
     MPLBACKEND=PDF \
-    PYTHONWARNINGS="ignore:The 'warn' parameter of use():UserWarning:tellurium.tellurium,ignore:Matplotlib is currently using agg:UserWarning:tellurium.plotting.engine_mpl"
+    PYTHONWARNINGS="ignore:The 'warn' parameter of use():UserWarning:tellurium.tellurium,ignore:Matplotlib is currently using agg:UserWarning:tellurium.plotting.engine_mpl" \
+    VERBOSE=0
 
 # Entrypoint
 ENTRYPOINT ["tellurium"]
