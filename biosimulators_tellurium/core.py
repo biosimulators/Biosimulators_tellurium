@@ -112,7 +112,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
 
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
-    # - Encode into PyTables dialect of HDF5
+    # - Encode into BioSimulators format(s)
     doc = SedmlSimulationReader().run(filename)
     report_results = ReportResults()
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
