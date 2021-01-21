@@ -10,7 +10,7 @@ from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
 from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog  # noqa: F401
 from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
-from biosimulators_utils.report.data_model import OutputResults, ReportFormat  # noqa: F401
+from biosimulators_utils.report.data_model import ReportResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
 from tellurium.sedml.tesedml import SEDMLCodeFactory
@@ -83,7 +83,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         indent (:obj:`int`, optional): degree to indent status messages
 
     Returns:
-        :obj:`OutputResults`: results of each report
+        :obj:`ReportResults`: results of each report
     """
     # Set the engine that tellurium uses for plotting
     tellurium.setDefaultPlottingEngine(Config().plotting_engine.value)
@@ -112,7 +112,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
     # - Encode into PyTables dialect of HDF5
-    report_results = OutputResults()
+    report_results = ReportResults()
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
         report_id = os.path.splitext(os.path.basename(report_filename))[0]
 
