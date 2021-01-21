@@ -10,6 +10,7 @@ from biosimulators_tellurium import __main__
 from biosimulators_tellurium import core
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.report.io import ReportReader
+from biosimulators_utils.sedml.data_model import Report, DataSet
 from biosimulators_utils.simulator.exec import exec_sedml_docs_in_archive_with_containerized_simulator
 from unittest import mock
 import numpy
@@ -108,9 +109,19 @@ class CliTestCase(unittest.TestCase):
                 'ex2/BIOMD0000000297.sedml/report_1_task1',
             ]))
 
-            report = ReportReader().run(dirname, 'ex1/BIOMD0000000297.sedml/report_1_task1')
-            self.assertFalse(numpy.any(numpy.isnan(report)))
-            numpy.testing.assert_allclose(report.loc['time', :], numpy.linspace(0., 140., 140 + 1))
+            report = Report(
+                data_sets=[
+                    DataSet(id='data_set_time', label='time'),
+                    DataSet(id='data_set_PSwe1M', label='PSwe1M'),
+                    DataSet(id='data_set_Swe1M', label='Swe1M'),
+                    DataSet(id='data_set_Swe1', label='Swe1'),
+                ],
+            )
+
+            report_results = ReportReader().run(report, dirname, 'ex1/BIOMD0000000297.sedml/report_1_task1')
+            for data_set_result in report_results.values():
+                self.assertFalse(numpy.any(numpy.isnan(data_set_result)))
+            numpy.testing.assert_allclose(report_results[report.data_sets[0].id], numpy.linspace(0., 140., 140 + 1))
 
         # check that expected plots where created at the expected locations
         if plots:

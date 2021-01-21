@@ -10,9 +10,10 @@ from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
 from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog  # noqa: F401
 from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
-from biosimulators_utils.report.data_model import ReportResults, ReportFormat  # noqa: F401
+from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
+from biosimulators_utils.sedml.io import SedmlSimulationReader
 from tellurium.sedml.tesedml import SEDMLCodeFactory
 import glob
 import os
@@ -112,19 +113,27 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
     # - Encode into PyTables dialect of HDF5
+    doc = SedmlSimulationReader().run(filename)
     report_results = ReportResults()
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
         report_id = os.path.splitext(os.path.basename(report_filename))[0]
 
         # read report from CSV file produced by tellurium
-        report_df = pandas.read_csv(report_filename).transpose()
+        data_set_df = pandas.read_csv(report_filename).transpose()
+
+        # create pseudo-report for ReportWriter
+        report = next(report for report in doc.outputs if report.id == report_id)
+        data_set_results = DataSetResults()
+        for data_set in report.data_sets:
+            data_set_results[data_set.id] = data_set_df.loc[data_set.label, :].to_numpy()
 
         # append to data structure of report results
-        report_results[report_id] = report_df
+        report_results[report_id] = data_set_results
 
         # save file in desired BioSimulators format(s)
         for report_format in report_formats:
-            ReportWriter().run(report_df,
+            ReportWriter().run(report,
+                               data_set_results,
                                base_out_path,
                                os.path.join(rel_out_path, report_id) if rel_out_path else report_id,
                                format=report_format)
