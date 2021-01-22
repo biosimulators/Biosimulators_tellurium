@@ -102,7 +102,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
                                    saveOutputs=True,
                                    outputDir=tmp_out_dir,
                                    )
-        for plot_format in plot_formats:
+        for plot_format in (plot_formats or [PlotFormat.pdf]):
             factory.reportFormat = 'csv'
             factory.plotFormat = plot_format.value
             factory.executePython()
