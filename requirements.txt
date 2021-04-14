@@ -1,3 +1,3 @@
-biosimulators_utils[logging] >= 0.1.43
+biosimulators_utils[logging] >= 0.1.52
 pandas
 tellurium
