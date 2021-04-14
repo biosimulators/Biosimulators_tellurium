@@ -13,7 +13,7 @@ from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
 from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
-from biosimulators_utils.sedml.io import SedmlSimulationReader
+from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from tellurium.sedml.tesedml import SEDMLCodeFactory
 import glob
 import os
@@ -94,9 +94,43 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     # - Plots: PDF
     tmp_out_dir = tempfile.mkdtemp()
 
+    # add a report for each plot to make tellurium output the data for each plot
+    doc = SedmlSimulationReader().run(filename)
+    for output in doc.outputs:
+        if isinstance(output, (Plot2D, Plot3D)):
+            report = Report(
+                id='__plot__' + output.id,
+                name=output.name)
+
+            data_generators = {}
+            if isinstance(output, Plot2D):
+                for curve in output.curves:
+                    data_generators[curve.x_data_generator.id] = curve.x_data_generator
+                    data_generators[curve.y_data_generator.id] = curve.y_data_generator
+
+            elif isinstance(output, Plot3D):
+                for surface in output.surfaces:
+                    data_generators[surface.x_data_generator.id] = surface.x_data_generator
+                    data_generators[surface.y_data_generator.id] = surface.y_data_generator
+                    data_generators[surface.z_data_generator.id] = surface.z_data_generator
+
+            for data_generator in data_generators.values():
+                report.data_sets.append(DataSet(
+                    id='__data_set__{}_{}'.format(output.id, data_generator.id),
+                    name=data_generator.name,
+                    label=data_generator.id,
+                    data_generator=data_generator,
+                ))
+
+            report.data_sets.sort(key=lambda data_set: data_set.id)
+            doc.outputs.append(report)
+
+    filename_with_reports_for_plots = os.path.join(tmp_out_dir, 'simulation.sedml')
+    SedmlSimulationWriter().run(doc, filename_with_reports_for_plots)
+
     # Use tellurium to execute the SED document and generate the specified outputs
     try:
-        factory = SEDMLCodeFactory(filename,
+        factory = SEDMLCodeFactory(filename_with_reports_for_plots,
                                    workingDir=working_dir,
                                    createOutputs=True,
                                    saveOutputs=True,
@@ -113,7 +147,6 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
     # - Encode into BioSimulators format(s)
-    doc = SedmlSimulationReader().run(filename)
     report_results = ReportResults()
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
         report_id = os.path.splitext(os.path.basename(report_filename))[0]
@@ -128,14 +161,17 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
             data_set_results[data_set.id] = data_set_df.loc[data_set.label, :].to_numpy()
 
         # append to data structure of report results
-        report_results[report_id] = data_set_results
+        if '__plot__' not in report_id:
+            report_results[report_id] = data_set_results
 
         # save file in desired BioSimulators format(s)
+        export_id = report_id.replace('__plot__', '')
+        report.id = export_id
         for report_format in report_formats:
             ReportWriter().run(report,
                                data_set_results,
                                base_out_path,
-                               os.path.join(rel_out_path, report_id) if rel_out_path else report_id,
+                               os.path.join(rel_out_path, export_id) if rel_out_path else export_id,
                                format=report_format)
 
     # Move the plot outputs to the permanent output directory

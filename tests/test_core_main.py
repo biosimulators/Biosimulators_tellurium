@@ -90,7 +90,7 @@ class CliTestCase(unittest.TestCase):
     def _assert_combine_archive_outputs(self, dirname, reports=True, plots=True):
         expected_files = set()
 
-        if reports:
+        if reports or plots:
             expected_files.add('reports.h5')
         else:
             self.assertNotIn('reports.h5', os.listdir(dirname))
@@ -104,10 +104,16 @@ class CliTestCase(unittest.TestCase):
 
         # check that the expected reports where created at the expected locations with the expected values
         if reports:
-            self.assertEqual(set(ReportReader().get_ids(dirname)), set([
-                'ex1/BIOMD0000000297.sedml/report_1_task1',
-                'ex2/BIOMD0000000297.sedml/report_1_task1',
-            ]))
+            if not plots:
+                self.assertEqual(set(ReportReader().get_ids(dirname)), set([
+                    'ex1/BIOMD0000000297.sedml/report_1_task1',
+                    'ex2/BIOMD0000000297.sedml/report_1_task1',
+                ]))
+            else:
+                self.assertEqual(set([
+                    'ex1/BIOMD0000000297.sedml/report_1_task1',
+                    'ex2/BIOMD0000000297.sedml/report_1_task1',
+                ]).difference(set(ReportReader().get_ids(dirname))), set([]))
 
             report = Report(
                 data_sets=[
@@ -125,6 +131,21 @@ class CliTestCase(unittest.TestCase):
 
         # check that expected plots where created at the expected locations
         if plots:
+            if not reports:
+                self.assertEqual(set(ReportReader().get_ids(dirname)), set([
+                    'ex1/BIOMD0000000297.sedml/plot_1_task1',
+                    'ex1/BIOMD0000000297.sedml/plot_3_task1',
+                    'ex2/BIOMD0000000297.sedml/plot_1_task1',
+                    'ex2/BIOMD0000000297.sedml/plot_3_task1',
+                ]))
+            else:
+                self.assertEqual(set([
+                    'ex1/BIOMD0000000297.sedml/plot_1_task1',
+                    'ex1/BIOMD0000000297.sedml/plot_3_task1',
+                    'ex2/BIOMD0000000297.sedml/plot_1_task1',
+                    'ex2/BIOMD0000000297.sedml/plot_3_task1',
+                ]).difference(set(ReportReader().get_ids(dirname))), set([]))
+
             plots_dir = os.path.join(self.dirname, 'plots')
             archive = ArchiveReader().run(os.path.join(dirname, 'plots.zip'), plots_dir)
             self.assertEqual(set(file.archive_path for file in archive.files), set([
