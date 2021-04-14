@@ -1,5 +1,5 @@
 # Build image:
-#   docker build --tag ghcr.io/biosimulators_tellurium/tellurium:2.1.6 --tag ghcr.io/biosimulators_tellurium/tellurium:latest .
+#   docker build --tag ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6 --tag ghcr.io/biosimulators/biosimulators_tellurium/tellurium:latest .
 #
 # Run image:
 #   docker run \
