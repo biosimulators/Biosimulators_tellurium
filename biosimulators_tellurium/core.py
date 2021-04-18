@@ -126,7 +126,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
             doc.outputs.append(report)
 
     filename_with_reports_for_plots = os.path.join(tmp_out_dir, 'simulation.sedml')
-    SedmlSimulationWriter().run(doc, filename_with_reports_for_plots)
+    SedmlSimulationWriter().run(doc, filename_with_reports_for_plots, validate_models_with_languages=False)
 
     # Use tellurium to execute the SED document and generate the specified outputs
     try:
