@@ -12,7 +12,7 @@
 #       -o /root/out
 
 # Base OS
-FROM python:3.7.9-slim-buster
+FROM python:3.9-slim-buster
 
 ARG VERSION="0.1.8"
 ARG SIMULATOR_VERSION="2.2.0"
@@ -29,7 +29,7 @@ LABEL \
     org.opencontainers.image.vendor="BioSimulators Team" \
     org.opencontainers.image.licenses="Apache-2.0" \
     \
-    base_image="python:3.7.9-slim-buster" \
+    base_image="python:3.9-slim-buster" \
     version="${VERSION}" \
     software="tellurium" \
     software.version="${SIMULATOR_VERSION}" \
