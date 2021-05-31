@@ -8,7 +8,7 @@
 
 from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
-from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog  # noqa: F401
+from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog, StandardOutputErrorCapturerLevel  # noqa: F401
 from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
 from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
@@ -62,7 +62,7 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
 
 def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
                  apply_xml_model_changes=True, report_formats=None, plot_formats=None,
-                 log=None, indent=0):
+                 log=None, indent=0, log_level=StandardOutputErrorCapturerLevel.c):
     """
     Args:
         filename (:obj:`str`): a path to SED-ML file which defines a SED document
@@ -82,6 +82,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): execution status of document
         indent (:obj:`int`, optional): degree to indent status messages
+        log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
 
     Returns:
         :obj:`ReportResults`: results of each report
