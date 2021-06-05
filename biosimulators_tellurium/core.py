@@ -21,6 +21,11 @@ import pandas
 import shutil
 import tellurium
 import tempfile
+import tellurium.sedml.tesedml
+
+
+# correct KISAO to parameter mapping
+tellurium.sedml.tesedml.KISAOS_ALGORITHMPARAMETERS[656] = ('variable_step_size', bool)
 
 
 __all__ = ['exec_sedml_docs_in_combine_archive']

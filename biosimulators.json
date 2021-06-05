@@ -333,7 +333,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000107"
+            "id": "KISAO_0000656"
           },
           "id": "variable_step_size",
           "name": "Adaptive time steps",
@@ -460,7 +460,7 @@
       "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000107"
+            "id": "KISAO_0000656"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
@@ -572,7 +572,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000107"
+            "id": "KISAO_0000656"
           },
           "name": "Adaptive time steps",
           "type": "boolean",
