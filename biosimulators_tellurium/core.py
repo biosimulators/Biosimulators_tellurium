@@ -156,28 +156,36 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     report_results = ReportResults()
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
         report_id = os.path.splitext(os.path.basename(report_filename))[0]
+        is_plot = report_id.startswith('__plot__')
+        is_report = not is_plot
+        if is_plot:
+            output_id = report_id[len('__plot__'):]
+        else:
+            output_id = report_id
 
         # read report from CSV file produced by tellurium
         data_set_df = pandas.read_csv(report_filename).transpose()
 
         # create pseudo-report for ReportWriter
-        report = next(report for report in doc.outputs if report.id == report_id)
+        output = next(output for output in doc.outputs if output.id == report_id)
+        if is_plot:
+            output.id = output_id
         data_set_results = DataSetResults()
-        for data_set in report.data_sets:
+        for data_set in output.data_sets:
+            if is_plot:
+                data_set.id = data_set.id[len('__data_set__{}_'.format(output_id)):]
             data_set_results[data_set.id] = data_set_df.loc[data_set.label, :].to_numpy()
 
         # append to data structure of report results
-        if '__plot__' not in report_id:
+        if is_report:
             report_results[report_id] = data_set_results
 
         # save file in desired BioSimulators format(s)
-        export_id = report_id.replace('__plot__', '')
-        report.id = export_id
         for report_format in report_formats:
-            ReportWriter().run(report,
+            ReportWriter().run(output,
                                data_set_results,
                                base_out_path,
-                               os.path.join(rel_out_path, export_id) if rel_out_path else export_id,
+                               os.path.join(rel_out_path, output_id) if rel_out_path else output_id,
                                format=report_format)
 
     # Move the plot outputs to the permanent output directory
