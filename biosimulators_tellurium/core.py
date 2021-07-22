@@ -9,7 +9,7 @@
 from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
 from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog, StandardOutputErrorCapturerLevel  # noqa: F401
-from biosimulators_utils.plot.data_model import PlotFormat  # noqa: F401
+from biosimulators_utils.viz.data_model import VizFormat  # noqa: F401
 from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
@@ -46,7 +46,7 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
               with reports at keys ``{ relative-path-to-SED-ML-file-within-archive }/{ report.id }`` within the HDF5 file
 
         report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): report format (e.g., pdf)
+        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): report format (e.g., pdf)
         bundle_outputs (:obj:`bool`, optional): if :obj:`True`, bundle outputs into archives for reports and plots
         keep_individual_outputs (:obj:`bool`, optional): if :obj:`True`, keep individual output files
 
@@ -84,7 +84,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
             calling :obj:`task_executer`.
         report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`PlotFormat`, optional): plot format (e.g., pdf)
+        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): execution status of document
         indent (:obj:`int`, optional): degree to indent status messages
         log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
@@ -142,7 +142,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
                                    saveOutputs=True,
                                    outputDir=tmp_out_dir,
                                    )
-        for plot_format in (plot_formats or [PlotFormat.pdf]):
+        for plot_format in (plot_formats or [VizFormat.pdf]):
             factory.reportFormat = 'csv'
             factory.plotFormat = plot_format.value
             factory.executePython()
