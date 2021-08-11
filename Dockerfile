@@ -66,5 +66,5 @@ ENV PLOTTING_ENGINE=matplotlib \
     VERBOSE=0
 
 # Entrypoint
-ENTRYPOINT ["tellurium"]
+ENTRYPOINT ["biosimulators-tellurium"]
 CMD []

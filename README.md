@@ -28,7 +28,7 @@ docker pull ghcr.io/biosimulators/tellurium
 
 ### Local usage
 ```
-usage: tellurium [-h] [-d] [-q] -i ARCHIVE [-o OUT_DIR] [-v]
+usage: biosimulators-tellurium [-h] [-d] [-q] -i ARCHIVE [-o OUT_DIR] [-v]
 
 BioSimulators-compliant command-line interface to the tellurium simulation program <http://tellurium.analogmachine.org>.
 
