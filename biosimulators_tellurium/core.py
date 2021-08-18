@@ -9,12 +9,14 @@
 from .config import Config
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
 from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog, StandardOutputErrorCapturerLevel  # noqa: F401
+from biosimulators_utils.log.utils import init_sed_document_log, StandardOutputErrorCapturer
 from biosimulators_utils.viz.data_model import VizFormat  # noqa: F401
-from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat  # noqa: F401
+from biosimulators_utils.report.data_model import DataSetResults, ReportResults, ReportFormat, SedDocumentResults  # noqa: F401
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from tellurium.sedml.tesedml import SEDMLCodeFactory
+import datetime
 import glob
 import os
 import pandas
@@ -32,8 +34,10 @@ __all__ = ['exec_sedml_docs_in_combine_archive']
 
 
 def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
+                                       return_results=False,
                                        report_formats=None, plot_formats=None,
-                                       bundle_outputs=None, keep_individual_outputs=None):
+                                       bundle_outputs=None, keep_individual_outputs=None,
+                                       raise_exceptions=True):
     """ Execute the SED tasks defined in a COMBINE/OMEX archive and save the outputs
 
     Args:
@@ -45,28 +49,35 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
             * HDF5: directory in which to save a single HDF5 file (``{ out_dir }/reports.h5``),
               with reports at keys ``{ relative-path-to-SED-ML-file-within-archive }/{ report.id }`` within the HDF5 file
 
+        return_results (:obj:`bool`, optional): whether to return the result of each output of each SED-ML file
         report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
         plot_formats (:obj:`list` of :obj:`VizFormat`, optional): report format (e.g., pdf)
         bundle_outputs (:obj:`bool`, optional): if :obj:`True`, bundle outputs into archives for reports and plots
         keep_individual_outputs (:obj:`bool`, optional): if :obj:`True`, keep individual output files
+        raise_exceptions (:obj:`bool`, optional): whether to raise exceptions
 
     Returns:
-        :obj:`CombineArchiveLog`: log
+        :obj:`tuple`:
+
+            * :obj:`SedDocumentResults`: results
+            * :obj:`CombineArchiveLog`: log
     """
     return exec_sedml_docs_in_archive(
         exec_sed_doc, archive_filename, out_dir,
         apply_xml_model_changes=True,
+        return_results=return_results,
         sed_doc_executer_supported_features=(Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface),
         report_formats=report_formats,
         plot_formats=plot_formats,
         bundle_outputs=bundle_outputs,
         keep_individual_outputs=keep_individual_outputs,
-        sed_doc_executer_logged_features=(),
+        sed_doc_executer_logged_features=(Report, Plot2D, Plot3D),
+        raise_exceptions=raise_exceptions,
     )
 
 
 def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
-                 apply_xml_model_changes=True, report_formats=None, plot_formats=None,
+                 apply_xml_model_changes=True, return_results=True, report_formats=None, plot_formats=None,
                  log=None, indent=0, log_level=StandardOutputErrorCapturerLevel.c):
     """
     Args:
@@ -83,6 +94,7 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         rel_out_path (:obj:`str`, optional): path relative to :obj:`out_path` to store the outputs
         apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
             calling :obj:`task_executer`.
+        return_results (:obj:`bool`, optional): whether to return the result of each output of each SED-ML file
         report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
         plot_formats (:obj:`list` of :obj:`VizFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): execution status of document
@@ -90,8 +102,17 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
 
     Returns:
-        :obj:`ReportResults`: results of each report
+        :obj:`tuple`:
+
+            * :obj:`ReportResults`: results of each report
+            * :obj:`SedDocumentLog`: log of the document
     """
+    doc = SedmlSimulationReader().run(filename)
+
+    if not log:
+        log = init_sed_document_log(doc)
+    start_time = datetime.datetime.now()
+
     # Set the engine that tellurium uses for plotting
     tellurium.setDefaultPlottingEngine(Config().plotting_engine.value)
 
@@ -101,7 +122,6 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     tmp_out_dir = tempfile.mkdtemp()
 
     # add a report for each plot to make tellurium output the data for each plot
-    doc = SedmlSimulationReader().run(filename)
     for output in doc.outputs:
         if isinstance(output, (Plot2D, Plot3D)):
             report = Report(
@@ -135,33 +155,52 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
     SedmlSimulationWriter().run(doc, filename_with_reports_for_plots, validate_models_with_languages=False)
 
     # Use tellurium to execute the SED document and generate the specified outputs
-    try:
-        factory = SEDMLCodeFactory(filename_with_reports_for_plots,
-                                   workingDir=working_dir,
-                                   createOutputs=True,
-                                   saveOutputs=True,
-                                   outputDir=tmp_out_dir,
-                                   )
-        for plot_format in (plot_formats or [VizFormat.pdf]):
-            factory.reportFormat = 'csv'
-            factory.plotFormat = plot_format.value
-            factory.executePython()
-    except Exception:
-        shutil.rmtree(tmp_out_dir)
-        raise
+    with StandardOutputErrorCapturer(relay=False, level=log_level) as captured:
+        try:
+            factory = SEDMLCodeFactory(filename_with_reports_for_plots,
+                                       workingDir=working_dir,
+                                       createOutputs=True,
+                                       saveOutputs=True,
+                                       outputDir=tmp_out_dir,
+                                       )
+            for plot_format in (plot_formats or [VizFormat.pdf]):
+                factory.reportFormat = 'csv'
+                factory.plotFormat = plot_format.value
+                factory.executePython()
+
+            log.output = captured.get_text()
+            log.export()
+
+        except Exception as exception:
+            log.status = Status.FAILED
+            log.exception = exception
+            log.duration = (datetime.datetime.now() - start_time).total_seconds()
+            log.output = captured.get_text()
+            for output in log.outputs.values():
+                output.status = Status.SKIPPED
+            log.export()
+            shutil.rmtree(tmp_out_dir)
+            raise
 
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
     # - Encode into BioSimulators format(s)
-    report_results = ReportResults()
+    if return_results:
+        report_results = ReportResults()
+    else:
+        report_results = None
+
     for report_filename in glob.glob(os.path.join(tmp_out_dir, '*.csv')):
         report_id = os.path.splitext(os.path.basename(report_filename))[0]
         is_plot = report_id.startswith('__plot__')
-        is_report = not is_plot
         if is_plot:
             output_id = report_id[len('__plot__'):]
         else:
             output_id = report_id
+
+        log.outputs[output_id].status = Status.RUNNING
+        log.export()
+        output_start_time = datetime.datetime.now()
 
         # read report from CSV file produced by tellurium
         data_set_df = pandas.read_csv(report_filename).transpose()
@@ -177,8 +216,8 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
             data_set_results[data_set.id] = data_set_df.loc[data_set.label, :].to_numpy()
 
         # append to data structure of report results
-        if is_report:
-            report_results[report_id] = data_set_results
+        if return_results:
+            report_results[output_id] = data_set_results
 
         # save file in desired BioSimulators format(s)
         for report_format in report_formats:
@@ -187,6 +226,10 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
                                base_out_path,
                                os.path.join(rel_out_path, output_id) if rel_out_path else output_id,
                                format=report_format)
+
+        log.outputs[output_id].status = Status.SUCCEEDED
+        log.outputs[output_id].duration = (datetime.datetime.now() - output_start_time).total_seconds()
+        log.export()
 
     # Move the plot outputs to the permanent output directory
     out_dir = base_out_path
@@ -200,8 +243,13 @@ def exec_sed_doc(filename, working_dir, base_out_path, rel_out_path=None,
         for plot_filename in glob.glob(os.path.join(tmp_out_dir, '*.' + plot_format.value)):
             shutil.move(plot_filename, out_dir)
 
+    # finalize log
+    log.status = Status.SUCCEEDED
+    log.duration = (datetime.datetime.now() - start_time).total_seconds()
+    log.export()
+
     # Clean up the temporary directory for tellurium's outputs
     shutil.rmtree(tmp_out_dir)
 
     # Return a data structure with the results of the reports
-    return report_results
+    return report_results, log
