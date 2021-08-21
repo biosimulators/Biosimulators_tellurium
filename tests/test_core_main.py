@@ -124,10 +124,21 @@ class CliTestCase(unittest.TestCase):
                 ],
             )
 
+            if reports and not plots:
+                report.data_sets.append(DataSet(id='data_set_kswe', label='kwse'))
+                report.data_sets.append(DataSet(id='data_set_kswe_prime', label="kwse'"))
+                report.data_sets.append(DataSet(id='data_set_R1', label="Clb-Sic dissociation"))
+                report.data_sets.append(DataSet(id='data_set_compartment', label="compartment"))
+
             report_results = ReportReader().run(report, dirname, 'ex1/BIOMD0000000297.sedml/report_1_task1')
             for data_set_result in report_results.values():
                 self.assertFalse(numpy.any(numpy.isnan(data_set_result)))
             numpy.testing.assert_allclose(report_results[report.data_sets[0].id], numpy.linspace(0., 140., 140 + 1))
+
+            if reports and not plots:
+                print(report_results.keys())
+                numpy.testing.assert_allclose(report_results['data_set_kswe_prime'], numpy.full((140 + 1,), 2.))
+                numpy.testing.assert_allclose(report_results['data_set_compartment'], numpy.full((140 + 1,), 1.))
 
         # check that expected plots where created at the expected locations
         if plots:

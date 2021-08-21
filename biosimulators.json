@@ -347,14 +347,21 @@
         "namespace": "SIO",
         "id": "SIO_000418"
       }],
-      "dependentVariableTargetPatterns": [
-        {
+      "dependentVariableTargetPatterns": [{
           "variables": "species concentrations",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
         },
         {
           "variables": "parameter values",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
@@ -408,14 +415,21 @@
         "namespace": "SIO",
         "id": "SIO_000418"
       }],
-      "dependentVariableTargetPatterns": [
-        {
+      "dependentVariableTargetPatterns": [{
           "variables": "species concentrations",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
         },
         {
           "variables": "parameter values",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
@@ -495,14 +509,21 @@
         "namespace": "SIO",
         "id": "SIO_000418"
       }],
-      "dependentVariableTargetPatterns": [
-        {
+      "dependentVariableTargetPatterns": [{
           "variables": "species concentrations",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
         },
         {
           "variables": "parameter values",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
@@ -618,14 +639,21 @@
         "namespace": "SIO",
         "id": "SIO_000418"
       }],
-      "dependentVariableTargetPatterns": [
-        {
+      "dependentVariableTargetPatterns": [{
           "variables": "species counts",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
         },
         {
           "variables": "parameter values",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
@@ -725,14 +753,21 @@
         }
       ],
       "dependentDimensions": [],
-      "dependentVariableTargetPatterns": [
-        {
+      "dependentVariableTargetPatterns": [{
           "variables": "species concentrations",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
         },
         {
           "variables": "parameter values",
           "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
         }
       ],
       "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
