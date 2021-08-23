@@ -7,7 +7,7 @@ import tellurium
 __all__ = [
     '__version__',
     'get_simulator_version',
-    # 'exec_sed_task',
+    'exec_sed_task',
     'exec_sedml_docs_in_combine_archive',
 ]
 

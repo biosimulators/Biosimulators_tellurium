@@ -1,3 +1,6 @@
-biosimulators_utils[logging] >= 0.1.104
+biosimulators_utils[logging] >= 0.1.108
+kisao >= 2.27
+libroadrunner
+numpy
 pandas
 tellurium

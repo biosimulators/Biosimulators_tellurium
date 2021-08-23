@@ -333,10 +333,22 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000656"
+            "id": "KISAO_0000671"
           },
-          "id": "variable_step_size",
-          "name": "Adaptive time steps",
+          "id": "stiff",
+          "name": "Stiff",
+          "type": "boolean",
+          "value": "true",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000670"
+          },
+          "id": "multiple_steps",
+          "name": "Multiple steps",
           "type": "boolean",
           "value": "false",
           "recommendedRange": null,
@@ -380,6 +392,67 @@
           "url": "https://computing.llnl.gov/projects/sundials"
         }
       ]
+    },
+    {
+      "id": "euler",
+      "name": "Forward Euler method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000030"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585",
+        "version": null,
+        "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685",
+        "version": null,
+        "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686",
+        "version": "1",
+        "supportedFeatures": []
+      }],
+      "parameters": [],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [{
+          "variables": "species concentrations",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        },
+        {
+          "variables": "reaction fluxes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction"
+        },
+        {
+          "variables": "compartment sizes",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment"
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
+      "dependencies": [{
+        "name": "libRoadRunner",
+        "version": null,
+        "required": true,
+        "freeNonCommercialLicense": true,
+        "url": "http://libroadrunner.org/"
+      }],
+      "citations": []
     },
     {
       "id": "runge_kutta_4",
@@ -474,19 +547,9 @@
       "parameters": [{
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000656"
-          },
-          "name": "Adaptive time steps",
-          "type": "boolean",
-          "value": "true",
-          "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
-        },
-        {
-          "kisaoId": {
-            "namespace": "KISAO",
             "id": "KISAO_0000485"
           },
+          "id": "minimum_time_step",
           "name": "Minimum time step",
           "type": "float",
           "value": "1e-12",
@@ -498,9 +561,22 @@
             "namespace": "KISAO",
             "id": "KISAO_0000467"
           },
+          "id": "maximum_time_step",
           "name": "Maximum time step",
           "type": "float",
           "value": "1.0",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000597"
+          },
+          "id": "epsilon",
+          "name": "Epsilon",
+          "type": "float",
+          "value": "0.000000000001",
           "recommendedRange": null,
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }
@@ -537,7 +613,7 @@
       "citations": []
     },
     {
-      "id": "gillespie_direct_ssa",
+      "id": "gillespie",
       "name": "Gillespie direct method of the Stochastic Simulation Algorithm (SSA)",
       "kisaoId": {
         "namespace": "KISAO",
@@ -584,53 +660,22 @@
             "namespace": "KISAO",
             "id": "KISAO_0000488"
           },
+          "id": "seed",
           "name": "Random number generator seed",
           "type": "integer",
-          "value": "0",
+          "value": null,
           "recommendedRange": null,
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         },
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000656"
+            "id": "KISAO_0000673"
           },
-          "name": "Adaptive time steps",
+          "id": "nonnegative",
+          "name": "Skip reactions which would result in negative species amounts",
           "type": "boolean",
-          "value": "true",
-          "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
-        },
-        {
-          "kisaoId": {
-            "namespace": "KISAO",
-            "id": "KISAO_0000332"
-          },
-          "name": "Initial time step",
-          "type": "float",
-          "value": null,
-          "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
-        },
-        {
-          "kisaoId": {
-            "namespace": "KISAO",
-            "id": "KISAO_0000485"
-          },
-          "name": "Minimum time step",
-          "type": "float",
-          "value": null,
-          "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
-        },
-        {
-          "kisaoId": {
-            "namespace": "KISAO",
-            "id": "KISAO_0000467"
-          },
-          "name": "Maximum time step",
-          "type": "float",
-          "value": null,
+          "value": "false",
           "recommendedRange": null,
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }
@@ -723,6 +768,7 @@
             "namespace": "KISAO",
             "id": "KISAO_0000209"
           },
+          "id": "relative_tolerance",
           "name": "Relative tolerance",
           "type": "float",
           "value": "1e-12",
@@ -734,6 +780,7 @@
             "namespace": "KISAO",
             "id": "KISAO_0000486"
           },
+          "id": "maximum_iterations",
           "name": "Maximum number of iterations",
           "type": "integer",
           "value": "100",
@@ -745,9 +792,118 @@
             "namespace": "KISAO",
             "id": "KISAO_0000487"
           },
+          "id": "minimum_damping",
           "name": "Minimum damping factor",
           "type": "float",
           "value": "1e-20",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000674"
+          },
+          "id": "allow_presimulation",
+          "name": "Presimulate",
+          "type": "boolean",
+          "value": "false",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000677"
+          },
+          "id": "presimulation_maximum_steps",
+          "name": "Maximum number of steps for presimulation",
+          "type": "integer",
+          "value": "100",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000680"
+          },
+          "id": "presimulation_time",
+          "name": "Amount of time to presimulate",
+          "type": "float",
+          "value": "100",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000682"
+          },
+          "id": "allow_approx",
+          "name": "Whether to find an approximate solution if an exact solution could not be found",
+          "type": "boolean",
+          "value": "false",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000683"
+          },
+          "id": "approx_tolerance",
+          "name": "Tolerance for finding an approximate solution",
+          "type": "float",
+          "value": "0.000001",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000678"
+          },
+          "id": "approx_maximum_steps",
+          "name": "Maximum number of steps for finding an approximate solution",
+          "type": "integer",
+          "value": "10000",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000679"
+          },
+          "id": "approx_time",
+          "name": "Maximum amount of time to spend finding finding an approximate solution",
+          "type": "float",
+          "value": "10000",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000675"
+          },
+          "id": "broyden_method",
+          "name": "Broyden method",
+          "type": "integer",
+          "value": "0",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000676"
+          },
+          "id": "linearity",
+          "name": "Degree of linearity of the systen",
+          "type": "integer",
+          "value": "3",
           "recommendedRange": null,
           "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
         }

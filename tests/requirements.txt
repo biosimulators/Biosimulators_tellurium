@@ -1,3 +1,4 @@
 biosimulators_utils[containers]
 numpy
 pypdf2
+pyyaml
