@@ -8,6 +8,7 @@
 
 from biosimulators_tellurium import __main__
 from biosimulators_tellurium import core
+from biosimulators_tellurium.config import Config as SimulatorConfig
 from biosimulators_tellurium.data_model import SedmlInterpreter
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.combine import data_model as combine_data_model
@@ -417,34 +418,43 @@ class CoreTestCase(unittest.TestCase):
         ]
 
         # execute simulation
+        simulator_config = SimulatorConfig()
+
+        simulator_config.sedml_interpreter = SedmlInterpreter.tellurium
         with self.assertRaises(NotImplementedError):
-            variable_results, log = core.exec_sed_task(task, variables, sedml_interpreter=SedmlInterpreter.tellurium)
+            variable_results, log = core.exec_sed_task(task, variables, simulator_config=simulator_config)
 
         variables_2 = copy.deepcopy(variables)
         variables_2[0].symbol = 'mass'
+        simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
         with self.assertRaises(NotImplementedError):
-            variable_results, log = core.exec_sed_task(task, variables_2, sedml_interpreter=SedmlInterpreter.biosimulators)
+            variable_results, log = core.exec_sed_task(task, variables_2, simulator_config=simulator_config)
 
         variables_2 = copy.deepcopy(variables)
         variables_2[1].target = '/sbml:sbml'
+        simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
         with self.assertRaisesRegex(ValueError, 'targets are not supported'):
-            variable_results, log = core.exec_sed_task(task, variables_2, sedml_interpreter=SedmlInterpreter.biosimulators)
+            variable_results, log = core.exec_sed_task(task, variables_2, simulator_config=simulator_config)
 
         task_2 = copy.deepcopy(task)
         task_2.simulation.output_start_time = 1.5
+        simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
         with self.assertRaises(NotImplementedError):
-            variable_results, log = core.exec_sed_task(task_2, variables, sedml_interpreter=SedmlInterpreter.biosimulators)
+            variable_results, log = core.exec_sed_task(task_2, variables, simulator_config=simulator_config)
 
     def test_exec_sedml_docs_in_combine_archive_successfully_with_biosimulators(self):
         doc, archive_filename = self._build_combine_archive()
 
         out_dir = os.path.join(self.dirname, 'out')
-        core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
-                                                report_formats=[
-                                                    report_data_model.ReportFormat.h5,
-                                                ],
-                                                bundle_outputs=True,
-                                                keep_individual_outputs=True)
+
+        config = get_config()
+        config.REPORT_FORMATS = [report_data_model.ReportFormat.h5]
+        config.BUNDLE_OUTPUTS = True
+        config.KEEP_INDIVIDUAL_OUTPUTS = True
+
+        _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=config)
+        if log.exception:
+                raise log.exception
 
         self._assert_combine_archive_outputs(doc, out_dir)
 
@@ -567,11 +577,16 @@ class CoreTestCase(unittest.TestCase):
     # all SED-ML interpreters
     def test_exec_sedml_docs_in_combine_archive(self):
         for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
             # with reports
             archive_filename = 'tests/fixtures/BIOMD0000000297-with-reports.omex'
 
             dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
-            core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, sedml_interpreter=sedml_interpreter)
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
 
             self._assert_curated_combine_archive_outputs(dirname, reports=True, plots=False)
 
@@ -579,7 +594,9 @@ class CoreTestCase(unittest.TestCase):
             archive_filename = 'tests/fixtures/BIOMD0000000297-with-plots.omex'
 
             dirname = os.path.join(self.dirname, sedml_interpreter.name, 'plots')
-            core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, sedml_interpreter=sedml_interpreter)
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
 
             self._assert_curated_combine_archive_outputs(dirname, reports=False, plots=True)
 
@@ -587,7 +604,9 @@ class CoreTestCase(unittest.TestCase):
             archive_filename = 'tests/fixtures/BIOMD0000000297-with-reports-and-plots.omex'
 
             dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports-and-plots')
-            core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, sedml_interpreter=sedml_interpreter)
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
 
             self._assert_curated_combine_archive_outputs(dirname, reports=True, plots=True)
 
@@ -596,30 +615,46 @@ class CoreTestCase(unittest.TestCase):
             for alg in gen_algorithms_from_specs(self.SPECIFICATIONS_FILENAME).values():
                 doc, archive_filename = self._build_combine_archive(algorithm=alg)
                 out_dir = os.path.join(self.dirname, sedml_interpreter.name, alg.kisao_id)
-                core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
-                                                        sedml_interpreter=sedml_interpreter,
-                                                        report_formats=[
-                                                            report_data_model.ReportFormat.h5,
-                                                        ],
-                                                        bundle_outputs=True,
-                                                        keep_individual_outputs=True)
+
+                config = get_config()
+                config.REPORT_FORMATS = [report_data_model.ReportFormat.h5]
+                config.BUNDLE_OUTPUTS = True
+                config.KEEP_INDIVIDUAL_OUTPUTS = True
+
+                simulator_config = SimulatorConfig()
+                simulator_config.sedml_interpreter = sedml_interpreter
+
+                _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
+                                                        config=config,
+                                                        simulator_config=simulator_config)
+                if log.exception:
+                    raise log.exception
                 self._assert_combine_archive_outputs(doc, out_dir)
 
     def test_exec_sed_doc(self):
         with mock.patch('biosimulators_tellurium.core.exec_sed_doc_with_biosimulators', return_value=None):
             core.exec_sed_doc(None, None, None)
+
+        simulator_config = SimulatorConfig()
+        simulator_config.sedml_interpreter = 'undefined'
         with self.assertRaises(NotImplementedError):
-            core.exec_sed_doc(None, None, None, sedml_interpreter='undefine')
+            core.exec_sed_doc(None, None, None, simulator_config=simulator_config)
 
     # tellurium error handling
     def test_exec_sedml_docs_in_combine_archive_with_tellurium_error_handling(self):
         archive_filename = 'tests/fixtures/BIOMD0000000297-with-reports-and-plots.omex'
 
+        simulator_config = SimulatorConfig()
+        simulator_config.sedml_interpreter = SedmlInterpreter.tellurium
+
+        with mock.patch.object(tellurium.sedml.tesedml.SEDMLCodeFactory, 'executePython', side_effect=Exception('my error')):
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, self.dirname, simulator_config=simulator_config)
         with self.assertRaisesRegex(Exception, 'my error'):
-            with mock.patch.object(tellurium.sedml.tesedml.SEDMLCodeFactory, 'executePython', side_effect=Exception('my error')):
-                core.exec_sedml_docs_in_combine_archive(archive_filename, self.dirname, sedml_interpreter=SedmlInterpreter.tellurium)
+            if log.exception:
+                raise log.exception
 
     # CLI and Docker image
+
     def test_exec_sedml_docs_in_combine_archive_with_cli(self):
         archive_filename = 'tests/fixtures/BIOMD0000000297-with-reports-and-plots.omex'
         env = self._get_combine_archive_exec_env()

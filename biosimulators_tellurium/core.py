@@ -6,10 +6,10 @@
 :License: MIT
 """
 
-from .config import Config
+from .config import Config as SimulatorConfig
 from .data_model import SedmlInterpreter, KISAO_ALGORITHM_MAP
 from biosimulators_utils.combine.exec import exec_sedml_docs_in_archive
-from biosimulators_utils.config import get_config as get_biosimulators_config
+from biosimulators_utils.config import get_config, Config  # noqa: F401
 from biosimulators_utils.log.data_model import Status, CombineArchiveLog, SedDocumentLog, StandardOutputErrorCapturerLevel, TaskLog  # noqa: F401
 from biosimulators_utils.log.utils import init_sed_document_log, StandardOutputErrorCapturer
 from biosimulators_utils.viz.data_model import VizFormat  # noqa: F401
@@ -27,6 +27,7 @@ from biosimulators_utils.warnings import warn, BioSimulatorsWarning
 from kisao.data_model import AlgorithmSubstitutionPolicy, ALGORITHM_SUBSTITUTION_POLICY_LEVELS
 from kisao.utils import get_preferred_substitute_algorithm_by_ids
 from tellurium.sedml.tesedml import SEDMLCodeFactory
+import copy
 import datetime
 import functools
 import glob
@@ -47,12 +48,7 @@ __all__ = [
 ]
 
 
-def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
-                                       sedml_interpreter=None,
-                                       return_results=False,
-                                       report_formats=None, plot_formats=None,
-                                       bundle_outputs=None, keep_individual_outputs=None,
-                                       raise_exceptions=True):
+def exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=None, simulator_config=None):
     """ Execute the SED tasks defined in a COMBINE/OMEX archive and save the outputs
 
     Args:
@@ -64,13 +60,8 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
             * HDF5: directory in which to save a single HDF5 file (``{ out_dir }/reports.h5``),
               with reports at keys ``{ relative-path-to-SED-ML-file-within-archive }/{ report.id }`` within the HDF5 file
 
-        sedml_interpreter (:obj:`SedmlInterpreter`, optional): SED-ML interpreter
-        return_results (:obj:`bool`, optional): whether to return the result of each output of each SED-ML file
-        report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): report format (e.g., pdf)
-        bundle_outputs (:obj:`bool`, optional): if :obj:`True`, bundle outputs into archives for reports and plots
-        keep_individual_outputs (:obj:`bool`, optional): if :obj:`True`, keep individual output files
-        raise_exceptions (:obj:`bool`, optional): whether to raise exceptions
+        config (:obj:`Config`, optional): BioSimulators common configuration
+        simulator_config (:obj:`SimulatorConfig`, optional): tellurium configuration
 
     Returns:
         :obj:`tuple`:
@@ -78,29 +69,24 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
             * :obj:`SedDocumentResults`: results
             * :obj:`CombineArchiveLog`: log
     """
-    if sedml_interpreter is None:
-        sedml_interpreter = Config().sedml_interpreter
+    if not simulator_config:
+        simulator_config = SimulatorConfig()
+    sedml_interpreter = simulator_config.sedml_interpreter
 
     return exec_sedml_docs_in_archive(
-        functools.partial(exec_sed_doc, sedml_interpreter=sedml_interpreter),
+        functools.partial(exec_sed_doc, simulator_config=simulator_config),
         archive_filename, out_dir,
         apply_xml_model_changes=sedml_interpreter == SedmlInterpreter.biosimulators,
-        return_results=return_results,
         sed_doc_executer_supported_features=(Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface),
-        report_formats=report_formats,
-        plot_formats=plot_formats,
-        bundle_outputs=bundle_outputs,
-        keep_individual_outputs=keep_individual_outputs,
         sed_doc_executer_logged_features=(Report, Plot2D, Plot3D),
-        raise_exceptions=raise_exceptions,
+        config=config,
     )
 
 
 def exec_sed_doc(doc, working_dir, base_out_path, rel_out_path=None,
-                 sedml_interpreter=None,
-                 apply_xml_model_changes=False, return_results=False, report_formats=None, plot_formats=None,
+                 apply_xml_model_changes=False,
                  log=None, indent=0, pretty_print_modified_xml_models=False,
-                 log_level=StandardOutputErrorCapturerLevel.c):
+                 log_level=StandardOutputErrorCapturerLevel.c, config=None, simulator_config=None):
     """ Execute the tasks specified in a SED document and generate the specified outputs
 
     Args:
@@ -115,17 +101,14 @@ def exec_sed_doc(doc, working_dir, base_out_path, rel_out_path=None,
               with reports at keys ``{rel_out_path}/{report.id}`` within the HDF5 file
 
         rel_out_path (:obj:`str`, optional): path relative to :obj:`base_out_path` to store the outputs
-        sedml_interpreter (:obj:`SedmlInterpreter`, optional): SED-ML interpreter
         apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
             calling :obj:`task_executer`.
-        return_results (:obj:`bool`, optional): whether to return a data structure with the result of each output of each SED-ML
-            file
-        report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): log of the document
         indent (:obj:`int`, optional): degree to indent status messages
         pretty_print_modified_xml_models (:obj:`bool`, optional): if :obj:`True`, pretty print modified XML models
         log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
+        config (:obj:`Config`, optional): BioSimulators common configuration
+        simulator_config (:obj:`SimulatorConfig`, optional): tellurium configuration
 
     Returns:
         :obj:`tuple`:
@@ -133,41 +116,40 @@ def exec_sed_doc(doc, working_dir, base_out_path, rel_out_path=None,
             * :obj:`ReportResults`: results of each report
             * :obj:`SedDocumentLog`: log of the document
     """
-    if sedml_interpreter is None:
-        sedml_interpreter = Config().sedml_interpreter
+    if not simulator_config:
+        simulator_config = SimulatorConfig()
+    sedml_interpreter = simulator_config.sedml_interpreter
 
     if sedml_interpreter == SedmlInterpreter.biosimulators:
         return exec_sed_doc_with_biosimulators(
             doc, working_dir, base_out_path,
             rel_out_path=rel_out_path,
             apply_xml_model_changes=apply_xml_model_changes,
-            return_results=return_results,
-            report_formats=report_formats,
-            plot_formats=plot_formats,
             log=log,
             indent=indent,
-            log_level=log_level)
+            log_level=log_level,
+            config=config,
+            simulator_config=simulator_config)
 
     elif sedml_interpreter == SedmlInterpreter.tellurium:
         return exec_sed_doc_with_tellurium(
             doc, working_dir, base_out_path,
             rel_out_path=rel_out_path,
             apply_xml_model_changes=apply_xml_model_changes,
-            return_results=return_results,
-            report_formats=report_formats,
-            plot_formats=plot_formats,
             log=log,
             indent=indent,
-            log_level=log_level)
+            log_level=log_level,
+            config=config,
+            simulator_config=simulator_config)
 
     else:
         raise NotImplementedError('`{}` is not a supported SED-ML interpreter.'.format(sedml_interpreter))
 
 
 def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_path=None,
-                                    apply_xml_model_changes=False, return_results=False, report_formats=None, plot_formats=None,
+                                    apply_xml_model_changes=False,
                                     log=None, indent=0, pretty_print_modified_xml_models=False,
-                                    log_level=StandardOutputErrorCapturerLevel.c):
+                                    log_level=StandardOutputErrorCapturerLevel.c, config=None, simulator_config=None):
     """ Execute the tasks specified in a SED document and generate the specified outputs
 
     Args:
@@ -183,14 +165,12 @@ def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_pat
         rel_out_path (:obj:`str`, optional): path relative to :obj:`base_out_path` to store the outputs
         apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
             calling :obj:`task_executer`.
-        return_results (:obj:`bool`, optional): whether to return a data structure with the result of each output of each SED-ML
-            file
-        report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): log of the document
         indent (:obj:`int`, optional): degree to indent status messages
         pretty_print_modified_xml_models (:obj:`bool`, optional): if :obj:`True`, pretty print modified XML models
         log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
+        config (:obj:`Config`, optional): BioSimulators common configuration
+        simulator_config (:obj:`SimulatorConfig`, optional): tellurium configuration
 
     Returns:
         :obj:`tuple`:
@@ -198,24 +178,29 @@ def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_pat
             * :obj:`ReportResults`: results of each report
             * :obj:`SedDocumentLog`: log of the document
     """
-    sed_task_executer = functools.partial(exec_sed_task, sedml_interpreter=SedmlInterpreter.biosimulators)
+    if not simulator_config:
+        simulator_config = SimulatorConfig()
+    else:
+        simulator_config = copy.copy(simulator_config)
+    simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
+
+    sed_task_executer = functools.partial(exec_sed_task, simulator_config=simulator_config)
     return sedml_exec.exec_sed_doc(sed_task_executer, doc, working_dir, base_out_path,
                                    rel_out_path=rel_out_path,
                                    apply_xml_model_changes=True,
-                                   return_results=return_results,
-                                   report_formats=report_formats,
-                                   plot_formats=plot_formats,
-                                   log_level=log_level)
+                                   log_level=log_level,
+                                   config=config)
 
 
-def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
+def exec_sed_task(task, variables, log=None, config=None, simulator_config=None):
     ''' Execute a task and save its results
 
     Args:
        task (:obj:`Task`): task
        variables (:obj:`list` of :obj:`Variable`): variables that should be recorded
        log (:obj:`TaskLog`, optional): log for the task
-       sedml_interpreter (:obj:`SedmlInterpreter`, optional): SED-ML interpreter
+       config (:obj:`Config`, optional): BioSimulators common configuration
+       simulator_config (:obj:`SimulatorConfig`, optional): tellurium configuration
 
     Returns:
         :obj:`tuple`:
@@ -229,20 +214,23 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
         :obj:`NotImplementedError`: if the task is not of a supported type or involves an unsuported feature
     '''
 
-    if sedml_interpreter is None:
-        sedml_interpreter = Config().sedml_interpreter
+    if not simulator_config:
+        simulator_config = SimulatorConfig()
+    sedml_interpreter = simulator_config.sedml_interpreter
 
     if sedml_interpreter != SedmlInterpreter.biosimulators:
         raise NotImplementedError('`{}` is not a supported SED-ML interpreter.'.format(sedml_interpreter))
 
-    biosimulators_config = get_biosimulators_config()
+    if not config:
+        config = get_config()
 
-    log = log or TaskLog()
+    if config.LOG and not log:
+        log = TaskLog()
 
     model = task.model
     sim = task.simulation
 
-    if biosimulators_config.VALIDATE_SEDML:
+    if config.VALIDATE_SEDML:
         raise_errors_warnings(validation.validate_task(task),
                               error_summary='Task `{}` is invalid.'.format(task.id))
         raise_errors_warnings(validation.validate_model_language(model.language, ModelLanguage.SBML),
@@ -259,7 +247,7 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
                               error_summary='Data generator variables for task `{}` are invalid.'.format(task.id))
     target_x_paths_to_sbml_ids = validation.validate_variable_xpaths(variables, model.source, attr='id')
 
-    if biosimulators_config.VALIDATE_SEDML_MODELS:
+    if config.VALIDATE_SEDML_MODELS:
         raise_errors_warnings(*validation.validate_model(model, [], working_dir='.'),
                               error_summary='Model `{}` is invalid.'.format(model.id),
                               warning_summary='Model `{}` may be invalid.'.format(model.id))
@@ -269,7 +257,7 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
     rr.load(model.source)
 
     # get algorithm to execute
-    algorithm_substitution_policy = get_algorithm_substitution_policy()
+    algorithm_substitution_policy = get_algorithm_substitution_policy(config=config)
     exec_alg_kisao_id = get_preferred_substitute_algorithm_by_ids(
         sim.algorithm.kisao_id, KISAO_ALGORITHM_MAP.keys(),
         substitution_policy=algorithm_substitution_policy)
@@ -277,21 +265,23 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
 
     if alg_props['id'] == 'nleq2':
         integrator = rr.getSteadyStateSolver()
-        raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation,)),
-                              error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+        if config.VALIDATE_SEDML:
+            raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation,)),
+                                  error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
 
     else:
         rr.setIntegrator(alg_props['id'])
         integrator = rr.getIntegrator()
-        raise_errors_warnings(validation.validate_simulation_type(sim, (UniformTimeCourseSimulation,)),
-                              error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+        if config.VALIDATE_SEDML:
+            raise_errors_warnings(validation.validate_simulation_type(sim, (UniformTimeCourseSimulation,)),
+                                  error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
 
     # set the parameters of the integrator
     if exec_alg_kisao_id == sim.algorithm.kisao_id:
         for change in sim.algorithm.changes:
             param_props = alg_props['parameters'].get(change.kisao_id, None)
-            if param_props:
-                if validate_str_value(change.new_value, param_props['type']):
+            if not config.VALIDATE_SEDML or param_props:
+                if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
                     new_value = parse_value(change.new_value, param_props['type'])
                     setattr(integrator, param_props['id'], new_value)
 
@@ -333,8 +323,9 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
     invalid_symbols = []
     invalid_targets = []
 
-    all_sbml_ids = rr.model.getAllTimeCourseComponentIds()
-    species_sbml_ids = rr.model.getBoundarySpeciesIds() + rr.model.getFloatingSpeciesIds()
+    if config.VALIDATE_SEDML:
+        all_sbml_ids = rr.model.getAllTimeCourseComponentIds()
+        species_sbml_ids = rr.model.getBoundarySpeciesIds() + rr.model.getFloatingSpeciesIds()
     observable_sbml_ids = []
 
     for variable in variables:
@@ -347,7 +338,7 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
         else:
             sbml_id = target_x_paths_to_sbml_ids.get(variable.target, None)
 
-            if sbml_id and sbml_id in all_sbml_ids:
+            if sbml_id and (not config.VALIDATE_SEDML or sbml_id in all_sbml_ids):
                 if exec_alg_kisao_id != 'KISAO_0000019' and sbml_id in species_sbml_ids:
                     observable_sbml_ids.append('[' + sbml_id + ']')
                 else:
@@ -409,7 +400,7 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
         results = rr.getSteadyStateValues()
 
     # check simulation succeeded
-    if numpy.any(numpy.isnan(results)):
+    if config.VALIDATE_RESULTS and numpy.any(numpy.isnan(results)):
         msg = 'Simulation failed with algorithm `{}` ({})'.format(exec_alg_kisao_id, alg_props['id'])
         for i_param in range(integrator.getNumParams()):
             param_name = integrator.getParamName(i_param)
@@ -425,23 +416,24 @@ def exec_sed_task(task, variables, log=None, sedml_interpreter=None):
         variable_results[variable.id] = result
 
     # log action
-    log.algorithm = exec_alg_kisao_id
-    log.simulator_details = {
-        'method': 'simulate' if isinstance(sim, UniformTimeCourseSimulation) else 'steadyState',
-        'integrator': integrator.getName(),
-    }
-    for i_param in range(integrator.getNumParams()):
-        param_name = integrator.getParamName(i_param)
-        log.simulator_details[param_name] = getattr(integrator, param_name)
+    if config.LOG:
+        log.algorithm = exec_alg_kisao_id
+        log.simulator_details = {
+            'method': 'simulate' if isinstance(sim, UniformTimeCourseSimulation) else 'steadyState',
+            'integrator': integrator.getName(),
+        }
+        for i_param in range(integrator.getNumParams()):
+            param_name = integrator.getParamName(i_param)
+            log.simulator_details[param_name] = getattr(integrator, param_name)
 
     # return results and log
     return variable_results, log
 
 
 def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=None,
-                                apply_xml_model_changes=True, return_results=True, report_formats=None, plot_formats=None,
+                                apply_xml_model_changes=True,
                                 log=None, indent=0, pretty_print_modified_xml_models=False,
-                                log_level=StandardOutputErrorCapturerLevel.c):
+                                log_level=StandardOutputErrorCapturerLevel.c, config=None, simulator_config=None):
     """
     Args:
         doc (:obj:`SedDocument` or :obj:`str`): SED document or a path to SED-ML file which defines a SED document
@@ -456,13 +448,12 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
         rel_out_path (:obj:`str`, optional): path relative to :obj:`base_out_path` to store the outputs
         apply_xml_model_changes (:obj:`bool`, optional): if :obj:`True`, apply any model changes specified in the SED-ML file before
             calling :obj:`task_executer`.
-        return_results (:obj:`bool`, optional): whether to return the result of each output of each SED-ML file
-        report_formats (:obj:`list` of :obj:`ReportFormat`, optional): report format (e.g., csv or h5)
-        plot_formats (:obj:`list` of :obj:`VizFormat`, optional): plot format (e.g., pdf)
         log (:obj:`SedDocumentLog`, optional): execution status of document
         indent (:obj:`int`, optional): degree to indent status messages
         pretty_print_modified_xml_models (:obj:`bool`, optional): if :obj:`True`, pretty print modified XML models
         log_level (:obj:`StandardOutputErrorCapturerLevel`, optional): level at which to log output
+        config (:obj:`Config`, optional): BioSimulators common configuration
+        simulator_config (:obj:`SimulatorConfig`, optional): tellurium configuration
 
     Returns:
         :obj:`tuple`:
@@ -470,15 +461,20 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
             * :obj:`ReportResults`: results of each report
             * :obj:`SedDocumentLog`: log of the document
     """
+    if not config:
+        config = get_config()
+    if not simulator_config:
+        simulator_config = SimulatorConfig()
+
     if isinstance(doc, str):
         doc = SedmlSimulationReader().run(doc)
 
-    if not log:
+    if config.LOG and not log:
         log = init_sed_document_log(doc)
     start_time = datetime.datetime.now()
 
     # Set the engine that tellurium uses for plotting
-    tellurium.setDefaultPlottingEngine(Config().plotting_engine.value)
+    tellurium.setDefaultPlottingEngine(simulator_config.plotting_engine.value)
 
     # Create a temporary for tellurium's outputs
     # - Reports: CSV (Rows: time, Columns: data sets)
@@ -519,7 +515,8 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
     SedmlSimulationWriter().run(doc, filename_with_reports_for_plots, validate_models_with_languages=False)
 
     # Use tellurium to execute the SED document and generate the specified outputs
-    with StandardOutputErrorCapturer(relay=False, level=log_level) as captured:
+    viz_formats = [VizFormat(format_value) for format_value in config.VIZ_FORMATS]
+    with StandardOutputErrorCapturer(relay=False, level=log_level, disabled=not config.LOG) as captured:
         try:
             factory = SEDMLCodeFactory(filename_with_reports_for_plots,
                                        workingDir=working_dir,
@@ -527,29 +524,31 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                                        saveOutputs=True,
                                        outputDir=tmp_out_dir,
                                        )
-            for plot_format in (plot_formats or [VizFormat.pdf]):
+            for viz_format in (viz_formats or [VizFormat.pdf]):
                 factory.reportFormat = 'csv'
-                factory.plotFormat = plot_format.value
+                factory.plotFormat = viz_format.value
                 factory.executePython()
 
-            log.output = captured.get_text()
-            log.export()
+            if config.LOG:
+                log.output = captured.get_text()
+                log.export()
 
         except Exception as exception:
-            log.status = Status.FAILED
-            log.exception = exception
-            log.duration = (datetime.datetime.now() - start_time).total_seconds()
-            log.output = captured.get_text()
-            for output in log.outputs.values():
-                output.status = Status.SKIPPED
-            log.export()
+            if config.LOG:
+                log.status = Status.FAILED
+                log.exception = exception
+                log.duration = (datetime.datetime.now() - start_time).total_seconds()
+                log.output = captured.get_text()
+                for output in log.outputs.values():
+                    output.status = Status.SKIPPED
+                log.export()
             shutil.rmtree(tmp_out_dir)
             raise
 
     # Convert tellurium's CSV reports to the desired BioSimulators format(s)
     # - Transpose rows/columns
     # - Encode into BioSimulators format(s)
-    if return_results:
+    if config.COLLECT_SED_DOCUMENT_RESULTS:
         report_results = ReportResults()
     else:
         report_results = None
@@ -562,9 +561,10 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
         else:
             output_id = report_id
 
-        log.outputs[output_id].status = Status.RUNNING
-        log.export()
-        output_start_time = datetime.datetime.now()
+        if config.LOG:
+            log.outputs[output_id].status = Status.RUNNING
+            log.export()
+            output_start_time = datetime.datetime.now()
 
         # read report from CSV file produced by tellurium
         data_set_df = pandas.read_csv(report_filename).transpose()
@@ -580,10 +580,11 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
             data_set_results[data_set.id] = data_set_df.loc[data_set.label, :].to_numpy()
 
         # append to data structure of report results
-        if return_results:
+        if config.COLLECT_SED_DOCUMENT_RESULTS:
             report_results[output_id] = data_set_results
 
         # save file in desired BioSimulators format(s)
+        report_formats = [ReportFormat(format_value) for format_value in config.REPORT_FORMATS]
         for report_format in report_formats:
             ReportWriter().run(output,
                                data_set_results,
@@ -591,9 +592,10 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                                os.path.join(rel_out_path, output_id) if rel_out_path else output_id,
                                format=report_format)
 
-        log.outputs[output_id].status = Status.SUCCEEDED
-        log.outputs[output_id].duration = (datetime.datetime.now() - output_start_time).total_seconds()
-        log.export()
+        if config.LOG:
+            log.outputs[output_id].status = Status.SUCCEEDED
+            log.outputs[output_id].duration = (datetime.datetime.now() - output_start_time).total_seconds()
+            log.export()
 
     # Move the plot outputs to the permanent output directory
     out_dir = base_out_path
@@ -603,14 +605,15 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
-    for plot_format in plot_formats:
-        for plot_filename in glob.glob(os.path.join(tmp_out_dir, '*.' + plot_format.value)):
-            shutil.move(plot_filename, out_dir)
+    for viz_format in viz_formats:
+        for viz_filename in glob.glob(os.path.join(tmp_out_dir, '*.' + viz_format.value)):
+            shutil.move(viz_filename, out_dir)
 
     # finalize log
-    log.status = Status.SUCCEEDED
-    log.duration = (datetime.datetime.now() - start_time).total_seconds()
-    log.export()
+    if config.LOG:
+        log.status = Status.SUCCEEDED
+        log.duration = (datetime.datetime.now() - start_time).total_seconds()
+        log.export()
 
     # Clean up the temporary directory for tellurium's outputs
     shutil.rmtree(tmp_out_dir)

@@ -14,7 +14,7 @@
 # Base OS
 FROM python:3.9-slim-buster
 
-ARG VERSION="0.1.16"
+ARG VERSION="0.1.17"
 ARG SIMULATOR_VERSION="2.2.0"
 
 # metadata
@@ -47,6 +47,11 @@ RUN apt-get update -y \
         libxml2 \
         libncurses5 \
     && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# fonts for matplotlib
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends libfreetype6 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy code for command-line interface into image and install it
