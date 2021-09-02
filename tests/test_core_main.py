@@ -134,7 +134,7 @@ class CoreTestCase(unittest.TestCase):
 
         # check that log can be serialized to JSON
         self.assertEqual(log.algorithm, 'KISAO_0000019')
-        self.assertEqual(log.simulator_details['integrator'], 'cvode')
+        self.assertEqual(log.simulator_details['solver'], 'cvode')
         self.assertEqual(log.simulator_details['relative_tolerance'], 1e-8)
 
         json.dumps(log.to_json())
@@ -442,6 +442,126 @@ class CoreTestCase(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             variable_results, log = core.exec_sed_task(task_2, variables, simulator_config=simulator_config)
 
+    def test_exec_sed_task_with_preprocesssed_task(self):
+        # configure simulation
+        task = sedml_data_model.Task(
+            model=sedml_data_model.Model(
+                source=self.EXAMPLE_MODEL_FILENAME,
+                language=sedml_data_model.ModelLanguage.SBML.value,
+                changes=[
+                    sedml_data_model.ModelAttributeChange(
+                        target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']",
+                        target_namespaces=self.NAMESPACES,
+                        new_value=0.011,
+                    ),
+                    sedml_data_model.ModelAttributeChange(
+                        target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='VM1']",
+                        target_namespaces=self.NAMESPACES,
+                        new_value=3.01,
+                    ),
+                    sedml_data_model.ModelAttributeChange(
+                        target="/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment[@id='cell']",
+                        target_namespaces=self.NAMESPACES,
+                        new_value=1.01,
+                    ),
+                ],
+            ),
+            simulation=sedml_data_model.UniformTimeCourseSimulation(
+                initial_time=0.,
+                output_start_time=0.,
+                output_end_time=10.,
+                number_of_points=10,
+                algorithm=sedml_data_model.Algorithm(
+                    kisao_id='KISAO_0000019',
+                ),
+            ),
+        )
+
+        variables = [
+            sedml_data_model.Variable(
+                id='Time',
+                symbol=sedml_data_model.Symbol.time,
+                task=task),
+            sedml_data_model.Variable(
+                id='C',
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']",
+                target_namespaces=self.NAMESPACES,
+                task=task),
+            sedml_data_model.Variable(
+                id='M',
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='M']",
+                target_namespaces=self.NAMESPACES,
+                task=task),
+            sedml_data_model.Variable(
+                id='X',
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='X']",
+                target_namespaces=self.NAMESPACES,
+                task=task),
+        ]
+
+        # execute simulation
+        task.model.changes[0].target = "/sbml:sbml/sbml:model"
+        with self.assertRaisesRegex(ValueError, 'targets for the following changes are not valid'):
+            preprocessed_task = core.preprocess_sed_task(task, variables)
+
+        task.model.changes[0].target = "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']"
+        task.simulation.algorithm.kisao_id = 'KISAO_0000029'
+        preprocessed_task = core.preprocess_sed_task(task, variables)
+
+        task.simulation.algorithm.kisao_id = 'KISAO_0000019'
+        preprocessed_task = core.preprocess_sed_task(task, variables)
+
+        task.model.changes = []
+        task.simulation.number_of_points = 1
+        preprocessed_task = core.preprocess_sed_task(task, variables)
+        variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
+        end_c = variable_results['C'][-1]
+
+        task.simulation.output_end_time /= 2
+        preprocessed_task = core.preprocess_sed_task(task, variables)
+        variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
+        with self.assertRaises(AssertionError):
+            numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
+        mid_c = preprocessed_task.road_runner['C']
+        mid_m = preprocessed_task.road_runner['M']
+        mid_x = preprocessed_task.road_runner['X']
+
+        variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
+        numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
+
+        task.model.changes = [
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']",
+                target_namespaces=self.NAMESPACES,
+                new_value=mid_c,
+            ),
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='M']",
+                target_namespaces=self.NAMESPACES,
+                new_value=mid_m,
+            ),
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='X']",
+                target_namespaces=self.NAMESPACES,
+                new_value=mid_x,
+            ),
+        ]
+        preprocessed_task = core.preprocess_sed_task(task, variables)
+        variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
+        numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
+
+        # check that the simulation was executed correctly
+        self.assertEqual(set(variable_results.keys()), set(['Time', 'C', 'M', 'X']))
+        for variable_result in variable_results.values():
+            self.assertFalse(numpy.any(numpy.isnan(variable_result)))
+        numpy.testing.assert_allclose(
+            variable_results['Time'],
+            numpy.linspace(
+                task.simulation.output_start_time,
+                task.simulation.output_end_time,
+                task.simulation.number_of_points + 1,
+            ))
+
     def test_exec_sedml_docs_in_combine_archive_successfully_with_biosimulators(self):
         doc, archive_filename = self._build_combine_archive()
 
@@ -454,7 +574,7 @@ class CoreTestCase(unittest.TestCase):
 
         _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=config)
         if log.exception:
-                raise log.exception
+            raise log.exception
 
         self._assert_combine_archive_outputs(doc, out_dir)
 
@@ -617,6 +737,7 @@ class CoreTestCase(unittest.TestCase):
                 out_dir = os.path.join(self.dirname, sedml_interpreter.name, alg.kisao_id)
 
                 config = get_config()
+                config.COLLECT_COMBINE_ARCHIVE_RESULTS = True
                 config.REPORT_FORMATS = [report_data_model.ReportFormat.h5]
                 config.BUNDLE_OUTPUTS = True
                 config.KEEP_INDIVIDUAL_OUTPUTS = True
@@ -624,9 +745,15 @@ class CoreTestCase(unittest.TestCase):
                 simulator_config = SimulatorConfig()
                 simulator_config.sedml_interpreter = sedml_interpreter
 
-                _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
-                                                        config=config,
-                                                        simulator_config=simulator_config)
+                results, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir,
+                                                                       config=config,
+                                                                       simulator_config=simulator_config)
+                self.assertEqual(set(results.keys()), set(['sim.sedml']))
+                self.assertEqual(set(results['sim.sedml'].keys()), set(['report']))
+                if alg.kisao_id == 'KISAO_0000408':
+                    self.assertEqual(set(results['sim.sedml']['report'].keys()), set(['data_set_C']))
+                else:
+                    self.assertEqual(set(results['sim.sedml']['report'].keys()), set(['data_set_time', 'data_set_C']))
                 if log.exception:
                     raise log.exception
                 self._assert_combine_archive_outputs(doc, out_dir)
