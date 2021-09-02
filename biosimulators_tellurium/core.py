@@ -46,6 +46,7 @@ __all__ = [
     'exec_sedml_docs_in_combine_archive',
     'exec_sed_doc',
     'exec_sed_task',
+    'preprocess_sed_task',
 ]
 
 
@@ -223,7 +224,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     if config.LOG and not log:
         log = TaskLog()
 
-    if not preprocessed_task:
+    if preprocessed_task is None:
         preprocessed_task = preprocess_sed_task(task, variables, config=config, simulator_config=simulator_config)
 
     model = task.model
