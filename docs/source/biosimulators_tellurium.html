@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>biosimulators_tellurium package &#8212; BioSimulators-tellurium 0.1.17 documentation</title>
+    <title>biosimulators_tellurium package &#8212; BioSimulators-tellurium 0.1.18 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -109,15 +109,141 @@
             
   <div class="section" id="module-biosimulators_tellurium">
 <span id="biosimulators-tellurium-package"></span><h1>biosimulators_tellurium package<a class="headerlink" href="#module-biosimulators_tellurium" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PlottingEngine">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.</span></span><span class="sig-name descname"><span class="pre">PlottingEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PlottingEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Engine that tellurium uses for plottting</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PlottingEngine.matplotlib">
+<span class="sig-name descname"><span class="pre">matplotlib</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'matplotlib'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PlottingEngine.matplotlib" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PlottingEngine.plotly">
+<span class="sig-name descname"><span class="pre">plotly</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'plotly'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PlottingEngine.plotly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.</span></span><span class="sig-name descname"><span class="pre">PreprocesssedTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road_runner</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">roadrunner.roadrunner.RoadRunner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">roadrunner.roadrunner.Integrator</span><span class="p"><span class="pre">,</span> </span><span class="pre">roadrunner.roadrunner.SteadyStateSolver</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_change_target_tellurium_id_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_kisao_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_target_tellurium_observable_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Processed information about a SED task</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask.road_runner">
+<span class="sig-name descname"><span class="pre">road_runner</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask.road_runner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Road Runner instance with model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.RoadRunner</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask.solver">
+<span class="sig-name descname"><span class="pre">solver</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask.solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.Integrator</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.SteadyStateSolver</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask.model_change_target_tellurium_id_map">
+<span class="sig-name descname"><span class="pre">model_change_target_tellurium_id_map</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask.model_change_target_tellurium_id_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary that maps the targets of
+changes to their corresponding tellurium identifiers (tuples of their type and index within their type)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask.algorithm_kisao_id">
+<span class="sig-name descname"><span class="pre">algorithm_kisao_id</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask.algorithm_kisao_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>KiSAO id of algorithm to execute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.PreprocesssedTask.variable_target_tellurium_observable_map">
+<span class="sig-name descname"><span class="pre">variable_target_tellurium_observable_map</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.PreprocesssedTask.variable_target_tellurium_observable_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary that maps tuples of variable targets and
+symbols to their corresponding tellurium observable identifiers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">algorithm_kisao_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">model_change_target_tellurium_id_map</span></span><em class="property"><span class="pre">:</span> <span class="pre">dict</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">road_runner</span></span><em class="property"><span class="pre">:</span> <span class="pre">roadrunner.roadrunner.RoadRunner</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">solver</span></span><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">roadrunner.roadrunner.Integrator</span><span class="p"><span class="pre">,</span> </span><span class="pre">roadrunner.roadrunner.SteadyStateSolver</span><span class="p"><span class="pre">]</span></span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">variable_target_tellurium_observable_map</span></span><em class="property"><span class="pre">:</span> <span class="pre">dict</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biosimulators_tellurium.SedmlInterpreter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.</span></span><span class="sig-name descname"><span class="pre">SedmlInterpreter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.SedmlInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Code that interprets SED-ML</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.SedmlInterpreter.biosimulators">
+<span class="sig-name descname"><span class="pre">biosimulators</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'biosimulators'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.SedmlInterpreter.biosimulators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.SedmlInterpreter.tellurium">
+<span class="sig-name descname"><span class="pre">tellurium</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'tellurium'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.SedmlInterpreter.tellurium" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="biosimulators_tellurium.exec_sed_task">
-<span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.</span></span><span class="sig-name descname"><span class="pre">exec_sed_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.exec_sed_task" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.</span></span><span class="sig-name descname"><span class="pre">exec_sed_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessed_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/__init__.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.exec_sed_task" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a task and save its results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Task</span></code>) – task</p></li>
 <li><p><strong>variables</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Variable</span></code>) – variables that should be recorded</p></li>
+<li><p><strong>preprocessed_task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">PreprocessedTask</span></code>, optional) – preprocessed information about the task, including possible
+model changes and variables. This can be used to avoid repeatedly executing the same initialization for repeated
+calls to this method.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">TaskLog</span></code>, optional) – log for the task</p></li>
 <li><p><strong>config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Config</span></code>, optional) – BioSimulators common configuration</p></li>
 <li><p><strong>simulator_config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorConfig</span></code>, optional) – tellurium configuration</p></li>
@@ -297,13 +423,16 @@ calling <code class="xref py py-obj docutils literal notranslate"><span class="p
 
 <dl class="py function">
 <dt class="sig sig-object py" id="biosimulators_tellurium.core.exec_sed_task">
-<span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.core.</span></span><span class="sig-name descname"><span class="pre">exec_sed_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/core.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.core.exec_sed_task" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.core.</span></span><span class="sig-name descname"><span class="pre">exec_sed_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessed_task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/core.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.core.exec_sed_task" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a task and save its results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Task</span></code>) – task</p></li>
 <li><p><strong>variables</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Variable</span></code>) – variables that should be recorded</p></li>
+<li><p><strong>preprocessed_task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">PreprocessedTask</span></code>, optional) – preprocessed information about the task, including possible
+model changes and variables. This can be used to avoid repeatedly executing the same initialization for repeated
+calls to this method.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">TaskLog</span></code>, optional) – log for the task</p></li>
 <li><p><strong>config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Config</span></code>, optional) – BioSimulators common configuration</p></li>
 <li><p><strong>simulator_config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorConfig</span></code>, optional) – tellurium configuration</p></li>
@@ -359,6 +488,32 @@ with reports at keys <code class="docutils literal notranslate"><span class="pre
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="biosimulators_tellurium.core.preprocess_sed_task">
+<span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.core.</span></span><span class="sig-name descname"><span class="pre">preprocess_sed_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/core.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.core.preprocess_sed_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess a SED task, including its possible model changes and variables. This is useful for avoiding
+repeatedly initializing tasks on repeated calls of <a class="reference internal" href="#biosimulators_tellurium.core.exec_sed_task" title="biosimulators_tellurium.core.exec_sed_task"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exec_sed_task</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Task</span></code>) – task</p></li>
+<li><p><strong>variables</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Variable</span></code>) – variables that should be recorded</p></li>
+<li><p><strong>preprocessed_task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">PreprocessedTask</span></code>, optional) – preprocessed information about the task, including possible
+model changes and variables. This can be used to avoid repeatedly executing the same initialization for repeated
+calls to this method.</p></li>
+<li><p><strong>config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Config</span></code>, optional) – BioSimulators common configuration</p></li>
+<li><p><strong>simulator_config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorConfig</span></code>, optional) – tellurium configuration</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>preprocessed information about the task</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PreprocessedTask</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-biosimulators_tellurium.data_model">
 <span id="biosimulators-tellurium-data-model-module"></span><h2>biosimulators_tellurium.data_model module<a class="headerlink" href="#module-biosimulators_tellurium.data_model" title="Permalink to this headline">¶</a></h2>
@@ -390,6 +545,95 @@ with reports at keys <code class="docutils literal notranslate"><span class="pre
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PlottingEngine.plotly">
 <span class="sig-name descname"><span class="pre">plotly</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'plotly'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PlottingEngine.plotly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_tellurium.data_model.</span></span><span class="sig-name descname"><span class="pre">PreprocesssedTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">road_runner</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">roadrunner.roadrunner.RoadRunner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">roadrunner.roadrunner.Integrator</span><span class="p"><span class="pre">,</span> </span><span class="pre">roadrunner.roadrunner.SteadyStateSolver</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_change_target_tellurium_id_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_kisao_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_target_tellurium_observable_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Processed information about a SED task</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask.road_runner">
+<span class="sig-name descname"><span class="pre">road_runner</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask.road_runner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Road Runner instance with model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.RoadRunner</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask.solver">
+<span class="sig-name descname"><span class="pre">solver</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask.solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>solver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.Integrator</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">roadrunner.SteadyStateSolver</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask.model_change_target_tellurium_id_map">
+<span class="sig-name descname"><span class="pre">model_change_target_tellurium_id_map</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask.model_change_target_tellurium_id_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary that maps the targets of
+changes to their corresponding tellurium identifiers (tuples of their type and index within their type)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask.algorithm_kisao_id">
+<span class="sig-name descname"><span class="pre">algorithm_kisao_id</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask.algorithm_kisao_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>KiSAO id of algorithm to execute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_tellurium.data_model.PreprocesssedTask.variable_target_tellurium_observable_map">
+<span class="sig-name descname"><span class="pre">variable_target_tellurium_observable_map</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_tellurium.data_model.PreprocesssedTask.variable_target_tellurium_observable_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary that maps tuples of variable targets and
+symbols to their corresponding tellurium observable identifiers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">algorithm_kisao_id</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">model_change_target_tellurium_id_map</span></span><em class="property"><span class="pre">:</span> <span class="pre">dict</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">road_runner</span></span><em class="property"><span class="pre">:</span> <span class="pre">roadrunner.roadrunner.RoadRunner</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">solver</span></span><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">roadrunner.roadrunner.Integrator</span><span class="p"><span class="pre">,</span> </span><span class="pre">roadrunner.roadrunner.SteadyStateSolver</span><span class="p"><span class="pre">]</span></span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">variable_target_tellurium_observable_map</span></span><em class="property"><span class="pre">:</span> <span class="pre">dict</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_tellurium/blob/dev/biosimulators_tellurium/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
