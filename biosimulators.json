@@ -56,7 +56,8 @@
   },
   "pythonApi": {
     "package": "biosimulators-tellurium",
-    "module": "biosimulators_tellurium"
+    "module": "biosimulators_tellurium",
+      "installationInstructions": "https://docs.biosimulators.org/biosimulators_tellurium/installation.html"
   },
   "authors": [{
       "firstName": "Jayit",
