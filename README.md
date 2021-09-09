@@ -14,6 +14,13 @@ A simple web application and web service for using tellurium to execute COMBINE/
 
 ## Installation
 
+### Dependencies
+
+* Python
+* pip
+* libncurses
+* libxml
+
 ### Install Python package
 ```
 pip install biosimulators-tellurium
