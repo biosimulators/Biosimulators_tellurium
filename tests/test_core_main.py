@@ -525,6 +525,7 @@ class CoreTestCase(unittest.TestCase):
         mid_c = preprocessed_task.road_runner['C']
         mid_m = preprocessed_task.road_runner['M']
         mid_x = preprocessed_task.road_runner['X']
+        self.assertIsInstance(mid_c, float)
 
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
@@ -561,6 +562,27 @@ class CoreTestCase(unittest.TestCase):
                 task.simulation.output_end_time,
                 task.simulation.number_of_points + 1,
             ))
+
+        # check changes can be strings
+        task.model.changes = [
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']",
+                target_namespaces=self.NAMESPACES,
+                new_value=str(mid_c),
+            ),
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='M']",
+                target_namespaces=self.NAMESPACES,
+                new_value=str(mid_m),
+            ),
+            sedml_data_model.ModelAttributeChange(
+                target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='X']",
+                target_namespaces=self.NAMESPACES,
+                new_value=str(mid_x),
+            ),
+        ]
+        variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
+        numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
 
     def test_exec_sedml_docs_in_combine_archive_successfully_with_biosimulators(self):
         doc, archive_filename = self._build_combine_archive()

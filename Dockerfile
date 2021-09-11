@@ -14,7 +14,7 @@
 # Base OS
 FROM python:3.9-slim-buster
 
-ARG VERSION="0.1.19"
+ARG VERSION="0.1.20"
 ARG SIMULATOR_VERSION="2.2.0"
 
 # metadata
