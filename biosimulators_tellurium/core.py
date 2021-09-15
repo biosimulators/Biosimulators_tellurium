@@ -232,10 +232,13 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     road_runner = preprocessed_task.road_runner
 
     # apply model changes
-    for change in model.changes:
-        component_id = preprocessed_task.model_change_target_tellurium_id_map[change.target]
-        new_value = float(change.new_value)
-        road_runner.model[component_id] = new_value
+    if model.changes:
+        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
+                              error_summary='Changes for model `{}` are not supported.'.format(model.id))
+        for change in model.changes:
+            component_id = preprocessed_task.model_change_target_tellurium_id_map[change.target]
+            new_value = float(change.new_value)
+            road_runner.model[component_id] = new_value
 
     # simulate
     if isinstance(sim, UniformTimeCourseSimulation):
