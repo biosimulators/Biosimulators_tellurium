@@ -88,8 +88,8 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
                 'type': ValueType.float,
                 'default': None,
             },
-            'KISAO_0000332': {
-                'kisao_id': 'KISAO_0000332',
+            'KISAO_0000559': {
+                'kisao_id': 'KISAO_0000559',
                 'id': 'initial_time_step',
                 'name': 'Initial time step',
                 'type': ValueType.float,
@@ -172,8 +172,8 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
             },
         }
     }),
-    ('KISAO_0000408', {
-        'kisao_id': 'KISAO_0000408',
+    ('KISAO_0000569', {
+        'kisao_id': 'KISAO_0000569',
         'id': 'nleq2',
         'name': "Newton-type method for solveing non-linear (NL) equations (EQ)",
         'parameters': {

@@ -290,7 +290,7 @@ class CoreTestCase(unittest.TestCase):
             ),
             simulation=sedml_data_model.SteadyStateSimulation(
                 algorithm=sedml_data_model.Algorithm(
-                    kisao_id='KISAO_0000408',
+                    kisao_id='KISAO_0000569',
                 ),
             ),
         )
@@ -638,7 +638,7 @@ class CoreTestCase(unittest.TestCase):
             source='model.xml',
             language=sedml_data_model.ModelLanguage.SBML.value,
         ))
-        if algorithm.kisao_id == 'KISAO_0000408':
+        if algorithm.kisao_id == 'KISAO_0000569':
             doc.simulations.append(sedml_data_model.SteadyStateSimulation(
                 id='sim_steady_state',
                 algorithm=algorithm,
@@ -659,7 +659,7 @@ class CoreTestCase(unittest.TestCase):
             simulation=doc.simulations[0],
         ))
 
-        if algorithm.kisao_id != 'KISAO_0000408':
+        if algorithm.kisao_id != 'KISAO_0000569':
             doc.data_generators.append(sedml_data_model.DataGenerator(
                 id='data_gen_time',
                 variables=[
@@ -686,7 +686,7 @@ class CoreTestCase(unittest.TestCase):
 
         report = sedml_data_model.Report(id='report')
         doc.outputs.append(report)
-        if algorithm.kisao_id != 'KISAO_0000408':
+        if algorithm.kisao_id != 'KISAO_0000569':
             report.data_sets.append(sedml_data_model.DataSet(id='data_set_time', label='Time', data_generator=doc.data_generators[0]))
         report.data_sets.append(sedml_data_model.DataSet(id='data_set_C', label='C', data_generator=doc.data_generators[-1]))
 
@@ -702,7 +702,7 @@ class CoreTestCase(unittest.TestCase):
         self.assertEqual(sorted(report.keys()), sorted([d.id for d in doc.outputs[0].data_sets]))
 
         sim = doc.tasks[0].simulation
-        if doc.simulations[0].algorithm.kisao_id == 'KISAO_0000408':
+        if doc.simulations[0].algorithm.kisao_id == 'KISAO_0000569':
             self.assertIn(report[doc.outputs[0].data_sets[0].id].shape, [(), (1,)])
             self.assertIsInstance(report[doc.outputs[0].data_sets[0].id].tolist(), (float, list))
         else:
@@ -711,7 +711,7 @@ class CoreTestCase(unittest.TestCase):
         for data_set_result in report.values():
             self.assertFalse(numpy.any(numpy.isnan(data_set_result)))
 
-        if doc.simulations[0].algorithm.kisao_id != 'KISAO_0000408':
+        if doc.simulations[0].algorithm.kisao_id != 'KISAO_0000569':
             self.assertIn('data_set_time', report)
             numpy.testing.assert_allclose(report[doc.outputs[0].data_sets[0].id],
                                           numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1))
@@ -772,7 +772,7 @@ class CoreTestCase(unittest.TestCase):
                                                                        simulator_config=simulator_config)
                 self.assertEqual(set(results.keys()), set(['sim.sedml']))
                 self.assertEqual(set(results['sim.sedml'].keys()), set(['report']))
-                if alg.kisao_id == 'KISAO_0000408':
+                if alg.kisao_id == 'KISAO_0000569':
                     self.assertEqual(set(results['sim.sedml']['report'].keys()), set(['data_set_C']))
                 else:
                     self.assertEqual(set(results['sim.sedml']['report'].keys()), set(['data_set_time', 'data_set_C']))

@@ -361,7 +361,7 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
-            "id": "KISAO_0000332"
+            "id": "KISAO_0000559"
           },
           "id": "initial_time_step",
           "name": "Initial time step",
@@ -933,7 +933,7 @@
       "name": "Newton-type method for solveing non-linear (NL) equations (EQ)",
       "kisaoId": {
         "namespace": "KISAO",
-        "id": "KISAO_0000408"
+        "id": "KISAO_0000569"
       },
       "modelingFrameworks": [{
         "namespace": "SBO",
