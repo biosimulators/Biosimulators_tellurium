@@ -5,3 +5,4 @@ lxml
 numpy
 pandas
 tellurium < 2.2.1
+rrplugins < 2.1.0
