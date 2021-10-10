@@ -190,7 +190,6 @@ class CoreTestCase(unittest.TestCase):
                 task.simulation.number_of_points + 1,
             ))
 
-    @unittest.expectedFailure
     def test_exec_sed_task_negative_initial_time_with_biosimulators(self):
         # configure simulation
         task = sedml_data_model.Task(
