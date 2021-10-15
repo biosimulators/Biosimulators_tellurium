@@ -2,6 +2,7 @@
 [![PyPI](https://img.shields.io/pypi/v/biosimulators_tellurium)](https://pypi.org/project/biosimulators_tellurium/)
 [![CI status](https://github.com/biosimulators/Biosimulators_tellurium/workflows/Continuous%20integration/badge.svg)](https://github.com/biosimulators/Biosimulators_tellurium/actions?query=workflow%3A%22Continuous+integration%22)
 [![Test coverage](https://codecov.io/gh/biosimulators/Biosimulators_tellurium/branch/dev/graph/badge.svg)](https://codecov.io/gh/biosimulators/Biosimulators_tellurium)
+[![All Contributors](https://img.shields.io/github/all-contributors/biosimulators/Biosimulators_tellurium/HEAD)](#contributors-)
 
 # BioSimulators-tellurium
 BioSimulators-compliant command-line interface and Docker image for the [tellurium](http://tellurium.analogmachine.org/) simulation program.
@@ -74,7 +75,7 @@ Documentation is available at https://docs.biosimulators.org/Biosimulators_tellu
 This package is released under the [MIT license](LICENSE).
 
 ## Development team
-This package was developed by the [Center for Reproducible Biomedical Modeling](http://reproduciblebiomodels.org) and the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York.
+This package was developed by the [Center for Reproducible Biomedical Modeling](http://reproduciblebiomodels.org) and the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York with assistance from the contributors listed [here](CONTRIBUTORS.md).
 
 ## Questions and comments
 Please contact the [BioSimulators Team](mailto:info@biosimulators.org) with any questions or comments.
