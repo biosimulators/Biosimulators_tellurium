@@ -75,12 +75,19 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=None, s
         simulator_config = SimulatorConfig()
     sedml_interpreter = simulator_config.sedml_interpreter
 
+    if sedml_interpreter == SedmlInterpreter.biosimulators:
+        apply_xml_model_changes = True
+        sed_doc_executer_logged_features = (Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface)
+    else:
+        apply_xml_model_changes = False
+        sed_doc_executer_logged_features = (Report, Plot2D, Plot3D)
+
     return exec_sedml_docs_in_archive(
         functools.partial(exec_sed_doc, simulator_config=simulator_config),
         archive_filename, out_dir,
-        apply_xml_model_changes=sedml_interpreter == SedmlInterpreter.biosimulators,
+        apply_xml_model_changes=apply_xml_model_changes,
         sed_doc_executer_supported_features=(Task, Report, DataSet, Plot2D, Curve, Plot3D, Surface),
-        sed_doc_executer_logged_features=(Report, Plot2D, Plot3D),
+        sed_doc_executer_logged_features=sed_doc_executer_logged_features,
         config=config,
     )
 
@@ -129,6 +136,7 @@ def exec_sed_doc(doc, working_dir, base_out_path, rel_out_path=None,
             apply_xml_model_changes=apply_xml_model_changes,
             log=log,
             indent=indent,
+            pretty_print_modified_xml_models=pretty_print_modified_xml_models,
             log_level=log_level,
             config=config,
             simulator_config=simulator_config)
@@ -140,6 +148,7 @@ def exec_sed_doc(doc, working_dir, base_out_path, rel_out_path=None,
             apply_xml_model_changes=apply_xml_model_changes,
             log=log,
             indent=indent,
+            pretty_print_modified_xml_models=pretty_print_modified_xml_models,
             log_level=log_level,
             config=config,
             simulator_config=simulator_config)
@@ -190,6 +199,9 @@ def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_pat
     return sedml_exec.exec_sed_doc(sed_task_executer, doc, working_dir, base_out_path,
                                    rel_out_path=rel_out_path,
                                    apply_xml_model_changes=True,
+                                   log=log,
+                                   indent=indent,
+                                   pretty_print_modified_xml_models=pretty_print_modified_xml_models,
                                    log_level=log_level,
                                    config=config)
 

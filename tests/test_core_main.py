@@ -14,6 +14,7 @@ from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.combine import data_model as combine_data_model
 from biosimulators_utils.combine.io import CombineArchiveWriter
 from biosimulators_utils.config import get_config
+from biosimulators_utils.log.data_model import Status
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.report import data_model as report_data_model
 from biosimulators_utils.sedml import data_model as sedml_data_model
@@ -597,6 +598,7 @@ class CoreTestCase(unittest.TestCase):
         _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=config)
         if log.exception:
             raise log.exception
+        self.assertEqual(log.sed_documents['sim.sedml'].tasks['task_1'].status, Status.SUCCEEDED)
 
         self._assert_combine_archive_outputs(doc, out_dir)
 
