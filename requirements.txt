@@ -1,8 +1,8 @@
 biosimulators_utils[logging] >= 0.1.128
 kisao >= 2.28
-libroadrunner
+libroadrunner >= 2.1.2
 lxml
 numpy
 pandas
-tellurium < 2.2.1
-rrplugins < 2.1.0
+tellurium >= 2.2.1
+rrplugins != 2.1.0
