@@ -88,7 +88,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools
 
-      - name: Install libXML2
+      - name: Install libXML2, libncurses5
         run: |
           sudo apt-get update -y
           sudo apt-get install -y --no-install-recommends libxml2 libncurses5
