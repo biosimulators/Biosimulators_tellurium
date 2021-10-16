@@ -20,8 +20,47 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1736150?v=4",
       "profile": "https://github.com/luciansmith",
       "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "hsauro",
+      "name": "Herbert Sauro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1054990?v=4",
+      "profile": "http://www.sys-bio.org/",
+      "contributions": [
         "tool",
         "ideas"
+      ]
+    },
+    {
+      "login": "0u812",
+      "name": "Kyle Medley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7402146?v=4",
+      "profile": "https://github.com/0u812",
+      "contributions": [
+        "tool",
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "CiaranWelsh",
+      "name": "Ciaran Welsh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19502680?v=4",
+      "profile": "https://github.com/CiaranWelsh",
+      "contributions": [
+        "tool"
+      ]
+    },
+    {
+      "login": "matthiaskoenig",
+      "name": "Matthias König",
+      "avatar_url": "https://avatars.githubusercontent.com/u/900538?v=4",
+      "profile": "https://livermetabolism.com/",
+      "contributions": [
+        "ideas",
+        "tool"
       ]
     }
   ],
@@ -30,5 +69,6 @@
   "projectOwner": "biosimulators",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "none"
 }
