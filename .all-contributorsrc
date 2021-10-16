@@ -13,7 +13,17 @@
       "contributions": [
         "code"
       ]
-    } 
+    },
+    {
+      "login": "luciansmith",
+      "name": "Lucian Smith",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1736150?v=4",
+      "profile": "https://github.com/luciansmith",
+      "contributions": [
+        "tool",
+        "ideas"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "Biosimulators_tellurium",
