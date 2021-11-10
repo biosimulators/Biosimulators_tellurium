@@ -188,7 +188,7 @@
       "title": "tellurium: an extensible Python-based modeling environment for systems and synthetic biology",
       "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
       "journal": "BioSystems",
-      "volume": 171,
+      "volume": "171",
       "pages": "74-79",
       "year": 2018,
       "identifiers": [{
@@ -270,8 +270,8 @@
         "title": "CVODE, a stiff/nonstiff ODE solver in C",
         "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
         "journal": "Computers in Physics",
-        "volume": 10,
-        "issue": 2,
+        "volume": "10",
+        "issue": "2",
         "pages": "138-143",
         "year": 1996,
         "identifiers": [{
@@ -862,8 +862,8 @@
         "title": "Exact stochastic simulation of coupled chemical reactions",
         "authors": "Daniel T. Gillespie",
         "journal": "Journal of Physical Chemistry",
-        "volume": 81,
-        "issue": 25,
+        "volume": "81",
+        "issue": "25",
         "pages": "2340-2361",
         "year": 1977,
         "identifiers": [{
