@@ -912,7 +912,7 @@ class CoreTestCase(unittest.TestCase):
             # check that the plots are valid PDFs
             for archive_file in archive.files:
                 with open(archive_file.local_path, 'rb') as file:
-                    PyPDF2.PdfFileReader(file)
+                    PyPDF2.PdfReader(file)
 
 
 class CliTestCase(unittest.TestCase):
