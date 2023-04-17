@@ -267,7 +267,10 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
             raise NotImplementedError(msg)
 
         number_of_points = round(number_of_points)
-        results = numpy.array(road_runner.simulate(sim.initial_time, sim.output_end_time, number_of_points).tolist()).transpose()
+        try:
+            results = numpy.array(road_runner.simulate(sim.initial_time, sim.output_end_time, number_of_points).tolist()).transpose()
+        except (Exception) as e:
+            raise RuntimeError("Error from roadrunner version " + road_runner.__version__ + ": " + str(e))
     else:
         road_runner.steadyState()
         results = road_runner.getSteadyStateValues()
