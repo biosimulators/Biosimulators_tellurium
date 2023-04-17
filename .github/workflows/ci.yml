@@ -88,17 +88,17 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y --no-install-recommends libxml2 libncurses5
 
-      - name: Install pip, setuptools, and package
-        run: |
-          python -m pip install --upgrade pip
+#      - name: Install pip, setuptools, and package
+#        run: |
+#          python -m pip install --upgrade pip
 
       - name: Install pip, setuptools, and package
         run: |
           python -m pip install --upgrade setuptools
 
-      - name: Install pip, setuptools, and package
-        run: |
-          python -m pip install --upgrade pip
+#      - name: Install pip, setuptools, and package
+#        run: |
+#          python -m pip install --upgrade pip
 
       - name: Install pip, setuptools, and package
         run: |
