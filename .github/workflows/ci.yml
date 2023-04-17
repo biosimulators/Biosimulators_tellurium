@@ -174,8 +174,8 @@ jobs:
       - name: Install the requirements for the tests
         run: |
           python -m pip install .[tests]
-          python -m pip uninstall libroadrunner rrplugins
-          python -m pip install libroadrunner
+          python -m pip uninstall -y libroadrunner rrplugins
+          python -m pip install -y libroadrunner
 
 
       - name: Run the tests
