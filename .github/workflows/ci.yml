@@ -172,7 +172,11 @@ jobs:
         run: python -m pip install pytest pytest-cov
 
       - name: Install the requirements for the tests
-        run: python -m pip install .[tests]
+        run: |
+          python -m pip install .[tests]
+          python -m pip uninstall libroadrunner rrplugins
+          python -m pip install libroadrunner
+
 
       - name: Run the tests
         run: python -m pytest tests/ --cov=biosimulators_tellurium --cov-report=xml
