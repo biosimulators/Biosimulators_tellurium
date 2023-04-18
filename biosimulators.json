@@ -1,9 +1,10 @@
 {
   "id": "tellurium",
   "name": "tellurium",
-  "version": "2.2.1",
+  "version": "2.2.8",
   "description": "tellurium is a Python-based environment for model building, simulation, and analysis that facilitates reproducibility of models in systems and synthetic biology.",
-  "urls": [{
+  "urls": [
+    {
       "type": "Home page",
       "url": "http://tellurium.analogmachine.org/"
     },
@@ -45,7 +46,7 @@
     }
   ],
   "image": {
-    "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.2.1",
+    "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.2.8",
     "format": {
       "namespace": "EDAM",
       "id": "format_3973",
@@ -65,7 +66,8 @@
     "module": "biosimulators_tellurium",
     "installationInstructions": "https://docs.biosimulators.org/biosimulators_tellurium/installation.html"
   },
-  "authors": [{
+  "authors": [
+    {
       "firstName": "Jayit",
       "lastName": "Biswas",
       "identifiers": []
@@ -73,11 +75,13 @@
     {
       "firstName": "Kiri",
       "lastName": "Choi",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0002-0156-8410",
-        "url": "https://orcid.org/0000-0002-0156-8410"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0002-0156-8410",
+          "url": "https://orcid.org/0000-0002-0156-8410"
+        }
+      ]
     },
     {
       "firstName": "Wilbert",
@@ -102,11 +106,13 @@
     {
       "firstName": "Michal",
       "lastName": "Galdzicki",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0002-8392-8183",
-        "url": "https://orcid.org/0000-0002-8392-8183"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0002-8392-8183",
+          "url": "https://orcid.org/0000-0002-8392-8183"
+        }
+      ]
     },
     {
       "firstName": "Stanley",
@@ -121,31 +127,37 @@
     {
       "firstName": "Matthias",
       "lastName": "König",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0003-1725-179X",
-        "url": "https://orcid.org/0000-0003-1725-179X"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0003-1725-179X",
+          "url": "https://orcid.org/0000-0003-1725-179X"
+        }
+      ]
     },
     {
       "firstName": "J",
       "middleName": "Kyle",
       "lastName": "Medley",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0002-9135-0844",
-        "url": "https://orcid.org/0000-0002-9135-0844"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0002-9135-0844",
+          "url": "https://orcid.org/0000-0002-9135-0844"
+        }
+      ]
     },
     {
       "firstName": "Herbert",
       "middleName": "M.",
       "lastName": "Sauro",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0002-3659-6817",
-        "url": "https://orcid.org/0000-0002-3659-6817"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0002-3659-6817",
+          "url": "https://orcid.org/0000-0002-3659-6817"
+        }
+      ]
     },
     {
       "firstName": "Andy",
@@ -155,11 +167,13 @@
     {
       "firstName": "Lucian",
       "lastName": "Smith",
-      "identifiers": [{
-        "namespace": "orcid",
-        "id": "0000-0001-7002-6386",
-        "url": "https://orcid.org/0000-0001-7002-6386"
-      }]
+      "identifiers": [
+        {
+          "namespace": "orcid",
+          "id": "0000-0001-7002-6386",
+          "url": "https://orcid.org/0000-0001-7002-6386"
+        }
+      ]
     },
     {
       "firstName": "Kaylene",
@@ -168,7 +182,8 @@
     }
   ],
   "references": {
-    "identifiers": [{
+    "identifiers": [
+      {
         "namespace": "pypi",
         "id": "tellurium",
         "url": "https://pypi.org/project/tellurium/"
@@ -184,45 +199,58 @@
         "url": "https://nanohub.org/resources/tellurium"
       }
     ],
-    "citations": [{
-      "title": "tellurium: an extensible Python-based modeling environment for systems and synthetic biology",
-      "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
-      "journal": "BioSystems",
-      "volume": "171",
-      "pages": "74-79",
-      "year": 2018,
-      "identifiers": [{
-        "namespace": "doi",
-        "id": "10.1016/j.biosystems.2018.07.006",
-        "url": "https://doi.org/10.1016/j.biosystems.2018.07.006"
-      }]
-    }]
+    "citations": [
+      {
+        "title": "tellurium: an extensible Python-based modeling environment for systems and synthetic biology",
+        "authors": "Kiri Choi, J. Kyle Medley, Matthias König, Kaylene Stocking, Lucian Smith, Stanley Gua & Herbert M. Sauro",
+        "journal": "BioSystems",
+        "volume": "171",
+        "pages": "74-79",
+        "year": 2018,
+        "identifiers": [
+          {
+            "namespace": "doi",
+            "id": "10.1016/j.biosystems.2018.07.006",
+            "url": "https://doi.org/10.1016/j.biosystems.2018.07.006"
+          }
+        ]
+      }
+    ]
   },
   "license": {
     "namespace": "SPDX",
     "id": "Apache-2.0"
   },
-  "algorithms": [{
+  "algorithms": [
+    {
       "id": "cvode",
       "name": "C-language Variable-coefficient Ordinary Differential Equation solver",
       "kisaoId": {
         "namespace": "KISAO",
         "id": "KISAO_0000019"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000293"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000293"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -230,7 +258,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -238,7 +268,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -246,41 +278,54 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedUniformTimeCourseSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
-      "citations": [{
-        "title": "CVODE, a stiff/nonstiff ODE solver in C",
-        "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
-        "journal": "Computers in Physics",
-        "volume": "10",
-        "issue": "2",
-        "pages": "138-143",
-        "year": 1996,
-        "identifiers": [{
-          "namespace": "doi",
-          "id": "10.1063/1.4822377",
-          "url": "https://doi.org/10.1063/1.4822377"
-        }]
-      }],
-      "parameters": [{
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedUniformTimeCourseSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
+      "citations": [
+        {
+          "title": "CVODE, a stiff/nonstiff ODE solver in C",
+          "authors": "Scott D. Cohen, Alan C. Hindmarsh & Paul F. Dubois",
+          "journal": "Computers in Physics",
+          "volume": "10",
+          "issue": "2",
+          "pages": "138-143",
+          "year": 1996,
+          "identifiers": [
+            {
+              "namespace": "doi",
+              "id": "10.1063/1.4822377",
+              "url": "https://doi.org/10.1063/1.4822377"
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000209"
@@ -290,7 +335,12 @@
           "type": "float",
           "value": "0.000001",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -302,7 +352,12 @@
           "type": "float",
           "value": "1e-12",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -314,7 +369,12 @@
           "type": "integer",
           "value": "5",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -326,7 +386,12 @@
           "type": "integer",
           "value": "12",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -338,7 +403,12 @@
           "type": "integer",
           "value": "20000",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -350,7 +420,12 @@
           "type": "float",
           "value": null,
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -362,7 +437,12 @@
           "type": "float",
           "value": null,
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -374,7 +454,12 @@
           "type": "float",
           "value": null,
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -386,7 +471,12 @@
           "type": "boolean",
           "value": "true",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -398,40 +488,65 @@
           "type": "boolean",
           "value": "false",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         }
       ],
-      "outputDimensions": [{
-        "namespace": "SIO",
-        "id": "SIO_000418"
-      }],
+      "outputDimensions": [
+        {
+          "namespace": "SIO",
+          "id": "SIO_000418"
+        }
+      ],
       "outputVariablePatterns": [
         {
           "name": "time",
           "symbol": {
-                    "value": "time",
-                    "namespace": "urn:sedml:symbol"
-                  }
+            "value": "time",
+            "namespace": "urn:sedml:symbol"
+          }
         },
         {
           "name": "species concentrations",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
           "name": "libRoadRunner",
           "version": null,
           "required": true,
@@ -454,20 +569,28 @@
         "namespace": "KISAO",
         "id": "KISAO_0000030"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000293"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000293"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -475,7 +598,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -483,7 +608,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -491,64 +618,93 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedUniformTimeCourseSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedUniformTimeCourseSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
       "parameters": [],
-      "outputDimensions": [{
-        "namespace": "SIO",
-        "id": "SIO_000418"
-      }],
+      "outputDimensions": [
+        {
+          "namespace": "SIO",
+          "id": "SIO_000418"
+        }
+      ],
       "outputVariablePatterns": [
         {
           "name": "time",
           "symbol": {
-                    "value": "time",
-                    "namespace": "urn:sedml:symbol"
-                  }
+            "value": "time",
+            "namespace": "urn:sedml:symbol"
+          }
         },
         {
           "name": "species concentrations",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
-        "name": "libRoadRunner",
-        "version": null,
-        "required": true,
-        "freeNonCommercialLicense": true,
-        "url": "http://libroadrunner.org/"
-      }],
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        }
+      ],
       "citations": []
     },
     {
@@ -558,20 +714,28 @@
         "namespace": "KISAO",
         "id": "KISAO_0000032"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000293"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000293"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -579,7 +743,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -587,7 +753,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -595,64 +763,93 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedUniformTimeCourseSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedUniformTimeCourseSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
       "parameters": [],
-      "outputDimensions": [{
-        "namespace": "SIO",
-        "id": "SIO_000418"
-      }],
+      "outputDimensions": [
+        {
+          "namespace": "SIO",
+          "id": "SIO_000418"
+        }
+      ],
       "outputVariablePatterns": [
         {
           "name": "time",
           "symbol": {
-                    "value": "time",
-                    "namespace": "urn:sedml:symbol"
-                  }
+            "value": "time",
+            "namespace": "urn:sedml:symbol"
+          }
         },
         {
           "name": "species concentrations",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
-        "name": "libRoadRunner",
-        "version": null,
-        "required": true,
-        "freeNonCommercialLicense": true,
-        "url": "http://libroadrunner.org/"
-      }],
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        }
+      ],
       "citations": []
     },
     {
@@ -662,20 +859,28 @@
         "namespace": "KISAO",
         "id": "KISAO_0000086"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000293"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000293"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -683,7 +888,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -691,7 +898,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -699,27 +908,36 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedUniformTimeCourseSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
-      "parameters": [{
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedUniformTimeCourseSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
+      "parameters": [
+        {
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000485"
@@ -729,7 +947,12 @@
           "type": "float",
           "value": "1e-12",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -741,7 +964,12 @@
           "type": "float",
           "value": "1.0",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -753,45 +981,72 @@
           "type": "float",
           "value": "0.000000000001",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         }
       ],
-      "outputDimensions": [{
-        "namespace": "SIO",
-        "id": "SIO_000418"
-      }],
-      "outputVariablePatterns": [{
+      "outputDimensions": [
+        {
+          "namespace": "SIO",
+          "id": "SIO_000418"
+        }
+      ],
+      "outputVariablePatterns": [
+        {
           "name": "time",
           "symbol": {
-                    "value": "time",
-                    "namespace": "urn:sedml:symbol"
-                  }
+            "value": "time",
+            "namespace": "urn:sedml:symbol"
+          }
         },
         {
           "name": "species concentrations",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
-        "name": "libRoadRunner",
-        "version": null,
-        "required": true,
-        "freeNonCommercialLicense": true,
-        "url": "http://libroadrunner.org/"
-      }],
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        }
+      ],
       "citations": []
     },
     {
@@ -801,20 +1056,28 @@
         "namespace": "KISAO",
         "id": "KISAO_0000029"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000295"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000295"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -822,7 +1085,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -830,7 +1095,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -838,41 +1105,54 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedUniformTimeCourseSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
-      "citations": [{
-        "title": "Exact stochastic simulation of coupled chemical reactions",
-        "authors": "Daniel T. Gillespie",
-        "journal": "Journal of Physical Chemistry",
-        "volume": "81",
-        "issue": "25",
-        "pages": "2340-2361",
-        "year": 1977,
-        "identifiers": [{
-          "namespace": "doi",
-          "id": "10.1021/j100540a008",
-          "url": "https://doi.org/10.1021/j100540a008"
-        }]
-      }],
-      "parameters": [{
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedUniformTimeCourseSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
+      "citations": [
+        {
+          "title": "Exact stochastic simulation of coupled chemical reactions",
+          "authors": "Daniel T. Gillespie",
+          "journal": "Journal of Physical Chemistry",
+          "volume": "81",
+          "issue": "25",
+          "pages": "2340-2361",
+          "year": 1977,
+          "identifiers": [
+            {
+              "namespace": "doi",
+              "id": "10.1021/j100540a008",
+              "url": "https://doi.org/10.1021/j100540a008"
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000488"
@@ -882,7 +1162,12 @@
           "type": "integer",
           "value": null,
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -894,45 +1179,72 @@
           "type": "boolean",
           "value": "false",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         }
       ],
-      "outputDimensions": [{
-        "namespace": "SIO",
-        "id": "SIO_000418"
-      }],
-      "outputVariablePatterns": [{
+      "outputDimensions": [
+        {
+          "namespace": "SIO",
+          "id": "SIO_000418"
+        }
+      ],
+      "outputVariablePatterns": [
+        {
           "name": "time",
           "symbol": {
-                    "value": "time",
-                    "namespace": "urn:sedml:symbol"
-                  }
+            "value": "time",
+            "namespace": "urn:sedml:symbol"
+          }
         },
         {
           "name": "species counts",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
-        "name": "libRoadRunner",
-        "version": null,
-        "required": true,
-        "freeNonCommercialLicense": true,
-        "url": "http://libroadrunner.org/"
-      }]
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        }
+      ]
     },
     {
       "id": "nleq2",
@@ -941,20 +1253,28 @@
         "namespace": "KISAO",
         "id": "KISAO_0000569"
       },
-      "modelingFrameworks": [{
-        "namespace": "SBO",
-        "id": "SBO_0000293"
-      }],
-      "modelFormats": [{
-        "namespace": "EDAM",
-        "id": "format_2585",
-        "version": null,
-        "supportedFeatures": []
-      }],
+      "modelingFrameworks": [
+        {
+          "namespace": "SBO",
+          "id": "SBO_0000293"
+        }
+      ],
+      "modelFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_2585",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
       "modelChangePatterns": [
         {
           "name": "Change component attributes",
-          "types": ["SedAttributeModelChange", "SedComputeAttributeChangeModelChange", "SedSetValueAttributeModelChange"],
+          "types": [
+            "SedAttributeModelChange",
+            "SedComputeAttributeChangeModelChange",
+            "SedSetValueAttributeModelChange"
+          ],
           "target": {
             "value": "//*/@*",
             "grammar": "XPath"
@@ -962,7 +1282,9 @@
         },
         {
           "name": "Add components",
-          "types": ["SedAddXmlModelChange"],
+          "types": [
+            "SedAddXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -970,7 +1292,9 @@
         },
         {
           "name": "Remove components",
-          "types": ["SedRemoveXmlModelChange"],
+          "types": [
+            "SedRemoveXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
@@ -978,51 +1302,65 @@
         },
         {
           "name": "Change components",
-          "types": ["SedChangeXmlModelChange"],
+          "types": [
+            "SedChangeXmlModelChange"
+          ],
           "target": {
             "value": "//*",
             "grammar": "XPath"
           }
-        }        
+        }
       ],
-      "simulationFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3685",
-        "version": null,
-        "supportedFeatures": []
-      }],
-      "simulationTypes": ["SedSteadyStateSimulation"],
-      "archiveFormats": [{
-        "namespace": "EDAM",
-        "id": "format_3686",
-        "version": "1",
-        "supportedFeatures": []
-      }],
-      "citations": [{
+      "simulationFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3685",
+          "version": null,
+          "supportedFeatures": []
+        }
+      ],
+      "simulationTypes": [
+        "SedSteadyStateSimulation"
+      ],
+      "archiveFormats": [
+        {
+          "namespace": "EDAM",
+          "id": "format_3686",
+          "version": "1",
+          "supportedFeatures": []
+        }
+      ],
+      "citations": [
+        {
           "title": "A family of Newton codes for systems of highly nonlinear equations - algorithm, implementation, application",
           "authors": "Ulrich Nowak & Lutz Weimann",
           "journal": "Konrad-Zuse-Zentrum für Informationstechnik Berlin",
           "volume": "91-10",
           "year": 1991,
-          "identifiers": [{
-            "namespace": "citeseerx",
-            "id": "10.1.1.43.3751",
-            "url": "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.43.3751"
-          }]
+          "identifiers": [
+            {
+              "namespace": "citeseerx",
+              "id": "10.1.1.43.3751",
+              "url": "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.43.3751"
+            }
+          ]
         },
         {
           "title": "Newton methods for nonlinear problems",
           "authors": "Peter Deuflhard",
           "journal": "Affine Invariance and Adaptive Algorithms",
           "year": 2004,
-          "identifiers": [{
-            "namespace": "doi",
-            "id": "10.1007/978-3-642-23899-4",
-            "url": "https://doi.org/10.1007/978-3-642-23899-4"
-          }]
+          "identifiers": [
+            {
+              "namespace": "doi",
+              "id": "10.1007/978-3-642-23899-4",
+              "url": "https://doi.org/10.1007/978-3-642-23899-4"
+            }
+          ]
         }
       ],
-      "parameters": [{
+      "parameters": [
+        {
           "kisaoId": {
             "namespace": "KISAO",
             "id": "KISAO_0000209"
@@ -1032,7 +1370,12 @@
           "type": "float",
           "value": "1e-12",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1044,7 +1387,12 @@
           "type": "integer",
           "value": "100",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1056,7 +1404,12 @@
           "type": "float",
           "value": "1e-20",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1068,7 +1421,12 @@
           "type": "boolean",
           "value": "false",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1080,7 +1438,12 @@
           "type": "integer",
           "value": "100",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1092,7 +1455,12 @@
           "type": "float",
           "value": "100",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1104,7 +1472,12 @@
           "type": "boolean",
           "value": "false",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1116,7 +1489,12 @@
           "type": "float",
           "value": "0.000001",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1128,7 +1506,12 @@
           "type": "integer",
           "value": "10000",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1140,7 +1523,12 @@
           "type": "float",
           "value": "10000",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1152,7 +1540,12 @@
           "type": "integer",
           "value": "0",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         },
         {
           "kisaoId": {
@@ -1164,40 +1557,73 @@
           "type": "integer",
           "value": "3",
           "recommendedRange": null,
-          "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"]
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
         }
       ],
       "outputDimensions": [],
-      "outputVariablePatterns": [{
+      "outputVariablePatterns": [
+        {
           "name": "species concentrations",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "parameter values",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "reaction fluxes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction",
+            "grammar": "XPath"
+          }
         },
         {
           "name": "compartment sizes",
-          "target": {"value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment", "grammar": "XPath"}
+          "target": {
+            "value": "/sbml:sbml/sbml:model/sbml:listOfCompartments/sbml:compartment",
+            "grammar": "XPath"
+          }
         }
       ],
-      "availableSoftwareInterfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-      "dependencies": [{
-        "name": "libRoadRunner",
-        "version": null,
-        "required": true,
-        "freeNonCommercialLicense": true,
-        "url": "http://libroadrunner.org/"
-      }]
+      "availableSoftwareInterfaceTypes": [
+        "library",
+        "command-line application",
+        "desktop application",
+        "BioSimulators Docker image"
+      ],
+      "dependencies": [
+        {
+          "name": "libRoadRunner",
+          "version": null,
+          "required": true,
+          "freeNonCommercialLicense": true,
+          "url": "http://libroadrunner.org/"
+        }
+      ]
     }
   ],
-  "interfaceTypes": ["library", "command-line application", "desktop application", "BioSimulators Docker image"],
-  "supportedOperatingSystemTypes": ["platform-independent"],
-  "supportedProgrammingLanguages": [{
+  "interfaceTypes": [
+    "library",
+    "command-line application",
+    "desktop application",
+    "BioSimulators Docker image"
+  ],
+  "supportedOperatingSystemTypes": [
+    "platform-independent"
+  ],
+  "supportedProgrammingLanguages": [
+    {
       "namespace": "Linguist",
       "id": "Python"
     },
@@ -1214,7 +1640,8 @@
       "id": "C#"
     }
   ],
-  "funding": [{
+  "funding": [
+    {
       "funder": {
         "namespace": "FunderRegistry",
         "id": "100000057"
