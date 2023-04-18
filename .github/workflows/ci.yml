@@ -104,7 +104,7 @@ jobs:
       - name: Install pip, setuptools, and package
         run: |
           python -m pip --version
-          python -m setuptools --version
+          #python -m setuptools --version
 
       - name: Install pip, setuptools, and package
         run: |
