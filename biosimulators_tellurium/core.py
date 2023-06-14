@@ -646,7 +646,7 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                 report.data_sets.append(DataSet(
                     id='__data_set__{}_{}'.format(output.id, data_generator.id),
                     name=data_generator.name,
-                    label=data_generator.id,
+                    label=data_generator.label,
                     data_generator=data_generator,
                 ))
 
