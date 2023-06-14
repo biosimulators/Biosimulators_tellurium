@@ -650,7 +650,7 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
 
                     data_generators[curve.y_data_generator.id] = curve.y_data_generator
                     labels[curve.y_data_generator.id] = str(curve.name or curve.y_data_generator.name or curve.y_data_generator.id),
-
+            print(labels)
             for data_generator in data_generators.values():
                 report.data_sets.append(DataSet(
                     id='__data_set__{}_{}'.format(output.id, data_generator.id),
