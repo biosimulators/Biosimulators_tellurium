@@ -71,12 +71,12 @@ jobs:
       ## Install package and its dependencies
       #############################################
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Setup pip cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /opt/hostedtoolcache/Python
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements.optional.txt') }}
@@ -172,7 +172,7 @@ jobs:
         run: python -m pytest tests/ --cov=biosimulators_tellurium --cov-report=xml
 
       - name: Upload the coverage report to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
@@ -238,6 +238,8 @@ jobs:
           fi
 
           echo "release=$release" >> $GITHUB_OUTPUT
+          echo "::set-output name=release::$release"
+          echo "release=$release"
 
       # If new tag, commit and push documentation
       - id: commit-docs
