@@ -635,25 +635,23 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
             if isinstance(output, Plot3D):
                 for surface in output.surfaces:
                     data_generators[surface.x_data_generator.id] = surface.x_data_generator
-                    labels[surface.x_data_generator.id] = str(surface.x_data_generator.name or surface.x_data_generator.id),
+                    labels[surface.x_data_generator.id] = surface.x_data_generator.name or surface.x_data_generator.id
 
                     data_generators[surface.y_data_generator.id] = surface.y_data_generator
-                    labels[surface.x_data_generator.id] = str(surface.y_data_generator.name or surface.y_data_generator.id),
+                    labels[surface.x_data_generator.id] = surface.y_data_generator.name or surface.y_data_generator.id
 
                     data_generators[surface.z_data_generator.id] = surface.z_data_generator
-                    labels[surface.y_data_generator.id] = str(surface.name or surface.z_data_generator.name or surface.z_data_generator.id),
+                    labels[surface.y_data_generator.id] = surface.name or surface.z_data_generator.name or surface.z_data_generator.id
 
             elif isinstance(output, Plot2D):
                 for curve in output.curves:
                     data_generators[curve.x_data_generator.id] = curve.x_data_generator
-                    labels[curve.x_data_generator.id] = str(curve.x_data_generator.name or curve.x_data_generator.id),
+                    labels[curve.x_data_generator.id] = curve.x_data_generator.name or curve.x_data_generator.id
 
                     data_generators[curve.y_data_generator.id] = curve.y_data_generator
-                    labels[curve.y_data_generator.id] = str(curve.name or curve.y_data_generator.name or curve.y_data_generator.id),
+                    labels[curve.y_data_generator.id] = curve.name or curve.y_data_generator.name or curve.y_data_generator.id
 
-            if config.LOG:
-                log.output = "LS DEBUG:  Labels are " + str(labels)
-                log.export()
+            #print("LS DEBUG:  Labels are " + str(labels))
 
             for data_generator in data_generators.values():
                 report.data_sets.append(DataSet(
