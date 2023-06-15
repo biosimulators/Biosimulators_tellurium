@@ -90,7 +90,8 @@ jobs:
 
       - name: Install pip
         run: |
-          python -m pip install pip==23.0.1
+          python -m pip install --upgrade pip==23.0.1
+          python -m pip install --upgrade pip==23.0.1
           python -m pip --version
           #python -m pip install --upgrade setuptools
           #python -m setuptools --version
