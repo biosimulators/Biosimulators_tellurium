@@ -238,7 +238,6 @@ jobs:
           fi
 
           echo "release=$release" >> $GITHUB_OUTPUT
-          echo "::set-output name=release::$release"
           echo "release=$release"
 
       # If new tag, commit and push documentation
