@@ -651,7 +651,7 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                     data_generators[curve.y_data_generator.id] = curve.y_data_generator
                     labels[curve.y_data_generator.id] = curve.name or curve.y_data_generator.name or curve.y_data_generator.id
 
-            #print("LS DEBUG:  Labels are " + str(labels))
+            # print("LS DEBUG:  Labels are " + str(labels))
 
             for data_generator in data_generators.values():
                 report.data_sets.append(DataSet(
