@@ -28,3 +28,6 @@ class ConfigTestCase(unittest.TestCase):
         with mock.patch.dict(os.environ, {'PLOTTING_ENGINE': 'unsupported'}):
             with self.assertRaises(NotImplementedError):
                 Config()
+
+if __name__ == "__main__":
+    unittest.main()

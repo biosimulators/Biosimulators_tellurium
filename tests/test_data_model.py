@@ -48,3 +48,6 @@ class DataModelTestCase(unittest.TestCase):
                 self.assertEqual(param_props['id'], param_specs.get('id', None),
                                  'Algorithm: `{}`, Parameter: `{}`'.format(alg_specs['kisaoId']['id'], param_specs['kisaoId']['id'])
                                  )
+
+if __name__ == "__main__":
+    unittest.main()

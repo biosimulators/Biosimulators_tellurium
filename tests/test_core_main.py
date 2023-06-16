@@ -921,3 +921,6 @@ class CliTestCase(unittest.TestCase):
             with self.assertRaises(SystemExit) as context:
                 __main__.main()
                 self.assertRegex(context.Exception, 'usage: ')
+
+if __name__ == "__main__":
+    unittest.main()
