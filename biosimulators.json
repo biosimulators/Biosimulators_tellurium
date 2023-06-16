@@ -362,6 +362,23 @@
         {
           "kisaoId": {
             "namespace": "KISAO",
+            "id": "KISAO_0000571"
+          },
+          "id": "absolute_tolerance_adjustment_factor",
+          "name": "Absolute tolerance adjustment factor",
+          "type": "float",
+          "value": "1e-12",
+          "recommendedRange": null,
+          "availableSoftwareInterfaceTypes": [
+            "library",
+            "command-line application",
+            "desktop application",
+            "BioSimulators Docker image"
+          ]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
             "id": "KISAO_0000220"
           },
           "id": "maximum_bdf_order",

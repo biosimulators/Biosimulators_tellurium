@@ -46,17 +46,17 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
                 'type': ValueType.float,
                 'default': 0.000001,
             },
-            'KISAO_0000571': {
-                'kisao_id': 'KISAO_0000571',
+            'KISAO_0000211': {
+                'kisao_id': 'KISAO_0000211',
                 'id': 'absolute_tolerance',
                 'name': 'absolute tolerance',
                 'type': ValueType.float,
                 'default': 1e-12,
             },
-            'KISAO_0000211': {
-                'kisao_id': 'KISAO_0000211',
-                'id': 'absolute_tolerance',
-                'name': 'absolute tolerance',
+            'KISAO_0000571': {
+                'kisao_id': 'KISAO_0000571',
+                'id': 'absolute_tolerance_adjustment_factor',
+                'name': 'absolute tolerance adjustment factor',
                 'type': ValueType.float,
                 'default': 1e-12,
             },
