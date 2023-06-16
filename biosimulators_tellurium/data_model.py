@@ -46,6 +46,13 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
                 'type': ValueType.float,
                 'default': 0.000001,
             },
+            'KISAO_0000571': {
+                'kisao_id': 'KISAO_0000571',
+                'id': 'absolute_tolerance',
+                'name': 'absolute tolerance',
+                'type': ValueType.float,
+                'default': 1e-12,
+            },
             'KISAO_0000211': {
                 'kisao_id': 'KISAO_0000211',
                 'id': 'absolute_tolerance',
@@ -175,7 +182,7 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
     ('KISAO_0000569', {
         'kisao_id': 'KISAO_0000569',
         'id': 'nleq2',
-        'name': "Newton-type method for solveing non-linear (NL) equations (EQ)",
+        'name': "Newton-type method for solving non-linear (NL) equations (EQ)",
         'parameters': {
             'KISAO_0000209': {
                 'kisao_id': 'KISAO_0000209',
