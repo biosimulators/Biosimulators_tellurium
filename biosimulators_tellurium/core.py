@@ -387,7 +387,10 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
             if not config.VALIDATE_SEDML or param_props:
                 if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
                     new_value = parse_value(change.new_value, param_props['type'])
-                    setattr(solver, param_props['id'], new_value)
+                    att = param_props['id']
+                    if "roadrunner_attribute" in param_props:
+                        att = param_props['roadrunner_attribute']
+                    setattr(solver, att, new_value)
 
                 else:
                     if (
