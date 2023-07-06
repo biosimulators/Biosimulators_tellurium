@@ -289,7 +289,7 @@ class PreprocesssedTask(object):
     """
     road_runners: dict
     # solvers is dict of this type: typing.Union[roadrunner.Integrator, roadrunner.SteadyStateSolver]
-    solvers: dict 
+    solvers: dict
     model_change_target_tellurium_id_maps: dict
     algorithm_kisao_ids: dict
     variable_target_tellurium_observable_maps: dict
