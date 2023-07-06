@@ -18,7 +18,7 @@ from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml import exec as sedml_exec
 from biosimulators_utils.sedml import validation
 from biosimulators_utils.sedml.data_model import (
-    Task, ModelLanguage, ModelAttributeChange, SteadyStateSimulation, UniformTimeCourseSimulation,
+    Task, RepeatedTask, ModelLanguage, ModelAttributeChange, SteadyStateSimulation, UniformTimeCourseSimulation,
     Symbol, Report, DataSet, Plot2D, Curve, Plot3D, Surface)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.simulator.utils import get_algorithm_substitution_policy
@@ -196,6 +196,10 @@ def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_pat
     simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
 
     sed_task_executer = functools.partial(exec_sed_task, simulator_config=simulator_config)
+    # The value_executer's don't need the simulator_config.
+    # get_value_executer = functools.partial(get_model_variable_value, simulator_config=simulator_config)
+    # set_value_executer = functools.partial(set_model_variable_value, simulator_config=simulator_config)
+    preprocessed_task_executer = functools.partial(preprocess_sed_task, simulator_config=simulator_config)
     return sedml_exec.exec_sed_doc(sed_task_executer, doc, working_dir, base_out_path,
                                    rel_out_path=rel_out_path,
                                    apply_xml_model_changes=True,
@@ -203,7 +207,11 @@ def exec_sed_doc_with_biosimulators(doc, working_dir, base_out_path, rel_out_pat
                                    indent=indent,
                                    pretty_print_modified_xml_models=pretty_print_modified_xml_models,
                                    log_level=log_level,
-                                   config=config)
+                                   config=config,
+                                   get_value_executer=get_model_variable_value,
+                                   set_value_executer=set_model_variable_value,
+                                   preprocessed_task_executer=preprocessed_task_executer,
+                                   reset_executer=reset_all_models)
 
 
 def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None, simulator_config=None):
@@ -241,16 +249,16 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
     model = task.model
     sim = task.simulation
-    road_runner = preprocessed_task.road_runner
+    road_runner = preprocessed_task.road_runners[task.id]
 
     # apply model changes
     if model.changes:
         raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
                               error_summary='Changes for model `{}` are not supported.'.format(model.id))
         for change in model.changes:
-            component_id = preprocessed_task.model_change_target_tellurium_id_map[change.target]
+            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][change.target]
             new_value = float(change.new_value)
-            road_runner.model[component_id] = new_value
+            road_runner[component_id] = new_value
 
     # simulate
     if isinstance(sim, UniformTimeCourseSimulation):
@@ -267,10 +275,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
             raise NotImplementedError(msg)
 
         number_of_points = round(number_of_points)
-        try:
-            results = numpy.array(road_runner.simulate(sim.initial_time, sim.output_end_time, number_of_points).tolist()).transpose()
-        except (Exception) as e:
-            raise RuntimeError("Error from roadrunner version " + road_runner.getVersionStr() + ": " + str(e))
+        results = numpy.array(road_runner.simulate(sim.initial_time, sim.output_end_time, number_of_points).tolist()).transpose()
     else:
         road_runner.steadyState()
         results = road_runner.getSteadyStateValues()
@@ -278,11 +283,11 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     # check simulation succeeded
     if config.VALIDATE_RESULTS and numpy.any(numpy.isnan(results)):
         msg = 'Simulation failed with algorithm `{}` ({})'.format(
-            preprocessed_task.algorithm_kisao_id,
-            KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_id]['id'])
-        for i_param in range(preprocessed_task.solver.getNumParams()):
-            param_name = preprocessed_task.solver.getParamName(i_param)
-            msg += '\n  - {}: {}'.format(param_name, getattr(preprocessed_task.solver, param_name))
+            preprocessed_task.algorithm_kisao_ids[task.id],
+            KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_id[task.id]]['id'])
+        for i_param in range(preprocessed_task.solvers[task.id].getNumParams()):
+            param_name = preprocessed_task.solvers[task.id].getParamName(i_param)
+            msg += '\n  - {}: {}'.format(param_name, getattr(preprocessed_task.solvers[task.id], param_name))
         raise ValueError(msg)
 
     # record results
@@ -295,18 +300,34 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
     # log action
     if config.LOG:
-        log.algorithm = preprocessed_task.algorithm_kisao_id
+        log.algorithm = preprocessed_task.algorithm_kisao_ids[task.id]
         log.simulator_details = {
             'method': 'simulate' if isinstance(sim, UniformTimeCourseSimulation) else 'steadyState',
-            'solver': preprocessed_task.solver.getName(),
+            'solver': preprocessed_task.solvers[task.id].getName(),
         }
-        for i_param in range(preprocessed_task.solver.getNumParams()):
-            param_name = preprocessed_task.solver.getParamName(i_param)
-            log.simulator_details[param_name] = getattr(preprocessed_task.solver, param_name)
+        for i_param in range(preprocessed_task.solvers[task.id].getNumParams()):
+            param_name = preprocessed_task.solvers[task.id].getParamName(i_param)
+            log.simulator_details[param_name] = getattr(preprocessed_task.solvers[task.id], param_name)
 
     # return results and log
     return variable_results, log
 
+def get_all_tasks_from_task(task):
+    ret = set()
+    if type(task) == Task:
+        ret.add(task)
+        return ret
+    elif type(task) == RepeatedTask:
+        for sub_task in task.sub_tasks:
+            submodels = get_all_tasks_from_task(sub_task.task)
+            ret.update(submodels)
+        return ret
+    else:
+        raise NotImplementedError("Tasks other than 'Task' or 'RepeatedTask' are not supported.")
+
+def reset_all_models(preprocessed_task):
+    for taskid in preprocessed_task.road_runners:
+        preprocessed_task.road_runners[taskid].resetAll()
 
 def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     """ Preprocess a SED task, including its possible model changes and variables. This is useful for avoiding
@@ -331,126 +352,161 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     if not config:
         config = get_config()
 
-    model = task.model
-    sim = task.simulation
+    alltasks = get_all_tasks_from_task(task)
 
     if config.VALIDATE_SEDML:
-        raise_errors_warnings(validation.validate_task(task),
-                              error_summary='Task `{}` is invalid.'.format(task.id))
-        raise_errors_warnings(validation.validate_model_language(model.language, ModelLanguage.SBML),
-                              error_summary='Language for model `{}` is not supported.'.format(model.id))
-        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
-                              error_summary='Changes for model `{}` are not supported.'.format(model.id))
-        raise_errors_warnings(*validation.validate_model_changes(task.model),
-                              error_summary='Changes for model `{}` are invalid.'.format(model.id))
-        raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation, UniformTimeCourseSimulation)),
-                              error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
-        raise_errors_warnings(*validation.validate_simulation(sim),
-                              error_summary='Simulation `{}` is invalid.'.format(sim.id))
-        raise_errors_warnings(*validation.validate_data_generator_variables(variables),
-                              error_summary='Data generator variables for task `{}` are invalid.'.format(task.id))
-    model_etree = lxml.etree.parse(model.source)
-
-    if config.VALIDATE_SEDML_MODELS:
-        raise_errors_warnings(*validation.validate_model(model, [], working_dir='.'),
-                              error_summary='Model `{}` is invalid.'.format(model.id),
-                              warning_summary='Model `{}` may be invalid.'.format(model.id))
-
-    # read model
-    road_runner = roadrunner.RoadRunner()
-    road_runner.load(model.source)
-
-    # get algorithm to execute
-    algorithm_substitution_policy = get_algorithm_substitution_policy(config=config)
-    exec_alg_kisao_id = get_preferred_substitute_algorithm_by_ids(
-        sim.algorithm.kisao_id, KISAO_ALGORITHM_MAP.keys(),
-        substitution_policy=algorithm_substitution_policy)
-    alg_props = KISAO_ALGORITHM_MAP[exec_alg_kisao_id]
-
-    if alg_props['id'] == 'nleq2':
-        solver = road_runner.getSteadyStateSolver()
-        if config.VALIDATE_SEDML:
-            raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation,)),
+        for subtask in alltasks:
+            model = subtask.model
+            sim = subtask.simulation
+            raise_errors_warnings(validation.validate_task(subtask),
+                                  error_summary='Task `{}` is invalid.'.format(task.id))
+            raise_errors_warnings(validation.validate_model_language(model.language, ModelLanguage.SBML),
+                                  error_summary='Language for model `{}` is not supported.'.format(model.id))
+            raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
+                                  error_summary='Changes for model `{}` are not supported.'.format(model.id))
+            raise_errors_warnings(*validation.validate_model_changes(subtask.model),
+                                  error_summary='Changes for model `{}` are invalid.'.format(model.id))
+            raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation, UniformTimeCourseSimulation)),
                                   error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+            raise_errors_warnings(*validation.validate_simulation(sim),
+                                  error_summary='Simulation `{}` is invalid.'.format(sim.id))
+            raise_errors_warnings(*validation.validate_data_generator_variables(variables),
+                                  error_summary='Data generator variables for task `{}` are invalid.'.format(subtask.id))
 
-    else:
-        road_runner.setIntegrator(alg_props['id'])
-        solver = road_runner.getIntegrator()
-        if config.VALIDATE_SEDML:
-            raise_errors_warnings(validation.validate_simulation_type(sim, (UniformTimeCourseSimulation,)),
-                                  error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+    allroadrunners = {}
+    model_change_target_tellurium_id_maps = {}
+    exec_alg_kisao_ids = {}
+    variable_target_tellurium_observable_maps = {}
+    solvers = {}
+    for subtasks in alltasks:
+        model = subtask.model
+        sim = subtask.simulation
+        model_etree = lxml.etree.parse(model.source)
+    
+        if config.VALIDATE_SEDML_MODELS:
+            raise_errors_warnings(*validation.validate_model(model, [], working_dir='.'),
+                                  error_summary='Model `{}` is invalid.'.format(model.id),
+                                  warning_summary='Model `{}` may be invalid.'.format(model.id))
+    
+        # read model
+        road_runner = roadrunner.RoadRunner(model.source)
+    
+        # get algorithm to execute
+        algorithm_substitution_policy = get_algorithm_substitution_policy(config=config)
+        exec_alg_kisao_id = get_preferred_substitute_algorithm_by_ids(
+            sim.algorithm.kisao_id, KISAO_ALGORITHM_MAP.keys(),
+            substitution_policy=algorithm_substitution_policy)
+        alg_props = KISAO_ALGORITHM_MAP[exec_alg_kisao_id]
 
-    # set the parameters of the solver
-    if exec_alg_kisao_id == sim.algorithm.kisao_id:
-        for change in sim.algorithm.changes:
-            param_props = alg_props['parameters'].get(change.kisao_id, None)
-            if not config.VALIDATE_SEDML or param_props:
-                if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
-                    new_value = parse_value(change.new_value, param_props['type'])
-                    att = param_props['id']
-                    if "roadrunner_attribute" in param_props:
-                        att = param_props['roadrunner_attribute']
-                    setattr(solver, att, new_value)
+        if alg_props['id'] == 'nleq2':
+            solver = road_runner.getSteadyStateSolver()
+            if config.VALIDATE_SEDML:
+                raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation,)),
+                                      error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+
+        else:
+            road_runner.setIntegrator(alg_props['id'])
+            solver = road_runner.getIntegrator()
+            if config.VALIDATE_SEDML:
+                raise_errors_warnings(validation.validate_simulation_type(sim, (UniformTimeCourseSimulation,)),
+                                      error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
+
+        # set the parameters of the solver
+        if exec_alg_kisao_id == sim.algorithm.kisao_id:
+            for change in sim.algorithm.changes:
+                param_props = alg_props['parameters'].get(change.kisao_id, None)
+                if not config.VALIDATE_SEDML or param_props:
+                    if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
+	                    new_value = parse_value(change.new_value, param_props['type'])
+	                    att = param_props['id']
+	                    if "roadrunner_attribute" in param_props:
+	                        att = param_props['roadrunner_attribute']
+	                    setattr(solver, att, new_value)
+
+                    else:
+                        if (
+                            ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
+                            <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
+                        ):
+                            msg = "'{}' is not a valid {} value for parameter {}".format(
+                                change.new_value, param_props['type'].name, change.kisao_id)
+                            raise ValueError(msg)
+                        else:
+                            msg = "'{}' was ignored because it is not a valid {} value for parameter {}".format(
+                                change.new_value, param_props['type'].name, change.kisao_id)
+                            warn(msg, BioSimulatorsWarning)
 
                 else:
                     if (
                         ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
                         <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
                     ):
-                        msg = "'{}' is not a valid {} value for parameter {}".format(
-                            change.new_value, param_props['type'].name, change.kisao_id)
-                        raise ValueError(msg)
+                        msg = "".join([
+                            "Algorithm parameter with KiSAO id '{}' is not supported. ".format(change.kisao_id),
+                            "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
+                                '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
+                                for kisao_id, param_props in alg_props['parameters'].items())),
+                        ])
+                        raise NotImplementedError(msg)
                     else:
-                        msg = "'{}' was ignored because it is not a valid {} value for parameter {}".format(
-                            change.new_value, param_props['type'].name, change.kisao_id)
+                        msg = "".join([
+                            "Algorithm parameter with KiSAO id '{}' was ignored because it is not supported. ".format(change.kisao_id),
+                            "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
+                                '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
+                                for kisao_id, param_props in alg_props['parameters'].items())),
+                        ])
                         warn(msg, BioSimulatorsWarning)
 
-            else:
-                if (
-                    ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
-                    <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
-                ):
-                    msg = "".join([
-                        "Algorithm parameter with KiSAO id '{}' is not supported. ".format(change.kisao_id),
-                        "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
-                            '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
-                            for kisao_id, param_props in alg_props['parameters'].items())),
-                    ])
-                    raise NotImplementedError(msg)
-                else:
-                    msg = "".join([
-                        "Algorithm parameter with KiSAO id '{}' was ignored because it is not supported. ".format(change.kisao_id),
-                        "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
-                            '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
-                            for kisao_id, param_props in alg_props['parameters'].items())),
-                    ])
-                    warn(msg, BioSimulatorsWarning)
+        # validate model changes and build map
+        model_change_target_tellurium_id_map = get_model_change_target_tellurium_change_map(
+            model_etree, model.changes, exec_alg_kisao_id, road_runner.model)
 
-    # validate model changes and build map
-    model_change_target_tellurium_id_map = get_model_change_target_tellurium_change_map(
-        model_etree, model.changes, exec_alg_kisao_id, road_runner.model)
+        # validate variables and build map
+        variable_target_tellurium_observable_map = get_variable_target_tellurium_observable_map(
+            model_etree, sim, exec_alg_kisao_id, variables, road_runner.model, model.id)
 
-    # validate variables and build map
-    variable_target_tellurium_observable_map = get_variable_target_tellurium_observable_map(
-        model_etree, sim, exec_alg_kisao_id, variables, road_runner.model)
+        variable_tellurium_observable_ids = []
+        for variable in variables:
+            tellurium_id = variable_target_tellurium_observable_map[(model.id, variable.target, variable.symbol)]
+            variable_tellurium_observable_ids.append(tellurium_id)
 
-    variable_tellurium_observable_ids = []
-    for variable in variables:
-        tellurium_id = variable_target_tellurium_observable_map[(variable.target, variable.symbol)]
-        variable_tellurium_observable_ids.append(tellurium_id)
-
-    road_runner.timeCourseSelections = variable_tellurium_observable_ids
-    road_runner.steadyStateSelections = variable_tellurium_observable_ids
+        road_runner.timeCourseSelections = variable_tellurium_observable_ids
+        road_runner.steadyStateSelections = variable_tellurium_observable_ids
+        #Add the variables to the dictionaries:
+        allroadrunners[subtask.id] = road_runner
+        model_change_target_tellurium_id_maps[subtask.id] = model_change_target_tellurium_id_map
+        exec_alg_kisao_ids[subtask.id] = exec_alg_kisao_id
+        variable_target_tellurium_observable_maps[subtask.id] = variable_target_tellurium_observable_map
+        solvers[subtask.id] = solver
 
     # return preprocssed information about the task
     return PreprocesssedTask(
-        road_runner=road_runner,
-        solver=solver,
-        model_change_target_tellurium_id_map=model_change_target_tellurium_id_map,
-        algorithm_kisao_id=exec_alg_kisao_id,
-        variable_target_tellurium_observable_map=variable_target_tellurium_observable_map,
+        road_runners=allroadrunners,
+        solvers=solvers,
+        model_change_target_tellurium_id_maps=model_change_target_tellurium_id_maps,
+        algorithm_kisao_ids=exec_alg_kisao_ids,
+        variable_target_tellurium_observable_maps=variable_target_tellurium_observable_maps,
     )
 
+
+def get_model_variable_value(model, variable, preprocessed_task):
+    if preprocessed_task is None:
+        raise ValueError("Tellurium cannot obtain a model value without a working preprocessed_task.")
+    for taskid in preprocessed_task.variable_target_tellurium_observable_maps:
+        submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
+        if (model.id, variable.target, variable.symbol) in submap:
+            return submap[(model.id, variable.target, variable.symbol)]
+    raise ValueError("No stored variable with target " + variable.target + " and symbol " + variable.symbol + " in model " + model.id )
+
+def set_model_variable_value(model, target, symbol, value, preprocessed_task):
+    if preprocessed_task is None:
+        raise ValueError("Tellurium cannot set a model value without a working preprocessed_task.")
+    for taskid in preprocessed_task.variable_target_tellurium_observable_maps:
+        submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
+        if (model.id, target, symbol) in submap:
+            tellurium_id = submap[(model.id, target, symbol)]
+            preprocessed_task.road_runners[taskid][tellurium_id] = value
+    
 
 def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao_id, model):
     """ Get a mapping from XML XPath targets for model changes to tellurium identifiers for model changes
@@ -500,7 +556,7 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
     return target_tellurium_id_map
 
 
-def get_variable_target_tellurium_observable_map(model_etree, simulation, alg_kisao_id, variables, model):
+def get_variable_target_tellurium_observable_map(model_etree, simulation, alg_kisao_id, variables, model, model_id):
     """ Get a mapping from XML XPath targets for variables of data generators to their corresponding tellurium identifiers
 
     Args:
@@ -526,7 +582,7 @@ def get_variable_target_tellurium_observable_map(model_etree, simulation, alg_ki
     for variable in variables:
         if variable.symbol:
             if variable.symbol == Symbol.time.value and isinstance(simulation, UniformTimeCourseSimulation):
-                target_tellurium_observable_map[(variable.target, variable.symbol)] = 'time'
+                target_tellurium_observable_map[(model_id, variable.target, variable.symbol)] = 'time'
             else:
                 invalid_symbols.append(variable.symbol)
 
@@ -535,9 +591,9 @@ def get_variable_target_tellurium_observable_map(model_etree, simulation, alg_ki
 
             if sbml_id in all_sbml_ids:
                 if alg_kisao_id != 'KISAO_0000029' and sbml_id in species_sbml_ids:
-                    target_tellurium_observable_map[(variable.target, variable.symbol)] = '[' + sbml_id + ']'
+                    target_tellurium_observable_map[(model_id, variable.target, variable.symbol)] = '[' + sbml_id + ']'
                 else:
-                    target_tellurium_observable_map[(variable.target, variable.symbol)] = sbml_id
+                    target_tellurium_observable_map[(model_id, variable.target, variable.symbol)] = sbml_id
 
             else:
                 invalid_targets.append(variable.target)
@@ -654,7 +710,7 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                     data_generators[curve.y_data_generator.id] = curve.y_data_generator
                     labels[curve.y_data_generator.id] = curve.name or curve.y_data_generator.name or curve.y_data_generator.id
 
-            # print("LS DEBUG:  Labels are " + str(labels))
+            print("LS DEBUG:  Labels are " + str(labels))
 
             for data_generator in data_generators.values():
                 report.data_sets.append(DataSet(

@@ -56,7 +56,6 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
             'KISAO_0000571': {
                 'kisao_id': 'KISAO_0000571',
                 'id': 'absolute_tolerance_adjustment_factor',
-                'roadrunner_attribute': 'absolute_tolerance',
                 'name': 'absolute tolerance adjustment factor',
                 'type': ValueType.float,
                 'default': 1e-12,
@@ -280,16 +279,16 @@ class PreprocesssedTask(object):
     """ Processed information about a SED task
 
     Attributes:
-        road_runner (:obj:`roadrunner.RoadRunner`): Road Runner instance with model
-        solver (:obj:`roadrunner.Integrator` or :obj:`roadrunner.SteadyStateSolver`): solver
-        model_change_target_tellurium_id_map (:obj:`dict`): dictionary that maps the targets of
-            changes to their corresponding tellurium identifiers (tuples of their type and index within their type)
-        algorithm_kisao_id (:obj:`str`): KiSAO id of algorithm to execute
-        variable_target_tellurium_observable_map (:obj:`dict`): dictionary that maps tuples of variable targets and
-            symbols to their corresponding tellurium observable identifiers
+        road_runners (:obj:`roadrunner.RoadRunner`): Road Runner instances with model, per task
+        solver (:obj:`roadrunner.Integrator` or :obj:`roadrunner.SteadyStateSolver`): solver, per task
+        model_change_target_tellurium_id_map (:obj:`dict`): dictionaries that map the targets of
+            changes to their corresponding tellurium identifiers (tuples of their type and index within their type), per task
+        algorithm_kisao_id (:obj:`str`): dictionaries of KiSAO id of algorithm to execute, per task
+        variable_target_tellurium_observable_maps (:obj:`dict`): dictionary of dictionaries that map tuples of variable targets and
+            symbols to their corresponding tellurium observable identifiers, per task
     """
-    road_runner: roadrunner.RoadRunner
-    solver: typing.Union[roadrunner.Integrator, roadrunner.SteadyStateSolver]
-    model_change_target_tellurium_id_map: dict
-    algorithm_kisao_id: str
-    variable_target_tellurium_observable_map: dict
+    road_runners: dict
+    solvers: dict #typing.Union[roadrunner.Integrator, roadrunner.SteadyStateSolver]
+    model_change_target_tellurium_id_maps: dict
+    algorithm_kisao_ids: dict
+    variable_target_tellurium_observable_maps: dict
