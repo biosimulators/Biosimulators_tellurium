@@ -312,6 +312,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     # return results and log
     return variable_results, log
 
+
 def get_all_tasks_from_task(task):
     ret = set()
     if type(task) == Task:
@@ -325,9 +326,11 @@ def get_all_tasks_from_task(task):
     else:
         raise NotImplementedError("Tasks other than 'Task' or 'RepeatedTask' are not supported.")
 
+
 def reset_all_models(preprocessed_task):
     for taskid in preprocessed_task.road_runners:
         preprocessed_task.road_runners[taskid].resetAll()
+
 
 def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     """ Preprocess a SED task, including its possible model changes and variables. This is useful for avoiding
@@ -382,15 +385,15 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
         model = subtask.model
         sim = subtask.simulation
         model_etree = lxml.etree.parse(model.source)
-    
+
         if config.VALIDATE_SEDML_MODELS:
             raise_errors_warnings(*validation.validate_model(model, [], working_dir='.'),
                                   error_summary='Model `{}` is invalid.'.format(model.id),
                                   warning_summary='Model `{}` may be invalid.'.format(model.id))
-    
+
         # read model
         road_runner = roadrunner.RoadRunner(model.source)
-    
+
         # get algorithm to execute
         algorithm_substitution_policy = get_algorithm_substitution_policy(config=config)
         exec_alg_kisao_id = get_preferred_substitute_algorithm_by_ids(
@@ -417,11 +420,11 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                 param_props = alg_props['parameters'].get(change.kisao_id, None)
                 if not config.VALIDATE_SEDML or param_props:
                     if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
-	                    new_value = parse_value(change.new_value, param_props['type'])
-	                    att = param_props['id']
-	                    if "roadrunner_attribute" in param_props:
-	                        att = param_props['roadrunner_attribute']
-	                    setattr(solver, att, new_value)
+                        new_value = parse_value(change.new_value, param_props['type'])
+                        att = param_props['id']
+                        if "roadrunner_attribute" in param_props:
+                            att = param_props['roadrunner_attribute']
+                            setattr(solver, att, new_value)
 
                     else:
                         if (
@@ -472,7 +475,7 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
 
         road_runner.timeCourseSelections = variable_tellurium_observable_ids
         road_runner.steadyStateSelections = variable_tellurium_observable_ids
-        #Add the variables to the dictionaries:
+        # Add the variables to the dictionaries:
         allroadrunners[subtask.id] = road_runner
         model_change_target_tellurium_id_maps[subtask.id] = model_change_target_tellurium_id_map
         exec_alg_kisao_ids[subtask.id] = exec_alg_kisao_id
@@ -496,7 +499,8 @@ def get_model_variable_value(model, variable, preprocessed_task):
         submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
         if (model.id, variable.target, variable.symbol) in submap:
             return submap[(model.id, variable.target, variable.symbol)]
-    raise ValueError("No stored variable with target " + variable.target + " and symbol " + variable.symbol + " in model " + model.id )
+    raise ValueError("No stored variable with target " + variable.target + " and symbol " + variable.symbol + " in model " + model.id)
+
 
 def set_model_variable_value(model, target, symbol, value, preprocessed_task):
     if preprocessed_task is None:
@@ -506,7 +510,7 @@ def set_model_variable_value(model, target, symbol, value, preprocessed_task):
         if (model.id, target, symbol) in submap:
             tellurium_id = submap[(model.id, target, symbol)]
             preprocessed_task.road_runners[taskid][tellurium_id] = value
-    
+
 
 def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao_id, model):
     """ Get a mapping from XML XPath targets for model changes to tellurium identifiers for model changes

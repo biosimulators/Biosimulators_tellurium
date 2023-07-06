@@ -10,8 +10,8 @@ from biosimulators_utils.data_model import ValueType
 import collections
 import dataclasses
 import enum
-import roadrunner
-import typing
+# import roadrunner
+# import typing
 
 __all__ = [
     'SedmlInterpreter',
@@ -288,7 +288,8 @@ class PreprocesssedTask(object):
             symbols to their corresponding tellurium observable identifiers, per task
     """
     road_runners: dict
-    solvers: dict #typing.Union[roadrunner.Integrator, roadrunner.SteadyStateSolver]
+    # solvers is dict of this type: typing.Union[roadrunner.Integrator, roadrunner.SteadyStateSolver]
+    solvers: dict 
     model_change_target_tellurium_id_maps: dict
     algorithm_kisao_ids: dict
     variable_target_tellurium_observable_maps: dict
