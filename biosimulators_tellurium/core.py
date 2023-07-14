@@ -256,7 +256,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
         raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
                               error_summary='Changes for model `{}` are not supported.'.format(model.id))
         for change in model.changes:
-            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][change.target]
+            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
             new_value = float(change.new_value)
             road_runner[component_id] = new_value
 
@@ -381,6 +381,9 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     exec_alg_kisao_ids = {}
     variable_target_tellurium_observable_maps = {}
     solvers = {}
+    allchanges = model.changes
+    if isinstance(task, RepeatedTask):
+        allchanges = allchanges + task.changes
     for subtasks in alltasks:
         model = subtask.model
         sim = subtask.simulation
@@ -461,8 +464,10 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                         warn(msg, BioSimulatorsWarning)
 
         # validate model changes and build map
+        if isinstance(subtask, RepeatedTask):
+            allchanges = allchanges + subtask.changes
         model_change_target_tellurium_id_map = get_model_change_target_tellurium_change_map(
-            model_etree, model.changes, exec_alg_kisao_id, road_runner.model)
+            model_etree, allchanges, exec_alg_kisao_id, road_runner.model, model.id)
 
         # validate variables and build map
         variable_target_tellurium_observable_map = get_variable_target_tellurium_observable_map(
@@ -505,14 +510,25 @@ def get_model_variable_value(model, variable, preprocessed_task):
 def set_model_variable_value(model, target, symbol, value, preprocessed_task):
     if preprocessed_task is None:
         raise ValueError("Tellurium cannot set a model value without a working preprocessed_task.")
+    success = False
     for taskid in preprocessed_task.variable_target_tellurium_observable_maps:
         submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
         if (model.id, target, symbol) in submap:
             tellurium_id = submap[(model.id, target, symbol)]
             preprocessed_task.road_runners[taskid][tellurium_id] = value
+            success = True
+    if not success:
+        for taskid in preprocessed_task.model_change_target_tellurium_id_maps:
+            submap = preprocessed_task.model_change_target_tellurium_id_maps[taskid]
+            if (model.id, target, symbol) in submap:
+                tellurium_id = submap[(model.id, target, symbol)]
+                preprocessed_task.road_runners[taskid][tellurium_id] = value
+                success = True
+    if not success:
+        raise ValueError("No stored variable with target " + target + " and symbol " + symbol + " in model " + model.id)
 
 
-def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao_id, model):
+def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao_id, model, model_id):
     """ Get a mapping from XML XPath targets for model changes to tellurium identifiers for model changes
 
     Args:
@@ -533,12 +549,17 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
 
     invalid_changes = []
     for i_change, change in enumerate(changes):
+        if change.model.id != model_id:
+            raise NotImplementedError("Unable to process a change to model " + change.model_id + " inside a task concerning model " + model_id)
+        if change.symbol:
+            raise NotImplementedError("Unable to process a change to model " + change.model_id + " with the symbol " + change.symbol)
+            
         sbml_id = change_targets_to_sbml_ids[change.target]
 
         if alg_kisao_id == 'KISAO_0000029' and sbml_id in species_ids:
-            target_tellurium_id_map[change.target] = '[' + sbml_id + ']'
+            target_tellurium_id_map[(model_id, change.target, change.symbol)] = '[' + sbml_id + ']'
         elif sbml_id in component_ids:
-            target_tellurium_id_map[change.target] = sbml_id
+            target_tellurium_id_map[(model_id, change.target, change.symbol)] = sbml_id
         else:
             invalid_changes.append('{}: {}: {}'.format(i_change + 1, change.target, sbml_id))
 
