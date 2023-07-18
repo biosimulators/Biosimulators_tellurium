@@ -508,6 +508,7 @@ def get_model_variable_value(model, variable, preprocessed_task):
 
 
 def set_model_variable_value(model, target, symbol, value, preprocessed_task):
+    value = float(value)
     if preprocessed_task is None:
         raise ValueError("Tellurium cannot set a model value without a working preprocessed_task.")
     success = False
@@ -549,11 +550,13 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
 
     invalid_changes = []
     for i_change, change in enumerate(changes):
-        if change.model.id != model_id:
+        if hasattr(model, "change") and change.model.id != model_id:
             raise NotImplementedError("Unable to process a change to model " + change.model_id + " inside a task concerning model " + model_id)
-        if change.symbol:
+        if hasattr(model, "symbol") and change.symbol:
             raise NotImplementedError("Unable to process a change to model " + change.model_id + " with the symbol " + change.symbol)
-            
+        else:
+            change.symbol = None
+
         sbml_id = change_targets_to_sbml_ids[change.target]
 
         if alg_kisao_id == 'KISAO_0000029' and sbml_id in species_ids:

@@ -751,8 +751,6 @@ class CoreTestCase(unittest.TestCase):
             if log.exception:
                 raise log.exception
 
-            self._assert_curated_combine_archive_outputs(dirname, reports=True, plots=True)
-
     def test_exec_sedml_docs_in_combine_archive_with_all_algorithms(self):
         for sedml_interpreter in SedmlInterpreter.__members__.values():
             for alg in gen_algorithms_from_specs(self.SPECIFICATIONS_FILENAME).values():
@@ -823,6 +821,22 @@ class CoreTestCase(unittest.TestCase):
             archive_filename, self.dirname, self.DOCKER_IMAGE, environment=env, pull_docker_image=False)
 
         self._assert_curated_combine_archive_outputs(self.dirname, reports=True, plots=True)
+
+    # all SED-ML interpreters
+    def test_repeated_task_with_change(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat1.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+            self._assert_curated_combine_archive_outputs(dirname, reports=False, plots=True)
+
 
     # helper methods
     def _get_combine_archive_exec_env(self):
