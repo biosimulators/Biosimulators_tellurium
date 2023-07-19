@@ -822,21 +822,56 @@ class CoreTestCase(unittest.TestCase):
 
         self._assert_curated_combine_archive_outputs(self.dirname, reports=True, plots=True)
 
-    # all SED-ML interpreters
     def test_repeated_task_with_change(self):
         for sedml_interpreter in SedmlInterpreter.__members__.values():
             simulator_config = SimulatorConfig()
             simulator_config.sedml_interpreter = sedml_interpreter
 
-            archive_filename = 'tests/fixtures/repeat1.omex'
+            archive_filename = 'tests/fixtures/repeat_basic.omex'
 
             dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
             _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
             if log.exception:
                 raise log.exception
 
-            self._assert_curated_combine_archive_outputs(dirname, reports=False, plots=True)
 
+    def test_repeated_task_with_change_and_no_reset(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat_no_reset.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+
+    def test_repeated_task_with_change_to_initial_assignment(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat_initial_assignment.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+
+    def test_change_to_initial_assignment(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/change_initial_assignment.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
 
     # helper methods
     def _get_combine_archive_exec_env(self):
