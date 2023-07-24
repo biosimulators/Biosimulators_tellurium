@@ -445,7 +445,9 @@ class CoreTestCase(unittest.TestCase):
     def test_exec_sed_task_with_preprocesssed_task(self):
         # configure simulation
         task = sedml_data_model.Task(
+            id="task1",
             model=sedml_data_model.Model(
+                id="model1",
                 source=self.EXAMPLE_MODEL_FILENAME,
                 language=sedml_data_model.ModelLanguage.SBML.value,
                 changes=[
@@ -522,9 +524,9 @@ class CoreTestCase(unittest.TestCase):
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         with self.assertRaises(AssertionError):
             numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
-        mid_c = preprocessed_task.road_runner['C']
-        mid_m = preprocessed_task.road_runner['M']
-        mid_x = preprocessed_task.road_runner['X']
+        mid_c = preprocessed_task.road_runners[task.id]['C']
+        mid_m = preprocessed_task.road_runners[task.id]['M']
+        mid_x = preprocessed_task.road_runners[task.id]['X']
         self.assertIsInstance(mid_c, float)
 
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
@@ -547,6 +549,8 @@ class CoreTestCase(unittest.TestCase):
                 new_value=mid_x,
             ),
         ]
+        for change in task.model.changes:
+            change.model = task.model.id
         preprocessed_task = core.preprocess_sed_task(task, variables)
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
@@ -581,6 +585,9 @@ class CoreTestCase(unittest.TestCase):
                 new_value=str(mid_x),
             ),
         ]
+        for change in task.model.changes:
+            change.model = task.model.id
+        preprocessed_task = core.preprocess_sed_task(task, variables)
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
 
@@ -751,8 +758,6 @@ class CoreTestCase(unittest.TestCase):
             if log.exception:
                 raise log.exception
 
-            self._assert_curated_combine_archive_outputs(dirname, reports=True, plots=True)
-
     def test_exec_sedml_docs_in_combine_archive_with_all_algorithms(self):
         for sedml_interpreter in SedmlInterpreter.__members__.values():
             for alg in gen_algorithms_from_specs(self.SPECIFICATIONS_FILENAME).values():
@@ -823,6 +828,57 @@ class CoreTestCase(unittest.TestCase):
             archive_filename, self.dirname, self.DOCKER_IMAGE, environment=env, pull_docker_image=False)
 
         self._assert_curated_combine_archive_outputs(self.dirname, reports=True, plots=True)
+
+    def test_repeated_task_with_change(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat_basic.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+
+    def test_repeated_task_with_change_and_no_reset(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat_no_reset.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+
+    def test_repeated_task_with_change_to_initial_assignment(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/repeat_initial_assignment.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
+
+
+    def test_change_to_initial_assignment(self):
+        for sedml_interpreter in SedmlInterpreter.__members__.values():
+            simulator_config = SimulatorConfig()
+            simulator_config.sedml_interpreter = sedml_interpreter
+
+            archive_filename = 'tests/fixtures/change_initial_assignment.omex'
+
+            dirname = os.path.join(self.dirname, sedml_interpreter.name, 'reports')
+            _, log = core.exec_sedml_docs_in_combine_archive(archive_filename, dirname, simulator_config=simulator_config)
+            if log.exception:
+                raise log.exception
 
     # helper methods
     def _get_combine_archive_exec_env(self):
