@@ -56,6 +56,7 @@ KISAO_ALGORITHM_MAP = collections.OrderedDict([
             'KISAO_0000571': {
                 'kisao_id': 'KISAO_0000571',
                 'id': 'absolute_tolerance_adjustment_factor',
+                'roadrunner_attribute': 'absolute_tolerance',
                 'name': 'absolute tolerance adjustment factor',
                 'type': ValueType.float,
                 'default': 1e-12,

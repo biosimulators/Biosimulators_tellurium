@@ -427,7 +427,7 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                         att = param_props['id']
                         if "roadrunner_attribute" in param_props:
                             att = param_props['roadrunner_attribute']
-                            setattr(solver, att, new_value)
+                        setattr(solver, att, new_value)
 
                     else:
                         if (
