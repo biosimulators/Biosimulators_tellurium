@@ -522,9 +522,9 @@ class CoreTestCase(unittest.TestCase):
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         with self.assertRaises(AssertionError):
             numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
-        mid_c = preprocessed_task.road_runner[task.id]['C']
-        mid_m = preprocessed_task.road_runner[task.id]['M']
-        mid_x = preprocessed_task.road_runner[task.id]['X']
+        mid_c = preprocessed_task.road_runners[task.id]['C']
+        mid_m = preprocessed_task.road_runners[task.id]['M']
+        mid_x = preprocessed_task.road_runners[task.id]['X']
         self.assertIsInstance(mid_c, float)
 
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
