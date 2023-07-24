@@ -445,7 +445,9 @@ class CoreTestCase(unittest.TestCase):
     def test_exec_sed_task_with_preprocesssed_task(self):
         # configure simulation
         task = sedml_data_model.Task(
+            id="task1",
             model=sedml_data_model.Model(
+                id="model1",
                 source=self.EXAMPLE_MODEL_FILENAME,
                 language=sedml_data_model.ModelLanguage.SBML.value,
                 changes=[
@@ -547,6 +549,8 @@ class CoreTestCase(unittest.TestCase):
                 new_value=mid_x,
             ),
         ]
+        for change in task.model.changes:
+            change.model = task.model.id
         preprocessed_task = core.preprocess_sed_task(task, variables)
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
@@ -581,6 +585,9 @@ class CoreTestCase(unittest.TestCase):
                 new_value=str(mid_x),
             ),
         ]
+        for change in task.model.changes:
+            change.model = task.model.id
+        preprocessed_task = core.preprocess_sed_task(task, variables)
         variable_results, log = core.exec_sed_task(task, variables, preprocessed_task=preprocessed_task)
         numpy.testing.assert_allclose(variable_results['C'][-1], end_c)
 
