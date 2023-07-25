@@ -365,8 +365,6 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                                   error_summary='Task `{}` is invalid.'.format(task.id))
             raise_errors_warnings(validation.validate_model_language(model.language, ModelLanguage.SBML),
                                   error_summary='Language for model `{}` is not supported.'.format(model.id))
-            raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
-                                  error_summary='Changes for model `{}` are not supported.'.format(model.id))
             raise_errors_warnings(*validation.validate_model_changes(subtask.model),
                                   error_summary='Changes for model `{}` are invalid.'.format(model.id))
             raise_errors_warnings(validation.validate_simulation_type(sim, (SteadyStateSimulation, UniformTimeCourseSimulation)),
@@ -381,11 +379,11 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     exec_alg_kisao_ids = {}
     variable_target_tellurium_observable_maps = {}
     solvers = {}
-    allchanges = model.changes
-    if isinstance(task, RepeatedTask):
-        allchanges = allchanges + task.changes
     for subtasks in alltasks:
         model = subtask.model
+        allchanges = model.changes
+        if isinstance(task, RepeatedTask):
+            allchanges = allchanges + task.changes
         sim = subtask.simulation
         model_etree = lxml.etree.parse(model.source)
 
@@ -738,7 +736,7 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
                     data_generators[curve.y_data_generator.id] = curve.y_data_generator
                     labels[curve.y_data_generator.id] = curve.name or curve.y_data_generator.name or curve.y_data_generator.id
 
-            print("LS DEBUG:  Labels are " + str(labels))
+            # print("LS DEBUG:  Labels are " + str(labels))
 
             for data_generator in data_generators.values():
                 report.data_sets.append(DataSet(
