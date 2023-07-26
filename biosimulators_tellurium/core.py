@@ -254,7 +254,8 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     # apply model changes
     if model.changes:
         raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, ComputeModelChange, )),
-                              error_summary='Task changes for model `{}` that are not attribute changes or compute model changes are not supported.'.format(model.id))
+                              error_summary='Task changes for model ' + model.id
+                              + ' that are not attribute changes or compute model changes are not supported.')
         for change in model.changes:
             component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
             new_value = float(change.new_value)
@@ -558,7 +559,7 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
             change.symbol = None
         __, sep, __ = change.target.rpartition('/@')
         if sep == '/@':
-            #These changes are handled by biosimulators_utils directly.
+            # These changes are handled by biosimulators_utils directly.
             continue
 
         sbml_id = change_targets_to_sbml_ids[change.target]
