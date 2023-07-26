@@ -253,8 +253,8 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
     # apply model changes
     if model.changes:
-        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
-                              error_summary='Changes for model `{}` are not supported.'.format(model.id))
+        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, ComputeModelChange, )),
+                              error_summary='Task changes for model `{}` that are not attribute changes or compute model changes are not supported.'.format(model.id))
         for change in model.changes:
             component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
             new_value = float(change.new_value)
