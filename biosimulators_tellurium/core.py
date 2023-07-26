@@ -18,7 +18,7 @@ from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml import exec as sedml_exec
 from biosimulators_utils.sedml import validation
 from biosimulators_utils.sedml.data_model import (
-    Task, RepeatedTask, ModelLanguage, ModelAttributeChange, SteadyStateSimulation, UniformTimeCourseSimulation,
+    Task, RepeatedTask, ModelLanguage, ModelAttributeChange, ComputeModelChange, SteadyStateSimulation, UniformTimeCourseSimulation,
     Symbol, Report, DataSet, Plot2D, Curve, Plot3D, Surface)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.simulator.utils import get_algorithm_substitution_policy
@@ -253,8 +253,9 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
     # apply model changes
     if model.changes:
-        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, )),
-                              error_summary='Changes for model `{}` are not supported.'.format(model.id))
+        raise_errors_warnings(validation.validate_model_change_types(model.changes, (ModelAttributeChange, ComputeModelChange, )),
+                              error_summary='Task changes for model ' + model.id
+                              + ' that are not attribute changes or compute model changes are not supported.')
         for change in model.changes:
             component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
             new_value = float(change.new_value)
@@ -548,12 +549,18 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
 
     invalid_changes = []
     for i_change, change in enumerate(changes):
+        if not isinstance(change, ModelAttributeChange) and not isinstance(change, ComputeModelChange):
+            continue
         if hasattr(model, "change") and change.model.id != model_id:
             raise NotImplementedError("Unable to process a change to model " + change.model_id + " inside a task concerning model " + model_id)
         if hasattr(model, "symbol") and change.symbol:
             raise NotImplementedError("Unable to process a change to model " + change.model_id + " with the symbol " + change.symbol)
         else:
             change.symbol = None
+        __, sep, __ = change.target.rpartition('/@')
+        if sep == '/@':
+            # These changes are handled by biosimulators_utils directly.
+            continue
 
         sbml_id = change_targets_to_sbml_ids[change.target]
 
