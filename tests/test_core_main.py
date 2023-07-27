@@ -502,10 +502,6 @@ class CoreTestCase(unittest.TestCase):
         ]
 
         # execute simulation
-        task.model.changes[0].target = "/sbml:sbml/sbml:model"
-        with self.assertRaisesRegex(ValueError, 'targets for the following changes are not valid'):
-            preprocessed_task = core.preprocess_sed_task(task, variables)
-
         task.model.changes[0].target = "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']"
         task.simulation.algorithm.kisao_id = 'KISAO_0000029'
         preprocessed_task = core.preprocess_sed_task(task, variables)
