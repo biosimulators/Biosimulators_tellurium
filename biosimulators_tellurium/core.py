@@ -503,7 +503,8 @@ def get_model_variable_value(model, variable, preprocessed_task):
         submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
         if (model.id, variable.target, variable.symbol) in submap:
             return submap[(model.id, variable.target, variable.symbol)]
-    raise ValueError("No stored variable with target " + variable.target + " and symbol " + variable.symbol + " in model " + model.id)
+    raise ValueError("No stored variable with target '" + variable.target + "' and symbol '" + 
+                     str(variable.symbol if variable.symbol else '') + "' in model " + model.id)
 
 
 def set_model_variable_value(model, target, symbol, value, preprocessed_task):
@@ -525,7 +526,8 @@ def set_model_variable_value(model, target, symbol, value, preprocessed_task):
                 preprocessed_task.road_runners[taskid][tellurium_id] = value
                 success = True
     if not success:
-        raise ValueError("No stored variable with target " + target + " and symbol " + symbol + " in model " + model.id)
+        raise ValueError("No stored variable with target '" + target + "' and symbol '" + 
+                         str(symbol if symbol else '') + "' in model " + model.id)
 
 
 def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao_id, model, model_id):
@@ -558,9 +560,6 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
         else:
             change.symbol = None
         __, sep, __ = change.target.rpartition('/@')
-        if sep == '/@':
-            # These changes are handled by biosimulators_utils directly.
-            continue
 
         sbml_id = change_targets_to_sbml_ids[change.target]
 
@@ -568,23 +567,6 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
             target_tellurium_id_map[(model_id, change.target, change.symbol)] = '[' + sbml_id + ']'
         elif sbml_id in component_ids:
             target_tellurium_id_map[(model_id, change.target, change.symbol)] = sbml_id
-        else:
-            invalid_changes.append('{}: {}: {}'.format(i_change + 1, change.target, sbml_id))
-
-    if invalid_changes:
-        msg = "".join([
-            "The targets for the following changes are not valid:\n",
-            "  - {}\n".format('\n  - '.join(sorted(invalid_changes))),
-            "\n",
-            "Change targets must address one of the following SBML ids:\n",
-            "  - {}\n".format('\n  - '.join(sorted(
-                model.getFloatingSpeciesIds()
-                + model.getBoundarySpeciesIds()
-                + model.getGlobalParameterIds()
-                + model.getCompartmentIds()
-            ))),
-        ])
-        raise ValueError(msg)
 
     return target_tellurium_id_map
 
