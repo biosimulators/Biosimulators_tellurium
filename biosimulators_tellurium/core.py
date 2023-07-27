@@ -503,7 +503,7 @@ def get_model_variable_value(model, variable, preprocessed_task):
         submap = preprocessed_task.variable_target_tellurium_observable_maps[taskid]
         if (model.id, variable.target, variable.symbol) in submap:
             return submap[(model.id, variable.target, variable.symbol)]
-    raise ValueError("No stored variable with target '" + variable.target + "' and symbol '" + 
+    raise ValueError("No stored variable with target '" + variable.target + "' and symbol '" +
                      str(variable.symbol if variable.symbol else '') + "' in model " + model.id)
 
 
@@ -526,7 +526,7 @@ def set_model_variable_value(model, target, symbol, value, preprocessed_task):
                 preprocessed_task.road_runners[taskid][tellurium_id] = value
                 success = True
     if not success:
-        raise ValueError("No stored variable with target '" + target + "' and symbol '" + 
+        raise ValueError("No stored variable with target '" + target + "' and symbol '" +
                          str(symbol if symbol else '') + "' in model " + model.id)
 
 
@@ -549,7 +549,6 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
 
     target_tellurium_id_map = {}
 
-    invalid_changes = []
     for i_change, change in enumerate(changes):
         if not isinstance(change, ModelAttributeChange) and not isinstance(change, ComputeModelChange):
             continue
