@@ -266,7 +266,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
         if sim.initial_time < sim.output_start_time:
             number_of_presim_points = (sim.output_end_time - sim.initial_time) / \
                 (sim.output_end_time - sim.output_start_time) * sim.number_of_steps + 1
-    
+
             number_of_presim_points = round(number_of_presim_points) - sim.number_of_steps
             road_runner.simulate(sim.initial_time, sim.output_start_time, number_of_presim_points)
 
