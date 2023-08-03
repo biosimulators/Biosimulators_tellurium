@@ -436,12 +436,6 @@ class CoreTestCase(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'targets are not supported'):
             variable_results, log = core.exec_sed_task(task, variables_2, simulator_config=simulator_config)
 
-        task_2 = copy.deepcopy(task)
-        task_2.simulation.output_start_time = 1.5
-        simulator_config.sedml_interpreter = SedmlInterpreter.biosimulators
-        with self.assertRaises(NotImplementedError):
-            variable_results, log = core.exec_sed_task(task_2, variables, simulator_config=simulator_config)
-
     def test_exec_sed_task_with_preprocesssed_task(self):
         # configure simulation
         task = sedml_data_model.Task(

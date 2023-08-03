@@ -270,7 +270,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
             number_of_presim_points = round(number_of_presim_points) - sim.number_of_steps
             road_runner.simulate(sim.initial_time, sim.output_start_time, number_of_presim_points)
 
-        results = numpy.array(road_runner.simulate(sim.output_start_time, sim.output_end_time, sim.number_of_points).tolist()).transpose()
+        results = numpy.array(road_runner.simulate(sim.output_start_time, sim.output_end_time, sim.number_of_steps+1).tolist()).transpose()
     else:
         road_runner.steadyState()
         results = road_runner.getSteadyStateValues()
