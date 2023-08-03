@@ -263,20 +263,14 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
     # simulate
     if isinstance(sim, UniformTimeCourseSimulation):
-        number_of_points = (sim.output_end_time - sim.initial_time) / \
-            (sim.output_end_time - sim.output_start_time) * sim.number_of_steps + 1
-        if abs(number_of_points % 1) > 1e-8:
-            msg = (
-                'The number of simulation points `{}` must be an integer:'
-                '\n  Initial time: {}'
-                '\n  Output start time: {}'
-                '\n  Output end time: {}'
-                '\n  Number of points: {}'
-            ).format(number_of_points, sim.initial_time, sim.output_start_time, sim.output_start_time, sim.number_of_points)
-            raise NotImplementedError(msg)
+        if sim.initial_time < sim.output_start_time:
+            number_of_presim_points = (sim.output_end_time - sim.initial_time) / \
+                (sim.output_end_time - sim.output_start_time) * sim.number_of_steps + 1
 
-        number_of_points = round(number_of_points)
-        results = numpy.array(road_runner.simulate(sim.initial_time, sim.output_end_time, number_of_points).tolist()).transpose()
+            number_of_presim_points = round(number_of_presim_points) - sim.number_of_steps
+            road_runner.simulate(sim.initial_time, sim.output_start_time, number_of_presim_points)
+
+        results = numpy.array(road_runner.simulate(sim.output_start_time, sim.output_end_time, sim.number_of_steps+1).tolist()).transpose()
     else:
         road_runner.steadyState()
         results = road_runner.getSteadyStateValues()
