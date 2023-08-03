@@ -279,7 +279,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
     if config.VALIDATE_RESULTS and numpy.any(numpy.isnan(results)):
         msg = 'Simulation failed with algorithm `{}` ({})'.format(
             preprocessed_task.algorithm_kisao_ids[task.id],
-            KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_id[task.id]]['id'])
+            KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_ids[task.id]]['id'])
         for i_param in range(preprocessed_task.solvers[task.id].getNumParams()):
             param_name = preprocessed_task.solvers[task.id].getParamName(i_param)
             msg += '\n  - {}: {}'.format(param_name, getattr(preprocessed_task.solvers[task.id], param_name))
