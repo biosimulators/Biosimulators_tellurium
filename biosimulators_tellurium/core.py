@@ -311,10 +311,10 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
 def get_all_tasks_from_task(task):
     ret = set()
-    if type(task) == Task:
+    if task.isinstance(Task):
         ret.add(task)
         return ret
-    elif type(task) == RepeatedTask:
+    elif task.isinstance(RepeatedTask):
         for sub_task in task.sub_tasks:
             submodels = get_all_tasks_from_task(sub_task.task)
             ret.update(submodels)
