@@ -268,6 +268,7 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
                 (sim.output_end_time - sim.output_start_time) * sim.number_of_steps + 1
 
             number_of_presim_points = round(number_of_presim_points) - sim.number_of_steps
+            number_of_presim_points = max(2, number_of_presim_points)
             road_runner.simulate(sim.initial_time, sim.output_start_time, number_of_presim_points)
 
         results = numpy.array(road_runner.simulate(sim.output_start_time, sim.output_end_time, sim.number_of_steps+1).tolist()).transpose()
@@ -310,10 +311,10 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
 def get_all_tasks_from_task(task):
     ret = set()
-    if type(task) == Task:
+    if isinstance(task, Task):
         ret.add(task)
         return ret
-    elif type(task) == RepeatedTask:
+    elif isinstance(task, RepeatedTask):
         for sub_task in task.sub_tasks:
             submodels = get_all_tasks_from_task(sub_task.task)
             ret.update(submodels)
