@@ -561,15 +561,18 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
         if not isinstance(change, ModelAttributeChange) and not isinstance(change, ComputeModelChange):
             continue
         if hasattr(model, "change") and change.model.id != model_id:
-            raise NotImplementedError("Unable to process a change to model '" + change.model_id + "' inside a task concerning model '" + model_id + "'")
+            raise NotImplementedError("Unable to process a change to model '" + change.model_id 
+                                      + "' inside a task concerning model '" + model_id + "'")
         if hasattr(model, "symbol") and change.symbol:
-            raise NotImplementedError("Unable to process a change to model '" + change.model_id + "' with the symbol '" + change.symbol + "'")
+            raise NotImplementedError("Unable to process a change to model '" + change.model_id 
+                                      + "' with the symbol '" + change.symbol + "'")
         else:
             change.symbol = None
         __, sep, __ = change.target.rpartition('/@')
-        
+
         if "reaction[" in change.target and "kineticLaw/" in change.target:
-            raise NotImplementedError("Unable to process a change to model '" + model_id + "' with the target " + change.target + " because changing local parameters is not yet implemented.")
+            raise NotImplementedError("Unable to process a change to model '" + model_id + "' with the target " 
+                                      + change.target + " because changing local parameters is not yet implemented.")
 
         sbml_id = change_targets_to_sbml_ids[change.target]
 
