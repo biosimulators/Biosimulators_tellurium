@@ -316,8 +316,22 @@ def get_all_tasks_from_task(task):
         return ret
     elif isinstance(task, RepeatedTask):
         for sub_task in task.sub_tasks:
-            submodels = get_all_tasks_from_task(sub_task.task)
-            ret.update(submodels)
+            subtasks = get_all_tasks_from_task(sub_task.task)
+            ret.update(subtasks)
+        return ret
+    else:
+        raise NotImplementedError("Tasks other than 'Task' or 'RepeatedTask' are not supported.")
+
+
+def get_all_task_changes_from_task(task):
+    ret = set()
+    if isinstance(task, Task):
+        return ret
+    elif isinstance(task, RepeatedTask):
+        ret.update(task.changes)
+        for sub_task in task.sub_tasks:
+            subtask_changes = get_all_task_changes_from_task(sub_task.task)
+            ret.update(subtask_changes)
         return ret
     else:
         raise NotImplementedError("Tasks other than 'Task' or 'RepeatedTask' are not supported.")
@@ -352,6 +366,7 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
         config = get_config()
 
     alltasks = get_all_tasks_from_task(task)
+    alltaskchanges = get_all_task_changes_from_task(task)
 
     if config.VALIDATE_SEDML:
         for subtask in alltasks:
@@ -377,9 +392,7 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
     solvers = {}
     for subtasks in alltasks:
         model = subtask.model
-        allchanges = model.changes
-        if isinstance(task, RepeatedTask):
-            allchanges = allchanges + task.changes
+        allchanges = model.changes + list(alltaskchanges)
         sim = subtask.simulation
         model_etree = lxml.etree.parse(model.source)
 
@@ -548,12 +561,18 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
         if not isinstance(change, ModelAttributeChange) and not isinstance(change, ComputeModelChange):
             continue
         if hasattr(model, "change") and change.model.id != model_id:
-            raise NotImplementedError("Unable to process a change to model " + change.model_id + " inside a task concerning model " + model_id)
+            raise NotImplementedError("Unable to process a change to model '" + change.model_id
+                                      + "' inside a task concerning model '" + model_id + "'")
         if hasattr(model, "symbol") and change.symbol:
-            raise NotImplementedError("Unable to process a change to model " + change.model_id + " with the symbol " + change.symbol)
+            raise NotImplementedError("Unable to process a change to model '" + change.model_id
+                                      + "' with the symbol '" + change.symbol + "'")
         else:
             change.symbol = None
         __, sep, __ = change.target.rpartition('/@')
+
+        if "reaction[" in change.target and "kineticLaw/" in change.target:
+            raise NotImplementedError("Unable to process a change to model '" + model_id + "' with the target "
+                                      + change.target + " because changing local parameters is not yet implemented.")
 
         sbml_id = change_targets_to_sbml_ids[change.target]
 
