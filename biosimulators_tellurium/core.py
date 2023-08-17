@@ -283,7 +283,8 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
                     road_runner.resetAll()
                     if model.changes:
                         for change in model.changes:
-                            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
+                            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id]\
+                                           [(change.model, change.target, change.symbol)]
                             new_value = float(change.new_value)
                             road_runner[component_id] = new_value
                     road_runner.simulate(end=simdists[sd])
