@@ -273,12 +273,39 @@ def exec_sed_task(task, variables, preprocessed_task=None, log=None, config=None
 
         results = numpy.array(road_runner.simulate(sim.output_start_time, sim.output_end_time, sim.number_of_steps+1).tolist()).transpose()
     else:
-        road_runner.steadyState()
-        results = road_runner.getSteadyStateValues()
+        results = None
+        simdists = [0, 0.1, 1, 10, 100, 1000]
+        sd = 0
+        lasterr = ""
+        while sd < len(simdists) and results is None:
+            try:
+                if simdists[sd] > 0:
+                    road_runner.resetAll()
+                    if model.changes:
+                        for change in model.changes:
+                            component_id = preprocessed_task.model_change_target_tellurium_id_maps[task.id][(change.model, change.target, change.symbol)]
+                            new_value = float(change.new_value)
+                            road_runner[component_id] = new_value
+                    road_runner.simulate(end=simdists[sd])
+                road_runner.steadyState()
+                results = road_runner.getSteadyStateValues()
+            except Exception as e:
+                lasterr = str(e)
+            sd += 1
+        if results is None:
+            msg = 'Steady state analysis failed with algorithm `{}` ({}):'.format(
+                preprocessed_task.algorithm_kisao_ids[task.id],
+                KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_ids[task.id]]['id'])
+            msg += "\n   '" + lasterr + "'"
+            for i_param in range(preprocessed_task.solvers[task.id].getNumParams()):
+                param_name = preprocessed_task.solvers[task.id].getParamName(i_param)
+                msg += '\n  - {}: {}'.format(param_name, getattr(preprocessed_task.solvers[task.id], param_name))
+            raise ValueError(msg)
 
     # check simulation succeeded
     if config.VALIDATE_RESULTS and numpy.any(numpy.isnan(results)):
-        msg = 'Simulation failed with algorithm `{}` ({})'.format(
+        msg = 'Simulation failed: ' + str(numpy.count_nonzero(numpy.isnan(results))) +\
+              ' nan value(s) found in results with algorithm `{}` ({})'.format(
             preprocessed_task.algorithm_kisao_ids[task.id],
             KISAO_ALGORITHM_MAP[preprocessed_task.algorithm_kisao_ids[task.id]]['id'])
         for i_param in range(preprocessed_task.solvers[task.id].getNumParams()):
