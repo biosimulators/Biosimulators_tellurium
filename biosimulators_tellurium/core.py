@@ -454,50 +454,51 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                                       error_summary='{} `{}` is not supported.'.format(sim.__class__.__name__, sim.id))
 
         # set the parameters of the solver
-        if exec_alg_kisao_id == sim.algorithm.kisao_id:
-            for change in sim.algorithm.changes:
-                param_props = alg_props['parameters'].get(change.kisao_id, None)
-                if not config.VALIDATE_SEDML or param_props:
-                    if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
-                        new_value = parse_value(change.new_value, param_props['type'])
-                        att = param_props['id']
-                        if "roadrunner_attribute" in param_props:
-                            att = param_props['roadrunner_attribute']
-                        setattr(solver, att, new_value)
-
-                    else:
-                        if (
-                            ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
-                            <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
-                        ):
-                            msg = "'{}' is not a valid {} value for parameter {}".format(
-                                change.new_value, param_props['type'].name, change.kisao_id)
-                            raise ValueError(msg)
-                        else:
-                            msg = "'{}' was ignored because it is not a valid {} value for parameter {}".format(
-                                change.new_value, param_props['type'].name, change.kisao_id)
-                            warn(msg, BioSimulatorsWarning)
+        for change in sim.algorithm.changes:
+            param_props = alg_props['parameters'].get(change.kisao_id, None)
+            if not config.VALIDATE_SEDML or param_props:
+                if not config.VALIDATE_SEDML or validate_str_value(change.new_value, param_props['type']):
+                    new_value = parse_value(change.new_value, param_props['type'])
+                    att = param_props['id']
+                    if "roadrunner_attribute" in param_props:
+                        att = param_props['roadrunner_attribute']
+                    setattr(solver, att, new_value)
 
                 else:
                     if (
+                        exec_alg_kisao_id == sim.algorithm.kisao_id and
                         ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
                         <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
                     ):
-                        msg = "".join([
-                            "Algorithm parameter with KiSAO id '{}' is not supported. ".format(change.kisao_id),
-                            "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
-                                '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
-                                for kisao_id, param_props in alg_props['parameters'].items())),
-                        ])
-                        raise NotImplementedError(msg)
+                        msg = "'{}' is not a valid {} value for parameter {}".format(
+                            change.new_value, param_props['type'].name, change.kisao_id)
+                        raise ValueError(msg)
                     else:
-                        msg = "".join([
-                            "Algorithm parameter with KiSAO id '{}' was ignored because it is not supported. ".format(change.kisao_id),
-                            "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
-                                '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
-                                for kisao_id, param_props in alg_props['parameters'].items())),
-                        ])
+                        msg = "'{}' was ignored because it is not a valid {} value for parameter {}".format(
+                            change.new_value, param_props['type'].name, change.kisao_id)
                         warn(msg, BioSimulatorsWarning)
+
+            else:
+                if (
+                    exec_alg_kisao_id == sim.algorithm.kisao_id and
+                    ALGORITHM_SUBSTITUTION_POLICY_LEVELS[algorithm_substitution_policy]
+                    <= ALGORITHM_SUBSTITUTION_POLICY_LEVELS[AlgorithmSubstitutionPolicy.NONE]
+                ):
+                    msg = "".join([
+                        "Algorithm parameter with KiSAO id '{}' is not supported. ".format(change.kisao_id),
+                        "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
+                            '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
+                            for kisao_id, param_props in alg_props['parameters'].items())),
+                    ])
+                    raise NotImplementedError(msg)
+                else:
+                    msg = "".join([
+                        "Algorithm parameter with KiSAO id '{}' was ignored because it is not supported. ".format(change.kisao_id),
+                        "Parameter must have one of the following KiSAO ids:\n  - {}".format('\n  - '.join(
+                            '{}: {} ({})'.format(kisao_id, param_props['id'], param_props['name'])
+                            for kisao_id, param_props in alg_props['parameters'].items())),
+                    ])
+                    warn(msg, BioSimulatorsWarning)
 
         # validate model changes and build map
         if isinstance(subtask, RepeatedTask):
