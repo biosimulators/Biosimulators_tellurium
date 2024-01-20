@@ -564,6 +564,9 @@ def set_model_variable_value(model, target, symbol, value, preprocessed_task):
                 preprocessed_task.road_runners[taskid][tellurium_id] = value
                 success = True
     if not success:
+        if "reaction[" in target and "kineticLaw/" in target:
+            raise NotImplementedError("Unable to process a change to model '" + model.id + "' with the target "
+                                      + target + " because changing local parameters is not yet implemented.")
         raise ValueError("No stored variable with target '" + target + "' and symbol '" +
                          str(symbol if symbol else '') + "' in model " + model.id)
 
@@ -599,10 +602,6 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
         else:
             change.symbol = None
         __, sep, __ = change.target.rpartition('/@')
-
-        if "reaction[" in change.target and "kineticLaw/" in change.target:
-            raise NotImplementedError("Unable to process a change to model '" + model_id + "' with the target "
-                                      + change.target + " because changing local parameters is not yet implemented.")
 
         sbml_id = change_targets_to_sbml_ids[change.target]
 
