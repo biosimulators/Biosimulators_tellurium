@@ -83,10 +83,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install libXML2, libncurses5
+      - name: Install libXML2
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends libxml2 libncurses5
+          sudo apt-get install -y --no-install-recommends libxml2
 
       - name: Install pip
         run: |
