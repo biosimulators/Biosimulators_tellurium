@@ -46,7 +46,7 @@
     }
   ],
   "image": {
-    "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.2.8",
+    "url": "ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.2.10",
     "format": {
       "namespace": "EDAM",
       "id": "format_3973",
