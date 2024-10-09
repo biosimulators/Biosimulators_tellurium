@@ -125,6 +125,7 @@ jobs:
           fi
 
           echo "version=$version" >> $GITHUB_OUTPUT
+          echo "version=$version"
 
       - id: get-docker-image-tag
         name: Determine Docker image tag
