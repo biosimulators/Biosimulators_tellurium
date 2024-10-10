@@ -890,4 +890,3 @@ def exec_sed_doc_with_tellurium(doc, working_dir, base_out_path, rel_out_path=No
 
     # Return a data structure with the results of the reports
     return report_results, log
-
