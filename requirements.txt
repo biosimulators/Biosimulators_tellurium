@@ -1,4 +1,4 @@
-biosimulators_utils[logging] >= 0.2.3
+biosimulators-utils[logging] >= 0.2.3
 kisao >= 2.34
 libroadrunner >= 2.7.0
 lxml
