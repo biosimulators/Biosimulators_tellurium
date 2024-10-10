@@ -18,14 +18,15 @@ exclude = ['tests', 'tests.*']
 
 [tool.poetry.dependencies]
 python = "^3.10"
+tellurium = "^2.2.10"
 biosimulators_utils = {version = "^0.2.3", extras = ["logging", "sbml"]}
-docker = "^7.1.0"
 kisao = "^2.34"
 libroadrunner = "^2.7.0"
 lxml = "^4.9.2"
 numpy = "^1.24.4"
 pandas = "^2.0.2"
-tellurium = "^2.2.10"
+docker = "^7.1.0"
+pyPDF2 = "^3.0.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.1"
