@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "biosimulators-tellurium"
+version = "0.1.44"
+description = "BioSimulators-compliant command-line interface to the Tellurium/roadrunner simulator <https://tellurium.readthedocs.io/>."
+authors = ["Center for Reproducible Biomedical Modeling <info@biosimulators.org>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://tellurium.readthedocs.io/en/latest/"
+repository = "https://github.com/biosimulators/Biosimulators_tellurium"
+classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
+    ]
+keywords=['systems', 'biology', 'modeling', 'simulation']
+exclude = ['tests', 'tests.*']
+
+[tool.poetry.dependencies]
+python = "^3.10"
+tellurium = "^2.2.10"
+biosimulators_utils = {version = "^0.2.3", extras = ["logging", "sbml"]}
+kisao = "^2.34"
+libroadrunner = "^2.7.0"
+lxml = "^4.9.2"
+numpy = "^1.24.4"
+pandas = "^2.0.2"
+docker = "^7.1.0"
+pyPDF2 = "^3.0.1"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+flakey = "^1.0"
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+
+[tool.poetry.group.docs.dependencies]
+pydata-sphinx-theme = "*"
+sphinx = ">=1.8"
+
+[tool.poetry.scripts]
+biosimulators-tellurium = 'biosimulators_tellurium.__main__:main'
+fix-tellurium-generated-combine-archive = 'biosimulators_copasi.__main__:fix_copasi_generated_combine_archive'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

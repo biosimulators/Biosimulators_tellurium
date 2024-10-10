@@ -431,7 +431,8 @@ def preprocess_sed_task(task, variables, config=None, simulator_config=None):
                                   warning_summary='Model `{}` may be invalid.'.format(model.id))
 
         # read model
-        road_runner = roadrunner.RoadRunner(model.source)
+        road_runner = roadrunner.RoadRunner()
+        road_runner = roadrunner.RoadRunner(road_runner.getParamPromotedSBML(model.source))
 
         # get algorithm to execute
         algorithm_substitution_policy = get_algorithm_substitution_policy(config=config)
@@ -583,7 +584,7 @@ def get_model_change_target_tellurium_change_map(model_etree, changes, alg_kisao
     Returns:
         :obj:`dict`: dictionary that maps the targets of changes to their corresponding tellurium identifiers
     """
-    change_targets_to_sbml_ids = validation.validate_target_xpaths(changes, model_etree, attr='id')
+    change_targets_to_sbml_ids = validation.validate_target_xpaths(changes, model_etree, attr='id', separator="_")
 
     species_ids = model.getFloatingSpeciesIds() + model.getBoundarySpeciesIds()
     component_ids = species_ids + model.getGlobalParameterIds() + model.getCompartmentIds()
