@@ -260,7 +260,7 @@ jobs:
       #############################################
       # Create PyPI release
       #############################################
-      - name: Create PyPI release
+      -   name: Create PyPI release
           if: steps.determine-if-release-needed.outputs.release == '1'
           env:
               POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
