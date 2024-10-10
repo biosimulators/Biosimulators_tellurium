@@ -257,32 +257,32 @@ jobs:
           tag_name: ${{ steps.get-version-number.outputs.version }}
           release_name: Release ${{ steps.get-version-number.outputs.version }}
 
+      #############################################
       # Create PyPI release
+      #############################################
       - name: Create PyPI release
-        if: startsWith(github.ref, 'refs/tags/') && steps.determine-if-release-needed.outputs.release == '1'
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          # Install pandoc
-          sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends wget
-          wget "https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-amd64.deb" -O /tmp/pandoc.deb         
-          sudo dpkg -i /tmp/pandoc.deb
-          rm /tmp/pandoc.deb
+          if: steps.check-new-release.outputs.needDeploy == 'true'
+          env:
+              POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+          run: |
+              echo''
+              # Install pandoc
+              # sudo apt-get update -y
+              # sudo apt-get install -y --no-install-recommends wget
 
-          # Convert README to .rst format
-          pandoc --from=gfm --output=README.rst --to=rst README.md
+              # wget https://github.com/jgm/pandoc/releases -O /tmp/pandocVersions.html
+              # urlPart=`grep "\.deb" /tmp/pandocVersions.html | head -n 1 | cut -d'/' -f2-7 | cut -d'"' -f1`
+              # wget "https://github.com/$urlPart" -O /tmp/pandoc.deb
+              # sudo dpkg -i /tmp/pandoc.deb
+              # rm /tmp/pandocVersions.html
+              # rm /tmp/pandoc.deb
 
-          # Install twine
-          python -m pip install wheel twine
-
-          # Create packages to upload to PyPI
-          python setup.py sdist
-          python setup.py bdist_wheel
-
-          # Upload packages to PyPI
-          twine upload dist/*
+              # Convert README to .rst format
+              # pandoc --from=gfm --output=README.rst --to=rst README.md
+              
+              # Build and Publish
+              poetry build
+              poetry publish --no-interaction --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
 
       # build Docker image and push to GitHub Container Registry
       - name: Push Docker image
