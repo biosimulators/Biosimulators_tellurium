@@ -70,36 +70,11 @@ jobs:
       #############################################
       ## Install package and its dependencies
       #############################################
-      - name: Install Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.11'
-
-      - name: Setup pip cache
-        uses: actions/cache@v3
-        with:
-          path: /opt/hostedtoolcache/Python
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements.optional.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install libXML2
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends libxml2
-
-      - name: Install pip
-        run: |
-          python -m pip install pip==23.0.0
-          python -m pip install pip==23.0.0
-          python -m pip --version
-          #python -m pip install --upgrade setuptools
-          #python -m setuptools --version
-
-
-      - name: Install package
-        run: |
-          python -m pip install .[all]
+      # install package
+      -   name: Set up the environment
+          uses: ./.github/actions/setup-poetry-env
+          with:
+              python-version: "3.11"
 
       #############################################
       ## Lint
